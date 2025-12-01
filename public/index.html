@@ -1,0 +1,2245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>SV College of Engineering</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    /* Welcome Page Styles */
+    .welcome-page {
+      font-family: Arial, sans-serif; 
+      background: linear-gradient(135deg, #1f5fbf, #4a86e8);
+      margin: 0; 
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    /* Animated background elements */
+    .bg-animation {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 1;
+    }
+    
+    .bg-circle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      animation: float 20s infinite ease-in-out;
+    }
+    
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-20px) rotate(180deg);
+      }
+    }
+    
+    .welcome-container {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      padding: 60px 40px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      max-width: 600px;
+      width: 90%;
+      z-index: 2;
+      position: relative;
+      overflow: hidden;
+      animation: slideIn 0.8s ease-out;
+    }
+    
+    .welcome-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, #1f5fbf, #4a86e8, #1f5fbf);
+      animation: headerShine 3s infinite;
+    }
+    
+    @keyframes headerShine {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+    
+    @keyframes slideIn {
+      from { 
+        opacity: 0; 
+        transform: translateY(50px); 
+      }
+      to { 
+        opacity: 1; 
+        transform: translateY(0); 
+      }
+    }
+    
+    .college-icon {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 30px;
+      background: linear-gradient(135deg, #1f5fbf, #4a86e8);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 2.5rem;
+      font-weight: bold;
+      box-shadow: 0 10px 25px rgba(31, 95, 191, 0.3);
+      opacity: 0;
+      animation: fadeIn 1s ease-out forwards;
+      animation-delay: 0.2s;
+    }
+    
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+    
+    .welcome-title {
+      color: #1f5fbf;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      position: relative;
+      display: inline-block;
+      opacity: 0;
+      animation: fadeIn 1s ease-out forwards;
+      animation-delay: 0.4s;
+    }
+    
+    .welcome-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 0;
+      height: 3px;
+      background: #1f5fbf;
+      transition: width 1s ease;
+      animation: expandWidth 1.5s forwards;
+      animation-delay: 0.9s;
+    }
+    
+    @keyframes expandWidth {
+      to { width: 100%; }
+    }
+    
+    .subtitle {
+      color: #555;
+      font-size: 1.2rem;
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fadeIn 1s ease-out forwards;
+      animation-delay: 0.6s;
+    }
+    
+    .next-btn {
+      background: linear-gradient(135deg, #1f5fbf, #4a86e8);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 15px 40px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(31, 95, 191, 0.3);
+      opacity: 0;
+      animation: fadeIn 1s ease-out forwards;
+      animation-delay: 0.8s;
+    }
+    
+    .next-btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+    
+    .next-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(31, 95, 191, 0.4);
+    }
+    
+    .next-btn:active::before {
+      width: 300px;
+      height: 300px;
+    }
+    
+    /* Main Page Styles */
+    .main-page {
+      display: none;
+      font-family: Arial, sans-serif; 
+      background: #f7f9fc; 
+      margin: 0; 
+      transition: background-color 0.3s ease;
+      position: relative;
+      min-height: 100vh;
+    }
+    
+    header { 
+      background: #1f5fbf; 
+      color: white; 
+      text-align: center; 
+      padding: 20px; 
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, #1f5fbf, #4a86e8, #1f5fbf);
+      animation: headerShine 3s infinite;
+    }
+    
+    /* Menu Bar Styles */
+    .menu-bar {
+      background: #1f5fbf;
+      display: flex;
+      justify-content: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .menu-item {
+      padding: 15px 25px;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      font-weight: 500;
+    }
+    
+    .menu-item::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 3px;
+      background: #4a86e8;
+      transition: width 0.3s ease;
+    }
+    
+    .menu-item:hover::after {
+      width: 100%;
+    }
+    
+    .menu-item:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    
+    .container { 
+      max-width: 1000px; 
+      margin: 20px auto; 
+      padding: 0 16px; 
+      animation: fadeIn 0.5s ease-out;
+      padding-bottom: 60px; /* Added space for footer */
+    }
+    
+    .grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+      gap: 16px; 
+    }
+    
+    .card { 
+      background: white; 
+      border: 1px solid #ddd; 
+      border-radius: 8px; 
+      padding: 16px; 
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05); 
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: #1f5fbf;
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+      transform-origin: left;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    
+    .card:hover::before {
+      transform: scaleX(1);
+    }
+    
+    .card h2 { 
+      margin-top: 0; 
+      font-size: 1.2rem; 
+      color: #1f5fbf; 
+      transition: color 0.3s ease;
+    }
+    
+    .card:hover h2 {
+      color: #4a86e8;
+    }
+    
+    .semesters { 
+      display: grid; 
+      grid-template-columns: repeat(4, 1fr); 
+      gap: 8px; 
+    }
+    
+    .semesters button, .sections button { 
+      padding: 10px; 
+      border: none; 
+      border-radius: 6px; 
+      background: #e6efff; 
+      color: #1f5fbf; 
+      font-weight: bold; 
+      cursor: pointer; 
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .semesters button::after, .sections button::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+    
+    .semesters button:active::after, .sections button:active::after {
+      width: 300px;
+      height: 300px;
+    }
+    
+    .semesters button:hover, .sections button:hover { 
+      background: #d0e0ff; 
+      transform: scale(1.05);
+    }
+    
+    /* Modal */
+    #modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0);
+      z-index: 9999;
+      overflow: hidden;
+      transition: background 0.3s ease;
+    }
+    
+    #modal.active {
+      display: flex;
+      background: rgba(0,0,0,0.85);
+    }
+    
+    #modalContent {
+      background: white;
+      width: 100%; height: 100%;
+      padding: 40px;
+      box-sizing: border-box;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transform: scale(0.8);
+      opacity: 0;
+      transition: all 0.3s ease;
+      position: relative; /* Added this */
+    }
+    
+    #modal.active #modalContent {
+      transform: scale(1);
+      opacity: 1;
+    }
+    
+    #modalContent h3 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #1f5fbf;
+      text-align: center;
+      position: relative;
+      display: inline-block;
+    }
+    
+    #modalContent h3::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #1f5fbf;
+      transition: width 0.5s ease;
+    }
+    
+    #modal.active #modalContent h3::after {
+      width: 100%;
+    }
+    
+    table {
+      width: 100%;
+      max-width: 1200px;
+      font-size: 1rem;
+      border-collapse: collapse;
+      margin-top: 20px;
+      animation: slideIn 0.5s ease-out;
+    }
+    
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    
+    th, td {
+      border: 1px solid #ccc;
+      padding: 12px;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+    
+    tr {
+      transition: all 0.2s ease;
+    }
+    
+    tr:hover td {
+      background-color: #f5f9ff;
+    }
+    
+    th {
+      background: #e6efff;
+      font-weight: bold;
+      position: relative;
+    }
+    
+    th::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: #1f5fbf;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+    
+    table:hover th::after {
+      transform: scaleX(1);
+    }
+    
+    .closeBtn {
+      position: absolute;
+      top: 20px; right: 30px;
+      padding: 10px 16px;
+      font-size: 1rem;
+      background: #1f5fbf;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      overflow: hidden;
+      z-index: 10;
+    }
+    
+    .closeBtn:hover {
+      background: #4a86e8;
+      transform: rotate(90deg);
+    }
+    
+    .subject-cell {
+      position: relative;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .subject-cell:hover {
+      transform: scale(1.05);
+      font-weight: bold;
+    }
+    
+    .subject-tooltip {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 10px;
+      z-index: 1000;
+      width: 250px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      left: 50%;
+      transform: translateX(-50%) scale(0.8);
+      bottom: 100%;
+      margin-bottom: 10px;
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+    
+    .subject-cell:hover .subject-tooltip {
+      display: block;
+      opacity: 1;
+      transform: translateX(-50%) scale(1);
+    }
+    
+    .subject-name {
+      font-weight: bold;
+      color: #1f5fbf;
+    }
+    
+    .subject-code {
+      font-size: 0.9rem;
+      color: #666;
+    }
+    
+    .subject-faculty {
+      font-size: 0.9rem;
+      color: #333;
+      margin-top: 5px;
+    }
+    
+    .subject-details {
+      margin-top: 10px;
+      text-align: left;
+    }
+    
+    .legend {
+      margin-top: 20px;
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      animation: slideUp 0.5s ease-out;
+    }
+    
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .legend h3 {
+      margin-top: 0;
+      font-size: 1.2rem;
+      color: #1f5fbf;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .legend h3::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #1f5fbf;
+      transition: width 0.5s ease;
+    }
+    
+    .legend:hover h3::after {
+      width: 100%;
+    }
+    
+    .legend-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 16px;
+    }
+    
+    .legend-item {
+      border-bottom: 1px solid #eee;
+      padding-bottom: 8px;
+      margin-bottom: 8px;
+      transition: all 0.2s ease;
+    }
+    
+    .legend-item:hover {
+      background-color: #f5f9ff;
+      padding-left: 10px;
+      border-left: 3px solid #1f5fbf;
+    }
+    
+    .sections {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      animation: fadeIn 0.5s ease-out;
+    }
+    
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(0,0,0,0.1);
+      border-radius: 50%;
+      border-top-color: #1f5fbf;
+      animation: spin 1s ease-in-out infinite;
+      margin-left: 10px;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    /* Syllabus and Papers Styles */
+    .branch-selector {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    
+    .branch-btn {
+      padding: 10px 20px;
+      background: #e6efff;
+      color: #1f5fbf;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .branch-btn:hover {
+      background: #d0e0ff;
+      transform: scale(1.05);
+    }
+    
+    .branch-btn.active {
+      background: #1f5fbf;
+      color: white;
+    }
+    
+    .paper-list {
+      width: 100%;
+      max-width: 800px;
+    }
+    
+    .paper-item {
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    
+    .paper-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      background-color: #f5f9ff;
+    }
+    
+    .paper-title {
+      font-weight: bold;
+      color: #1f5fbf;
+    }
+    
+    .paper-year {
+      color: #666;
+      font-size: 0.9rem;
+    }
+    
+    .download-btn {
+      padding: 8px 15px;
+      background: #1f5fbf;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .download-btn:hover {
+      background: #4a86e8;
+      transform: scale(1.05);
+    }
+    
+    .syllabus-content {
+      width: 100%;
+      max-width: 800px;
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    
+    .syllabus-section {
+      margin-bottom: 20px;
+    }
+    
+    .syllabus-section h4 {
+      color: #1f5fbf;
+      border-bottom: 2px solid #e6efff;
+      padding-bottom: 5px;
+      margin-top: 0;
+    }
+    
+    .syllabus-section ul {
+      padding-left: 20px;
+    }
+    
+    .syllabus-section li {
+      margin-bottom: 8px;
+    }
+    
+    /* Footer with name */
+    .footer {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      padding: 15px 20px;
+      background: linear-gradient(135deg, #1f5fbf, #4a86e8);
+      color: white;
+      font-size: 14px;
+      font-weight: bold;
+      border-top-left-radius: 8px;
+      box-shadow: -2px -2px 10px rgba(0,0,0,0.1);
+      z-index: 1000;
+      animation: slideInRight 0.5s ease-out;
+    }
+    
+    @keyframes slideInRight {
+      from { transform: translateX(100%); }
+      to { transform: translateX(0); }
+    }
+    
+    .footer:hover {
+      background: linear-gradient(135deg, #4a86e8, #1f5fbf);
+      transform: scale(1.05);
+    }
+    
+    /* Subject Details Toggle Button */
+    .toggle-details-btn {
+      margin: 15px 0;
+      padding: 10px 20px;
+      background: #1f5fbf;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .toggle-details-btn:hover {
+      background: #4a86e8;
+      transform: scale(1.05);
+    }
+    
+    .toggle-details-btn::after {
+      content: '▼';
+      transition: transform 0.3s ease;
+    }
+    
+    .toggle-details-btn.collapsed::after {
+      transform: rotate(-90deg);
+    }
+    
+    /* Subject Details Panel */
+    .subject-details-panel {
+      width: 100%;
+      max-width: 1200px;
+      margin-top: 20px;
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      animation: slideDown 0.5s ease-out;
+    }
+    
+    @keyframes slideDown {
+      from { opacity: 0; max-height: 0; }
+      to { opacity: 1; max-height: 1000px; }
+    }
+    
+    .subject-details-panel h3 {
+      margin-top: 0;
+      font-size: 1.2rem;
+      color: #1f5fbf;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .subject-details-panel h3::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: #1f5fbf;
+    }
+    
+    .subject-details-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 16px;
+    }
+    
+    .subject-details-card {
+      background: #f7f9fc;
+      border: 1px solid #e6efff;
+      border-radius: 8px;
+      padding: 15px;
+      transition: all 0.3s ease;
+    }
+    
+    .subject-details-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      background: #e6efff;
+    }
+    
+    .subject-details-card h4 {
+      margin-top: 0;
+      color: #1f5fbf;
+      font-size: 1.1rem;
+    }
+    
+    .subject-details-card .subject-code {
+      color: #4a86e8;
+      font-weight: bold;
+    }
+    
+    .subject-details-card .subject-faculty {
+      color: #555;
+      margin-top: 5px;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+      
+      .subtitle {
+        font-size: 1rem;
+      }
+      
+      .welcome-container {
+        padding: 40px 20px;
+      }
+      
+      .college-icon {
+        width: 100px;
+        height: 100px;
+        font-size: 2rem;
+      }
+      
+      .menu-bar {
+        flex-wrap: wrap;
+      }
+      
+      .menu-item {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+      }
+      
+      .semesters {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      #modalContent {
+        padding: 20px;
+      }
+      
+      .closeBtn {
+        top: 10px;
+        right: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Welcome Page -->
+  <div class="welcome-page" id="welcomePage">
+    <!-- Animated background -->
+    <div class="bg-animation" id="bgAnimation"></div>
+    
+    <div class="welcome-container">
+      <div class="college-icon">SVCK</div>
+      <h1 class="welcome-title">Welcome to Sri venkateswara college of engineering Portal</h1>
+      <button class="next-btn" onclick="goToMainPage()">Next</button>
+      <p class="subtitle">Developed by C. Babu 23KH1A0519</p>
+    </div>
+    
+    <div class="footer">
+      BABU 23KH1A0519
+    </div>
+  </div>
+
+  <!-- Main Page -->
+  <div class="main-page" id="mainPage">
+    <header>
+      <h1>SV College of Engineering</h1>
+      <p>Branches: CSE, ECE, CSM</p>
+    </header>
+    
+    <!-- Menu Bar -->
+    <div class="menu-bar">
+      <div class="menu-item" onclick="showTimetables()">Timetables</div>
+      <div class="menu-item" onclick="showPreviousYearPapers()">Previous Year Papers</div>
+      <div class="menu-item" onclick="showSyllabus()">Syllabus</div>
+    </div>
+
+    <div class="container">
+      <div class="grid" id="timetableView">
+        <!-- CSE -->
+        <div class="card" data-branch="CSE">
+          <h2>Computer Science & Engineering (CSE)</h2>
+          <div class="semesters">
+            <button data-sem="1">Sem 1</button>
+            <button data-sem="2">Sem 2</button>
+            <button data-sem="3">Sem 3</button>
+            <button data-sem="4">Sem 4</button>
+            <button data-sem="5">Sem 5</button>
+            <button data-sem="6">Sem 6</button>
+            <button data-sem="7">Sem 7</button>
+            <button data-sem="8">Sem 8</button>
+          </div>
+        </div>
+
+        <!-- ECE -->
+        <div class="card" data-branch="ECE">
+          <h2>Electronics & Communication Engineering (ECE)</h2>
+          <div class="semesters">
+            <button data-sem="1">Sem 1</button>
+            <button data-sem="2">Sem 2</button>
+            <button data-sem="3">Sem 3</button>
+            <button data-sem="4">Sem 4</button>
+            <button data-sem="5">Sem 5</button>
+            <button data-sem="6">Sem 6</button>
+            <button data-sem="7">Sem 7</button>
+            <button data-sem="8">Sem 8</button>
+          </div>
+        </div>
+
+        <!-- CSM -->
+        <div class="card" data-branch="CSM">
+          <h2>Computer Science & Engineering (CSM)</h2>
+          <div class="semesters">
+            <button data-sem="1">Sem 1</button>
+            <button data-sem="2">Sem 2</button>
+            <button data-sem="3">Sem 3</button>
+            <button data-sem="4">Sem 4</button>
+            <button data-sem="5">Sem 5</button>
+            <button data-sem="6">Sem 6</button>
+            <button data-sem="7">Sem 7</button>
+            <button data-sem="8">Sem 8</button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Previous Year Papers View (Hidden by default) -->
+      <div id="papersView" style="display: none;">
+        <div class="branch-selector">
+          <button class="branch-btn active" data-branch="CSE">CSE</button>
+          <button class="branch-btn" data-branch="ECE">ECE</button>
+          <button class="branch-btn" data-branch="CSM">CSM</button>
+        </div>
+        
+        <div class="paper-list" id="papersList">
+          <!-- Papers will be loaded here based on selected branch -->
+        </div>
+      </div>
+      
+      <!-- Syllabus View (Hidden by default) -->
+      <div id="syllabusView" style="display: none;">
+        <div class="branch-selector">
+          <button class="branch-btn active" data-branch="CSE">CSE</button>
+          <button class="branch-btn" data-branch="ECE">ECE</button>
+          <button class="branch-btn" data-branch="CSM">CSM</button>
+        </div>
+        
+        <div class="semesters" style="margin-bottom: 20px;">
+          <button data-sem="1">Sem 1</button>
+          <button data-sem="2">Sem 2</button>
+          <button data-sem="3">Sem 3</button>
+          <button data-sem="4">Sem 4</button>
+          <button data-sem="5">Sem 5</button>
+          <button data-sem="6">Sem 6</button>
+          <button data-sem="7">Sem 7</button>
+          <button data-sem="8">Sem 8</button>
+        </div>
+        
+        <div class="syllabus-content" id="syllabusContent">
+          <!-- Syllabus will be loaded here based on selected branch and semester -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer with name -->
+    <div class="footer">
+      BABU 23KH1A0519
+    </div>
+
+    <!-- Modal -->
+    <div id="modal">
+      <div id="modalContent">
+        <h3 id="modalTitle"></h3>
+        <div id="modalBody"></div>
+        <button class="closeBtn" onclick="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Welcome Page Script
+    function createBackgroundElements() {
+      const bgContainer = document.getElementById('bgAnimation');
+      const circleCount = 15;
+      
+      for (let i = 0; i < circleCount; i++) {
+        const circle = document.createElement('div');
+        circle.classList.add('bg-circle');
+        
+        // Random size between 20px and 100px
+        const size = Math.random() * 80 + 20;
+        circle.style.width = `${size}px`;
+        circle.style.height = `${size}px`;
+        
+        // Random position
+        circle.style.left = `${Math.random() * 100}%`;
+        circle.style.top = `${Math.random() * 100}%`;
+        
+        // Random animation delay and duration
+        const duration = Math.random() * 10 + 15;
+        const delay = Math.random() * 5;
+        circle.style.animationDuration = `${duration}s`;
+        circle.style.animationDelay = `${delay}s`;
+        
+        bgContainer.appendChild(circle);
+      }
+    }
+    
+    // Initialize background elements on page load
+    window.addEventListener('load', createBackgroundElements);
+    
+    // Navigate to main page
+    function goToMainPage() {
+      document.getElementById('welcomePage').style.display = 'none';
+      document.getElementById('mainPage').style.display = 'block';
+      
+      // Initialize event listeners after DOM is ready
+      initializeEventListeners();
+    }
+
+    // Initialize all event listeners
+    function initializeEventListeners() {
+      // Event listeners for semester buttons in timetables
+      document.querySelectorAll('.semesters button').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const sem = e.target.getAttribute('data-sem');
+          const branch = e.target.closest('.card').getAttribute('data-branch');
+          showSections(branch, sem);
+        });
+      });
+
+      // Event listeners for branch buttons in papers view
+      document.querySelectorAll('#papersView .branch-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          // Remove active class from all buttons
+          document.querySelectorAll('#papersView .branch-btn').forEach(b => {
+            b.classList.remove('active');
+          });
+          
+          // Add active class to clicked button
+          e.target.classList.add('active');
+          
+          // Load papers for selected branch
+          const branch = e.target.getAttribute('data-branch');
+          loadPapers(branch);
+        });
+      });
+
+      // Event listeners for branch buttons in syllabus view
+      document.querySelectorAll('#syllabusView .branch-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          // Remove active class from all buttons
+          document.querySelectorAll('#syllabusView .branch-btn').forEach(b => {
+            b.classList.remove('active');
+          });
+          
+          // Add active class to clicked button
+          e.target.classList.add('active');
+          
+          // Get current selected semester
+          const currentSemBtn = document.querySelector('#syllabusView .semesters button.active');
+          const sem = currentSemBtn ? currentSemBtn.getAttribute('data-sem') : 1;
+          
+          // Load syllabus for selected branch and semester
+          const branch = e.target.getAttribute('data-branch');
+          loadSyllabus(branch, sem);
+        });
+      });
+
+      // Event listeners for semester buttons in syllabus view
+      document.querySelectorAll('#syllabusView .semesters button').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          // Remove active class from all buttons
+          document.querySelectorAll('#syllabusView .semesters button').forEach(b => {
+            b.classList.remove('active');
+          });
+          
+          // Add active class to clicked button
+          e.target.classList.add('active');
+          
+          // Get current selected branch
+          const currentBranchBtn = document.querySelector('#syllabusView .branch-btn.active');
+          const branch = currentBranchBtn ? currentBranchBtn.getAttribute('data-branch') : 'CSE';
+          
+          // Load syllabus for selected branch and semester
+          const sem = e.target.getAttribute('data-sem');
+          loadSyllabus(branch, sem);
+        });
+      });
+    }
+
+    // Menu Bar Functions
+    function showTimetables() {
+      document.getElementById('timetableView').style.display = 'grid';
+      document.getElementById('papersView').style.display = 'none';
+      document.getElementById('syllabusView').style.display = 'none';
+    }
+    
+    function showPreviousYearPapers() {
+      document.getElementById('timetableView').style.display = 'none';
+      document.getElementById('papersView').style.display = 'block';
+      document.getElementById('syllabusView').style.display = 'none';
+      
+      // Load default branch papers
+      loadPapers('CSE');
+    }
+    
+    function showSyllabus() {
+      document.getElementById('timetableView').style.display = 'none';
+      document.getElementById('papersView').style.display = 'none';
+      document.getElementById('syllabusView').style.display = 'block';
+      
+      // Set default semester to active if none is selected
+      if (!document.querySelector('#syllabusView .semesters button.active')) {
+        document.querySelector('#syllabusView .semesters button[data-sem="1"]').classList.add('active');
+      }
+      
+      // Load default branch and semester syllabus
+      loadSyllabus('CSE', 1);
+    }
+
+    // Main Page Script
+    // Different timing slots for different semesters
+    const timetableSlots = {
+      // Default timing for semesters 2-8
+      default: [
+        ["9:30-10:20 1", "9:30 am - 10:20 am"],
+        ["10:20-11:10 2", "10:20 am - 11:10 am"],
+        ["tea Break", "11:10 am - 11:30 am"],
+        ["11:30 am - 12:20  3", "11:30 am - 12:20 pm"],
+        ["12:20 pm - 1:10 pm 4", "12:20 pm - 1:10 pm"],
+        ["Lunch Break", "1:10 pm - 2:00 pm"],
+        ["2:00 pm - 2:50 pm 5", "2:00 pm - 2:50 pm"],
+        ["2:50 pm - 3:40 pm 6", "2:50 pm - 3:40 pm"],
+        ["3:40 pm - 4:30 pm 7", "3:40 pm - 4:30 pm"]
+      ],
+      // Custom timing for semester 1 (to be updated with your image timings)
+      sem1: [
+        ["P1  9:30am-10:20am ", " 9:30 am - 10:20 am"],
+        ["P2 10:20-11:10", "10:20 am - 11:10 am"],
+        ["P3 11:10am-12:00pm", "11:10 am - 12:00 pm"],
+        ["LUNCH BREAK ", "12:00 pm - 12:50 pm"],
+        ["P4 12:50pm-1:40pm ", " 12:50pm-1:40pm"],
+        ["P5 1:40 pm - 2:30 pm ", "1:40 pm - 2:30 pm"],
+        ["tea Break", "2:30pm-2:50pm"],
+        ["P6 2:50 pm - 3:40 pm ", "2:50 pm - 3:40 pm"],
+        ["P7 3:40 pm - 4:30 pm ", "3:40 pm - 4:30 pm"]
+      ]
+    };
+
+    const subjectDetails = {
+      // Existing subjects
+      "ML": { name: "Machine Learning", code: "23A31401T", faculty: "D. Masthan Pasha" },
+      "CC": { name: "Cloud Computing", code: "23A37501T", faculty: "K. Kishore Kumar" },
+      "CNS": { name: "Cryptography & Network Security", code: "23A50601T", faculty: "Dr. M. Jaya Bhaskar" },
+      "STM": { name: "Software Testing Methodologies", code: "23A50602A", faculty: "P. Ram Prasad" },
+      "SPM": { name: "Software Project Management", code: "23A50603A", faculty: "G. Parvathi" },
+      "CPA": { name: "Chemistry of Polymers and Applications", code: "23A31601", faculty: "Dr. Z. Raveendra Babu" },
+      "ML Lab": { name: "Machine Learning Lab", code: "23A31401P", faculty: "P. Ram Prasad" },
+      "CNS-LAB2": { name: "Cryptography & Network Security Lab", code: "23A50601P", faculty: "Dr. M. Jaya Bhaskar" },
+      "ML-LAB2": { name: "Machine Learning Lab", code: "23A31401P", faculty: "P. Ram Prasad" },
+      "CRT-SS": { name: "Soft Skills", code: "23A52501", faculty: "T. Sanjeeva Prasad" },
+      "SOFT-SKILLS LAB": { name: "Soft Skills Lab", code: "23A52501P", faculty: "T. Sanjeeva Prasad" },
+      "TPW": { name: "Technical Paper Writing & IPR", code: "23A52601", faculty: "B. Soma Sekhara Reddy" },
+      "CRT-APT": { name: "CRT - Aptitude", code: "CRT001", faculty: "CRT Faculty" },
+      
+      // New Semester 1 subjects
+      "EP/EW LAB": { name: "Engineering Physics/Engineering Workshop Lab", code: "23A11101P", faculty: "DR.P.Sreenivasula Reddy" },
+      "IP": { name: "Programming in C", code: "23A11103T", faculty: "Mr.G.Sreenivasulu" },
+      "BC": { name: "Basic Chemistry", code: "23A11102T", faculty: "dr.z.Ravindra Babu" },
+      "EGP": { name: "Engineering Graphics Practice", code: "23A11104P", faculty: "Mr.B.Saroj kumar" },
+      "ITW": { name: "Introduction to Web Technologies", code: "23A11105T", faculty: "Computer Science Faculty" },
+      "APT": { name: "Aptitude Skills", code: "23A11106T", faculty: "Training Faculty" },
+      "ME": { name: "Mathematics for Engineers", code: "23A11107T", faculty: " " },
+      "EG": { name: "Engineering Graphics", code: "23A11108T", faculty: "Mr.B.saroj kumar" },
+      "LAC": { name: "Linear algebra & calculus", code: "23A11109T", faculty: "Mr.M.firoj ali baig" },
+      "HW": { name: "Health and Wellness", code: "23A11110T", faculty: "Mrs.T.silpa" },
+      "EP": { name: "Engineering Physics", code: "23A11111T", faculty: "Dr.P.sreenivasulu" },
+      "YS": { name: "Yoga and Sports", code: "23A11112T", faculty: "Mr.M.ravi kumar" },
+      "LIB": { name: "Library Hour", code: "LIB001", faculty: "Library Staff" },
+      "CP LAB": { name: "C Programming Lab", code: "23A11113P", faculty: "Computer Science Faculty" },
+      "SS": { name: "Soft Skills", code: "23A11114T", faculty: "English Faculty" },
+      "SPORTS": { name: "Sports Activities", code: "SPORTS001", faculty: "Physical Education Faculty" },
+      "EEEW": { name: "Electrical and Electronics Engineering Workshop", code: "23A11115P", faculty: "EEE Faculty" },
+      "BEEE (ECE)": { name: "Basic Electrical and Electronics Engineering (ECE)", code: "23A11116T", faculty: "ECE Faculty" },
+      "IT/CHE LAB": { name: "Information Technology/Chemistry Lab", code: "23A11117P", faculty: "IT/Chemistry Faculty" },
+      "CHE": { name: "Chemistry", code: "23A11118T", faculty: "Chemistry Faculty" },
+      "BEEE (EEE)": { name: "Basic Electrical and Electronics Engineering (EEE)", code: "23A11119T", faculty: "EEE Faculty" },
+      "NSS": { name: "National Service Scheme", code: "NSS001", faculty: "NSS Coordinator" }
+    };
+
+    const timetableData = {
+      // Semester 6 timetables (existing)
+      "CSE-6-A": {
+        Monday: ["ML", "STM", "Break", "CPA", "CNS", "Lunch", "CC", "ML Lab", "ML Lab"],
+        Tuesday: ["CPA", "CNS", "Break", "ML", "STM", "Lunch", "CC", "CRT-SS", "CC"],
+        Wednesday: ["CRT-APT", "TPW", "Break", "CPA", "SPM", "Lunch", "STM", "SOFT-SKILLS LAB", "SOFT-SKILLS LAB"],
+        Thursday: ["STM", "SPM", "Break", "CNS-LAB2", "CNS-LAB2", "Lunch", "SPM", "CRT-APT", "CC"],
+        Friday: ["ML", "STM", "Break", "SPM", "CNS", "Lunch", "SPM", "CNS", "SPORTS"],
+        Saturday: ["CNS", "CC", "Break", "ML", "CPA", "Lunch", "ML", "CPA", "LIB"]
+      },
+      "CSE-6-B": {
+        Monday: ["CPA", "CC", "Break", "CRT-APT", "STM", "Lunch", "CNS", "ML", "CC"],
+        Tuesday: ["SPM", "STM", "Break", "CPA", "LIB", "Lunch", "ML", "CNS-LAB2", "CNS-LAB2"],
+        Wednesday: ["ML", "CNS", "Break", "STM", "CNS", "Lunch", "SPM", "CPA", "SPORTS"],
+        Thursday: ["CC", "ML", "Break", "CPA", "SPM", "Lunch", "STM", "ML-LAB2", "ML-LAB2"],
+        Friday: ["CC", "CNS", "Break", "CRT-APT", "CC", "Lunch", "STM", "SOFT-SKILLS LAB", "SOFT-SKILLS LAB"],
+        Saturday: ["SPM", "ML", "Break", "CNS", "TPW", "Lunch", "CPA", "CRT-SS", "SPM"]
+      },
+      "CSE-6-C": {
+        Monday: ["STM", "CC", "Break", "CNS", "CPA", "Lunch", "ML", "SOFT-SKILLS LAB", "SOFT-SKILLS LAB"],
+        Tuesday: ["CNS", "ML", "Break", "STM", "CC", "Lunch", "ML", "CRT-SS", "ML"],
+        Wednesday: ["CRT-APT", "TPW", "Break", "CNS", "SPM", "Lunch", "CC", "ML Lab", "ML Lab"],
+        Thursday: ["CC", "SPM", "Break", "CNS-LAB2", "CNS-LAB2", "Lunch", "SPM", "CRT-APT", "STM"],
+        Friday: ["STM", "CC", "Break", "SPM", "ML", "Lunch", "SPM", "CNS", "SPORTS"],
+        Saturday: ["CPA", "ML", "Break", "STM", "CNS", "Lunch", "STM", "CNS", "LIB"]
+      },
+      
+      // Semester 1 timetables (new)
+      "CSE-1-A": {
+        "Monday":    ["EP/EW LAB", "EP/EW LAB", "IP", "LUNCH", "BC", "EGP", "TEA-BREAK", "EGP", "EGP"],
+        "Tuesday":   ["ITW", "ITW", "APT", "LUNCH", "ME", "EG", "TEA-BREAK", "LAC", "IP"],
+        "Wednesday": ["ME", "LAC", "IP", "LUNCH", "EP/EW LAB", "EP/EW LAB", "TEA-BREAK", "EG", "EP"],
+        "Thursday":  ["LAC", "EG", "BC", "LUNCH", "ME", "HW", "TEA-BREAK", "EP", "IP"],
+        "Friday":    ["LAC", "IP", "EP", "LUNCH", "EG", "EP", "TEA-BREAK", "YS", "LIB"],
+        "Saturday":  ["CP LAB", "CP LAB", "EP", "LUNCH", "BC", "LAC", "TEA-BREAK", "SPORTS", "SS"]
+      },
+      "CSE-1-B": {
+        "Monday":   ["IP", "LAC", "EG", "LUNCH", "EP", "LIB", "TEA-BREAK", "SPORTS", "BC"],
+        "Tuesday":  ["EP/EW LAB", "EP/EW LAB", "EP/EW LAB", "LUNCH", "IP", "BC", "TEA-BREAK", "IP", "LAC"],
+        "Wednesday":["CP LAB", "CP LAB", "CP LAB", "LUNCH", "LAC", "EG", "TEA-BREAK", "EP", "ME"],
+        "Thursday": ["ITW", "ITW", "EG", "LUNCH", "IP", "EP", "TEA-BREAK", "YS", "EG"],
+        "Friday":   ["EGP", "EGP", "EGP", "LUNCH", "BC", "SS", "TEA-BREAK", "ME", "HW"],
+        "Saturday": ["EP", "APT", "IP", "LUNCH", "EP/EW LAB", "EP/EW LAB", "TEA-BREAK", "LAC", "ME"]
+      },
+      "CSM-1-A": {
+        "Monday":   ["EEEW", "EEEW", "LAC", "LUNCH", "IP", "BEEE (ECE)", "TEA-BREAK", "NSS", "LAC"],
+        "Tuesday":  ["IP", "SS", "EG", "LUNCH", "IT/CHE LAB", "IT/CHE LAB", "TEA-BREAK", "SPORTS", "CHE"],
+        "Wednesday":["EG", "CHE", "BEEE (EEE)", "LUNCH", "APT", "IP", "TEA-BREAK", "BEEE (ECE)", "LAC"],
+        "Thursday": ["IP", "CHE", "EG", "LUNCH", "BEEE (EEE)", "EGP", "TEA-BREAK", "BEEE (ECE)", "LIB"],
+        "Friday":   ["IT/CHE LAB", "IT/CHE LAB", "CHE", "LUNCH", "EGP", "IP", "TEA-BREAK", "CHE", "CP LAB"],
+        "Saturday": ["BEEE (EEE)", "LAC", "EG", "LUNCH", "EEEW", "EEEW", "TEA-BREAK", "CP LAB", "CP LAB"]
+      }
+    };
+    
+    // Sample data for previous year papers
+    const previousYearPapers = {
+      "CSE": [
+        { title: "Data Structures", year: "2022", semester: "3" },
+        { title: "Algorithms", year: "2022", semester: "3" },
+        { title: "Database Management Systems", year: "2022", semester: "4" },
+        { title: "Operating Systems", year: "2022", semester: "4" },
+        { title: "Computer Networks", year: "2021", semester: "5" },
+        { title: "Theory of Computation", year: "2021", semester: "5" },
+        { title: "Machine Learning", year: "2021", semester: "6" },
+        { title: "Cloud Computing", year: "2021", semester: "6" },
+        { title: "Software Engineering", year: "2020", semester: "7" },
+        { title: "Web Technologies", year: "2020", semester: "7" }
+      ],
+      "ECE": [
+        { title: "Electronic Devices", year: "2022", semester: "3" },
+        { title: "Digital Electronics", year: "2022", semester: "3" },
+        { title: "Signals and Systems", year: "2022", semester: "4" },
+        { title: "Microprocessors", year: "2022", semester: "4" },
+        { title: "Analog Communications", year: "2021", semester: "5" },
+        { title: "Digital Signal Processing", year: "2021", semester: "5" },
+        { title: "VLSI Design", year: "2021", semester: "6" },
+        { title: "Microwave Engineering", year: "2021", semester: "6" },
+        { title: "Embedded Systems", year: "2020", semester: "7" },
+        { title: "Wireless Communications", year: "2020", semester: "7" }
+      ],
+      "CSM": [
+        { title: "Programming in C", year: "2022", semester: "3" },
+        { title: "Data Structures", year: "2022", semester: "3" },
+        { title: "Object Oriented Programming", year: "2022", semester: "4" },
+        { title: "Database Systems", year: "2022", semester: "4" },
+        { title: "Web Development", year: "2021", semester: "5" },
+        { title: "Software Engineering", year: "2021", semester: "5" },
+        { title: "Machine Learning", year: "2021", semester: "6" },
+        { title: "Big Data Analytics", year: "2021", semester: "6" },
+        { title: "Cloud Computing", year: "2020", semester: "7" },
+        { title: "Internet of Things", year: "2020", semester: "7" }
+      ]
+    };
+    
+    // Sample data for syllabus
+    const syllabusData = {
+      "CSE": {
+        1: {
+          title: "CSE - Semester 1 Syllabus",
+          sections: [
+            {
+              title: "Mathematics I",
+              topics: [
+                "Calculus and Linear Algebra",
+                "Differential Equations",
+                "Vector Calculus"
+              ]
+            },
+            {
+              title: "Engineering Physics",
+              topics: [
+                "Mechanics",
+                "Optics",
+                "Thermodynamics"
+              ]
+            },
+            {
+              title: "Basic Electrical Engineering",
+              topics: [
+                "DC Circuits",
+                "AC Circuits",
+                "Electrical Machines"
+              ]
+            }
+          ]
+        },
+        2: {
+          title: "CSE - Semester 2 Syllabus",
+          sections: [
+            {
+              title: "Mathematics II",
+              topics: [
+                "Complex Analysis",
+                "Probability and Statistics",
+                "Numerical Methods"
+              ]
+            },
+            {
+              title: "Engineering Chemistry",
+              topics: [
+                "Chemical Thermodynamics",
+                "Electrochemistry",
+                "Environmental Chemistry"
+              ]
+            },
+            {
+              title: "Programming in C",
+              topics: [
+                "Introduction to C Programming",
+                "Control Structures",
+                "Arrays and Functions"
+              ]
+            }
+          ]
+        },
+        3: {
+          title: "CSE - Semester 3 Syllabus",
+          sections: [
+            {
+              title: "Data Structures",
+              topics: [
+                "Arrays, Stacks and Queues",
+                "Linked Lists",
+                "Trees and Graphs"
+              ]
+            },
+            {
+              title: "Digital Logic Design",
+              topics: [
+                "Boolean Algebra",
+                "Combinational Circuits",
+                "Sequential Circuits"
+              ]
+            },
+            {
+              title: "Computer Organization",
+              topics: [
+                "Basic Computer Organization",
+                "Instruction Set Architecture",
+                "CPU Organization"
+              ]
+            }
+          ]
+        },
+        4: {
+          title: "CSE - Semester 4 Syllabus",
+          sections: [
+            {
+              title: "Algorithms",
+              topics: [
+                "Algorithm Analysis",
+                "Sorting and Searching",
+                "Graph Algorithms"
+              ]
+            },
+            {
+              title: "Operating Systems",
+              topics: [
+                "Process Management",
+                "Memory Management",
+                "File Systems"
+              ]
+            },
+            {
+              title: "Database Management Systems",
+              topics: [
+                "Relational Model",
+                "SQL",
+                "Database Design"
+              ]
+            }
+          ]
+        },
+        5: {
+          title: "CSE - Semester 5 Syllabus",
+          sections: [
+            {
+              title: "Theory of Computation",
+              topics: [
+                "Finite Automata",
+                "Context-Free Grammars",
+                "Turing Machines"
+              ]
+            },
+            {
+              title: "Computer Networks",
+              topics: [
+                "Network Models",
+                "Data Link Layer",
+                "Network Layer"
+              ]
+            },
+            {
+              title: "Software Engineering",
+              topics: [
+                "Software Process Models",
+                "Requirements Engineering",
+                "Software Design"
+              ]
+            }
+          ]
+        },
+        6: {
+          title: "CSE - Semester 6 Syllabus",
+          sections: [
+            {
+              title: "Machine Learning",
+              topics: [
+                "Introduction to Machine Learning",
+                "Supervised Learning",
+                "Unsupervised Learning"
+              ]
+            },
+            {
+              title: "Cloud Computing",
+              topics: [
+                "Cloud Architecture",
+                "Virtualization",
+                "Cloud Services"
+              ]
+            },
+            {
+              title: "Cryptography and Network Security",
+              topics: [
+                "Symmetric Encryption",
+                "Asymmetric Encryption",
+                "Network Security"
+              ]
+            }
+          ]
+        },
+        7: {
+          title: "CSE - Semester 7 Syllabus",
+          sections: [
+            {
+              title: "Distributed Systems",
+              topics: [
+                "Distributed System Architecture",
+                "Distributed Algorithms",
+                "Consistency and Replication"
+              ]
+            },
+            {
+              title: "Compiler Design",
+              topics: [
+                "Lexical Analysis",
+                "Syntax Analysis",
+                "Code Generation"
+              ]
+            },
+            {
+              title: "Web Technologies",
+              topics: [
+                "HTML, CSS and JavaScript",
+                "Server-side Programming",
+                "Web Services"
+              ]
+            }
+          ]
+        },
+        8: {
+          title: "CSE - Semester 8 Syllabus",
+          sections: [
+            {
+              title: "Artificial Intelligence",
+              topics: [
+                "Problem Solving",
+                "Knowledge Representation",
+                "Machine Learning Applications"
+              ]
+            },
+            {
+              title: "Big Data Analytics",
+              topics: [
+                "Big Data Fundamentals",
+                "Data Mining",
+                "Data Visualization"
+              ]
+            },
+            {
+              title: "Project Work",
+              topics: [
+                "Project Planning",
+                "Implementation",
+                "Documentation and Presentation"
+              ]
+            }
+          ]
+        }
+      },
+      "ECE": {
+        1: {
+          title: "ECE - Semester 1 Syllabus",
+          sections: [
+            {
+              title: "Mathematics I",
+              topics: [
+                "Calculus and Linear Algebra",
+                "Differential Equations",
+                "Vector Calculus"
+              ]
+            },
+            {
+              title: "Engineering Physics",
+              topics: [
+                "Mechanics",
+                "Optics",
+                "Thermodynamics"
+              ]
+            },
+            {
+              title: "Basic Electrical Engineering",
+              topics: [
+                "DC Circuits",
+                "AC Circuits",
+                "Electrical Machines"
+              ]
+            }
+          ]
+        },
+        2: {
+          title: "ECE - Semester 2 Syllabus",
+          sections: [
+            {
+              title: "Mathematics II",
+              topics: [
+                "Complex Analysis",
+                "Probability and Statistics",
+                "Numerical Methods"
+              ]
+            },
+            {
+              title: "Engineering Chemistry",
+              topics: [
+                "Chemical Thermodynamics",
+                "Electrochemistry",
+                "Environmental Chemistry"
+              ]
+            },
+            {
+              title: "Electronic Devices",
+              topics: [
+                "Semiconductor Physics",
+                "Diodes and Applications",
+                "Transistors"
+              ]
+            }
+          ]
+        },
+        3: {
+          title: "ECE - Semester 3 Syllabus",
+          sections: [
+            {
+              title: "Digital Electronics",
+              topics: [
+                "Number Systems and Codes",
+                "Combinational Logic",
+                "Sequential Logic"
+              ]
+            },
+            {
+              title: "Network Analysis",
+              topics: [
+                "Network Theorems",
+                "Transient Analysis",
+                "AC Circuits"
+              ]
+            },
+            {
+              title: "Signals and Systems",
+              topics: [
+                "Signal Representation",
+                "LTI Systems",
+                "Fourier Analysis"
+              ]
+            }
+          ]
+        },
+        4: {
+          title: "ECE - Semester 4 Syllabus",
+          sections: [
+            {
+              title: "Analog Circuits",
+              topics: [
+                "Amplifiers",
+                "Oscillators",
+                "Filters"
+              ]
+            },
+            {
+              title: "Microprocessors",
+              topics: [
+                "8085 Architecture",
+                "Instruction Set",
+                "Programming"
+              ]
+            },
+            {
+              title: "Electromagnetic Theory",
+              topics: [
+                "Electrostatics",
+                "Magnetostatics",
+                "Maxwell's Equations"
+              ]
+            }
+          ]
+        },
+        5: {
+          title: "ECE - Semester 5 Syllabus",
+          sections: [
+            {
+              title: "Analog Communications",
+              topics: [
+                "Modulation Techniques",
+                "AM and FM",
+                "Noise in Communication Systems"
+              ]
+            },
+            {
+              title: "Digital Signal Processing",
+              topics: [
+                "Discrete-Time Signals",
+                "Z-Transform",
+                "DFT and FFT"
+              ]
+            },
+            {
+              title: "Control Systems",
+              topics: [
+                "System Modeling",
+                "Time Response Analysis",
+                "Stability Analysis"
+              ]
+            }
+          ]
+        },
+        6: {
+          title: "ECE - Semester 6 Syllabus",
+          sections: [
+            {
+              title: "Digital Communications",
+              topics: [
+                "Pulse Modulation",
+                "Digital Modulation",
+                "Error Control Coding"
+              ]
+            },
+            {
+              title: "VLSI Design",
+              topics: [
+                "MOSFET Operation",
+                "CMOS Logic Design",
+                "VLSI Design Methodology"
+              ]
+            },
+            {
+              title: "Microwave Engineering",
+              topics: [
+                "Waveguides",
+                "Microwave Components",
+                "Antennas"
+              ]
+            }
+          ]
+        },
+        7: {
+          title: "ECE - Semester 7 Syllabus",
+          sections: [
+            {
+              title: "Embedded Systems",
+              topics: [
+                "Microcontrollers",
+                "Embedded Programming",
+                "Real-Time Operating Systems"
+              ]
+            },
+            {
+              title: "Wireless Communications",
+              topics: [
+                "Cellular Systems",
+                "Wireless LANs",
+                "Mobile Ad Hoc Networks"
+              ]
+            },
+            {
+              title: "Digital Image Processing",
+              topics: [
+                "Image Enhancement",
+                "Image Filtering",
+                "Image Segmentation"
+              ]
+            }
+          ]
+        },
+        8: {
+          title: "ECE - Semester 8 Syllabus",
+          sections: [
+            {
+              title: "Advanced Communication Systems",
+              topics: [
+                "Optical Communication",
+                "Satellite Communication",
+                "Radar Systems"
+              ]
+            },
+            {
+              title: "Biomedical Instrumentation",
+              topics: [
+                "Biomedical Sensors",
+                "Diagnostic Equipment",
+                "Therapeutic Equipment"
+              ]
+            },
+            {
+              title: "Project Work",
+              topics: [
+                "Project Planning",
+                "Implementation",
+                "Documentation and Presentation"
+              ]
+            }
+          ]
+        }
+      },
+      "CSM": {
+        1: {
+          title: "CSM - Semester 1 Syllabus",
+          sections: [
+            {
+              title: "Mathematics I",
+              topics: [
+                "Calculus and Linear Algebra",
+                "Differential Equations",
+                "Vector Calculus"
+              ]
+            },
+            {
+              title: "Engineering Physics",
+              topics: [
+                "Mechanics",
+                "Optics",
+                "Thermodynamics"
+              ]
+            },
+            {
+              title: "Basic Electrical Engineering",
+              topics: [
+                "DC Circuits",
+                "AC Circuits",
+                "Electrical Machines"
+              ]
+            }
+          ]
+        },
+        2: {
+          title: "CSM - Semester 2 Syllabus",
+          sections: [
+            {
+              title: "Mathematics II",
+              topics: [
+                "Complex Analysis",
+                "Probability and Statistics",
+                "Numerical Methods"
+              ]
+            },
+            {
+              title: "Engineering Chemistry",
+              topics: [
+                "Chemical Thermodynamics",
+                "Electrochemistry",
+                "Environmental Chemistry"
+              ]
+            },
+            {
+              title: "Programming in C",
+              topics: [
+                "Introduction to C Programming",
+                "Control Structures",
+                "Arrays and Functions"
+              ]
+            }
+          ]
+        },
+        3: {
+          title: "CSM - Semester 3 Syllabus",
+          sections: [
+            {
+              title: "Data Structures",
+              topics: [
+                "Arrays, Stacks and Queues",
+                "Linked Lists",
+                "Trees and Graphs"
+              ]
+            },
+            {
+              title: "Digital Logic Design",
+              topics: [
+                "Boolean Algebra",
+                "Combinational Circuits",
+                "Sequential Circuits"
+              ]
+            },
+            {
+              title: "Computer Organization",
+              topics: [
+                "Basic Computer Organization",
+                "Instruction Set Architecture",
+                "CPU Organization"
+              ]
+            }
+          ]
+        },
+        4: {
+          title: "CSM - Semester 4 Syllabus",
+          sections: [
+            {
+              title: "Algorithms",
+              topics: [
+                "Algorithm Analysis",
+                "Sorting and Searching",
+                "Graph Algorithms"
+              ]
+            },
+            {
+              title: "Operating Systems",
+              topics: [
+                "Process Management",
+                "Memory Management",
+                "File Systems"
+              ]
+            },
+            {
+              title: "Database Management Systems",
+              topics: [
+                "Relational Model",
+                "SQL",
+                "Database Design"
+              ]
+            }
+          ]
+        },
+        5: {
+          title: "CSM - Semester 5 Syllabus",
+          sections: [
+            {
+              title: "Web Development",
+              topics: [
+                "HTML, CSS and JavaScript",
+                "Server-side Programming",
+                "Web Frameworks"
+              ]
+            },
+            {
+              title: "Software Engineering",
+              topics: [
+                "Software Process Models",
+                "Requirements Engineering",
+                "Software Design"
+              ]
+            },
+            {
+              title: "Computer Networks",
+              topics: [
+                "Network Models",
+                "Data Link Layer",
+                "Network Layer"
+              ]
+            }
+          ]
+        },
+        6: {
+          title: "CSM - Semester 6 Syllabus",
+          sections: [
+            {
+              title: "Machine Learning",
+              topics: [
+                "Introduction to Machine Learning",
+                "Supervised Learning",
+                "Unsupervised Learning"
+              ]
+            },
+            {
+              title: "Big Data Analytics",
+              topics: [
+                "Big Data Fundamentals",
+                "Hadoop and Spark",
+                "Data Mining"
+              ]
+            },
+            {
+              title: "Cloud Computing",
+              topics: [
+                "Cloud Architecture",
+                "Virtualization",
+                "Cloud Services"
+              ]
+            }
+          ]
+        },
+        7: {
+          title: "CSM - Semester 7 Syllabus",
+          sections: [
+            {
+              title: "Internet of Things",
+              topics: [
+                "IoT Architecture",
+                "Sensors and Actuators",
+                "IoT Protocols"
+              ]
+            },
+            {
+              title: "Blockchain Technology",
+              topics: [
+                "Blockchain Fundamentals",
+                "Cryptocurrency",
+                "Smart Contracts"
+              ]
+            },
+            {
+              title: "Cyber Security",
+              topics: [
+                "Security Fundamentals",
+                "Network Security",
+                "Application Security"
+              ]
+            }
+          ]
+        },
+        8: {
+          title: "CSM - Semester 8 Syllabus",
+          sections: [
+            {
+              title: "Artificial Intelligence",
+              topics: [
+                "Problem Solving",
+                "Knowledge Representation",
+                "Machine Learning Applications"
+              ]
+            },
+            {
+              title: "DevOps",
+              topics: [
+                "Continuous Integration",
+                "Continuous Deployment",
+                "Containerization"
+              ]
+            },
+            {
+              title: "Project Work",
+              topics: [
+                "Project Planning",
+                "Implementation",
+                "Documentation and Presentation"
+              ]
+            }
+          ]
+        }
+      }
+    };
+
+    // Function to load papers for a branch
+    function loadPapers(branch) {
+      const papersList = document.getElementById('papersList');
+      papersList.innerHTML = '<div class="loading"></div>';
+      
+      // Simulate loading delay
+      setTimeout(() => {
+        const papers = previousYearPapers[branch] || [];
+        
+        let html = '';
+        papers.forEach(paper => {
+          html += `
+            <div class="paper-item">
+              <div>
+                <div class="paper-title">${paper.title}</div>
+                <div class="paper-year">Semester ${paper.semester} - ${paper.year}</div>
+              </div>
+              <button class="download-btn">Download</button>
+            </div>
+          `;
+        });
+        
+        papersList.innerHTML = html || '<p>No papers available for this branch.</p>';
+      }, 300);
+    }
+
+    // Function to load syllabus for a branch and semester
+    function loadSyllabus(branch, semester) {
+      const syllabusContent = document.getElementById('syllabusContent');
+      syllabusContent.innerHTML = '<div class="loading"></div>';
+      
+      // Simulate loading delay
+      setTimeout(() => {
+        const syllabus = syllabusData[branch] ? syllabusData[branch][semester] : null;
+        
+        if (syllabus) {
+          let html = `<h3>${syllabus.title}</h3>`;
+          
+          syllabus.sections.forEach(section => {
+            html += `
+              <div class="syllabus-section">
+                <h4>${section.title}</h4>
+                <ul>
+            `;
+            
+            section.topics.forEach(topic => {
+              html += `<li>${topic}</li>`;
+            });
+            
+            html += `
+                </ul>
+              </div>
+            `;
+          });
+          
+          syllabusContent.innerHTML = html;
+        } else {
+          syllabusContent.innerHTML = '<p>No syllabus available for this branch and semester.</p>';
+        }
+      }, 300);
+    }
+
+    function showSections(branch, sem) {
+      const modal = document.getElementById('modal');
+      document.getElementById('modalTitle').innerText = `${branch} - Semester ${sem} Sections`;
+      const body = document.getElementById('modalBody');
+      body.innerHTML = `
+        <div class="sections">
+          <button onclick="showTimetable('${branch}', '${sem}', 'A')">Section A</button>
+          <button onclick="showTimetable('${branch}', '${sem}', 'B')">Section B</button>
+          <button onclick="showTimetable('${branch}', '${sem}', 'C')">Section C</button>
+        </div>
+      `;
+      
+      // Show modal with animation
+      modal.style.display = "flex";
+      setTimeout(() => {
+        modal.classList.add('active');
+      }, 10);
+    }
+
+    function showTimetable(branch, sem, section) {
+      const key = `${branch}-${sem}-${section}`;
+      document.getElementById('modalTitle').innerText = `${branch} - Semester ${sem} - Section ${section} Timetable`;
+      const body = document.getElementById('modalBody');
+
+      // Show loading indicator
+      body.innerHTML = `<div class="loading"></div>`;
+
+      // Simulate loading delay for better UX
+      setTimeout(() => {
+        if (timetableData[key]) {
+          // Determine which timing slots to use based on semester
+          const slots = sem === '1' ? timetableSlots.sem1 : timetableSlots.default;
+          
+          let table = "<table><thead><tr><th>Day</th>";
+          slots.forEach(slot => {
+            table += `<th>${slot[0]}</th>`;
+          });
+          table += "</tr></thead><tbody>";
+          for (const [day, subjects] of Object.entries(timetableData[key])) {
+            table += `<tr><td>${day}</td>`;
+            subjects.forEach(sub => {
+              if (subjectDetails[sub]) {
+                table += `<td class="subject-cell">
+                  ${sub}
+                  <div class="subject-tooltip">
+                    <div class="subject-name">${subjectDetails[sub].name}</div>
+                    <div class="subject-code">Code: ${subjectDetails[sub].code}</div>
+                    <div class="subject-faculty">Faculty: ${subjectDetails[sub].faculty}</div>
+                  </div>
+                </td>`;
+              } else {
+                table += `<td>${sub}</td>`;
+              }
+            });
+            table += "</tr>";
+          }
+          table += "</tbody></table>";
+          
+          // Add toggle button for subject details
+          table += `
+            <button class="toggle-details-btn" onclick="toggleSubjectDetails()">
+              Show Subject Details
+            </button>
+            <div class="subject-details-panel" id="subjectDetailsPanel">
+              <h3>Subject Details</h3>
+              <div class="subject-details-grid">
+          `;
+          
+          // Collect unique subjects from this timetable
+          const uniqueSubjects = new Set();
+          for (const [day, subjects] of Object.entries(timetableData[key])) {
+            subjects.forEach(sub => {
+              if (subjectDetails[sub]) {
+                uniqueSubjects.add(sub);
+              }
+            });
+          }
+          
+          // Create subject cards for each unique subject
+          for (const subject of uniqueSubjects) {
+            const details = subjectDetails[subject];
+            table += `
+              <div class="subject-details-card">
+                <h4>${subject}</h4>
+                <div class="subject-code">${details.code}</div>
+                <div class="subject-name">${details.name}</div>
+                <div class="subject-faculty">Faculty: ${details.faculty}</div>
+              </div>
+            `;
+          }
+          
+          table += `
+              </div>
+            </div>
+          `;
+          
+          body.innerHTML = table;
+        } else {
+          body.innerHTML = "<p>No timetable available for this section yet.</p>";
+        }
+      }, 300);
+    }
+
+    function toggleSubjectDetails() {
+      const panel = document.getElementById('subjectDetailsPanel');
+      const button = document.querySelector('.toggle-details-btn');
+      
+      if (panel.style.display === 'none') {
+        panel.style.display = 'block';
+        button.innerText = 'Hide Subject Details';
+        button.classList.remove('collapsed');
+      } else {
+        panel.style.display = 'none';
+        button.innerText = 'Show Subject Details';
+        button.classList.add('collapsed');
+      }
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('modal');
+      modal.classList.remove('active');
+      
+      // Wait for transition to complete before hiding
+      setTimeout(() => {
+        modal.style.display = "none";
+      }, 300);
+    }
+  </script>
+</body>
+</html>
