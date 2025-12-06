@@ -5,903 +5,873 @@
   <title>SV College of Engineering</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
+    /* Global Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background-color: #f5f7fa;
+      color: #333;
+    }
+    
     /* Welcome Page Styles */
     .welcome-page {
-      font-family: Arial, sans-serif; 
-      background: linear-gradient(135deg, #1f5fbf, #4a86e8);
-      margin: 0; 
-      padding: 0;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      overflow: hidden;
+      background: linear-gradient(135deg, #1a73e8, #4285f4);
+      color: white;
+      text-align: center;
+      padding: 20px;
       position: relative;
+      overflow: hidden;
     }
     
-    /* Animated background elements */
-    .bg-animation {
+    .welcome-page::before {
+      content: '';
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      overflow: hidden;
-      z-index: 1;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none"/><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2"/></svg>');
+      background-size: 100px 100px;
+      opacity: 0.1;
+      animation: moveBackground 20s linear infinite;
     }
     
-    .bg-circle {
-      position: absolute;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.05);
-      animation: float 20s infinite ease-in-out;
-    }
-    
-    @keyframes float {
-      0%, 100% {
-        transform: translateY(0) rotate(0deg);
-      }
-      50% {
-        transform: translateY(-20px) rotate(180deg);
-      }
+    @keyframes moveBackground {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(100px, 100px); }
     }
     
     .welcome-container {
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 20px;
-      padding: 60px 40px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-      text-align: center;
       max-width: 600px;
-      width: 90%;
-      z-index: 2;
-      position: relative;
-      overflow: hidden;
-      animation: slideIn 0.8s ease-out;
+      z-index: 1;
+      animation: fadeIn 1s ease-out;
     }
     
-    .welcome-container::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 5px;
-      background: linear-gradient(90deg, #1f5fbf, #4a86e8, #1f5fbf);
-      animation: headerShine 3s infinite;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     
-    @keyframes headerShine {
-      0% { transform: translateX(-100%); }
-      100% { transform: translateX(100%); }
-    }
-    
-    @keyframes slideIn {
-      from { 
-        opacity: 0; 
-        transform: translateY(50px); 
-      }
-      to { 
-        opacity: 1; 
-        transform: translateY(0); 
-      }
-    }
-    
-    .college-icon {
+    .college-logo {
       width: 120px;
       height: 120px;
-      margin: 0 auto 30px;
-      background: linear-gradient(135deg, #1f5fbf, #4a86e8);
+      background: rgba(255, 255, 255, 0.2);
       border-radius: 50%;
       display: flex;
       justify-content: center;
       align-items: center;
-      color: white;
-      font-size: 2.5rem;
+      margin: 0 auto 30px;
+      font-size: 3rem;
       font-weight: bold;
-      box-shadow: 0 10px 25px rgba(31, 95, 191, 0.3);
-      opacity: 0;
-      animation: fadeIn 1s ease-out forwards;
-      animation-delay: 0.2s;
-    }
-    
-    @keyframes fadeIn {
-      to { opacity: 1; }
     }
     
     .welcome-title {
-      color: #1f5fbf;
       font-size: 2.5rem;
       margin-bottom: 20px;
-      position: relative;
-      display: inline-block;
-      opacity: 0;
-      animation: fadeIn 1s ease-out forwards;
-      animation-delay: 0.4s;
+      font-weight: 600;
     }
     
-    .welcome-title::after {
-      content: '';
-      position: absolute;
-      bottom: -10px;
-      left: 0;
-      width: 0;
-      height: 3px;
-      background: #1f5fbf;
-      transition: width 1s ease;
-      animation: expandWidth 1.5s forwards;
-      animation-delay: 0.9s;
-    }
-    
-    @keyframes expandWidth {
-      to { width: 100%; }
-    }
-    
-    .subtitle {
-      color: #555;
+    .welcome-subtitle {
       font-size: 1.2rem;
       margin-bottom: 40px;
-      opacity: 0;
-      animation: fadeIn 1s ease-out forwards;
-      animation-delay: 0.6s;
+      opacity: 0.9;
     }
     
-    .next-btn {
-      background: linear-gradient(135deg, #1f5fbf, #4a86e8);
-      color: white;
+    .enter-btn {
+      background: white;
+      color: #1a73e8;
       border: none;
       border-radius: 50px;
       padding: 15px 40px;
-      font-size: 1.2rem;
-      font-weight: bold;
+      font-size: 1.1rem;
+      font-weight: 600;
       cursor: pointer;
       transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 5px 15px rgba(31, 95, 191, 0.3);
-      opacity: 0;
-      animation: fadeIn 1s ease-out forwards;
-      animation-delay: 0.8s;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     }
     
-    .next-btn::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.3);
-      transform: translate(-50%, -50%);
-      transition: width 0.6s, height 0.6s;
-    }
-    
-    .next-btn:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(31, 95, 191, 0.4);
-    }
-    
-    .next-btn:active::before {
-      width: 300px;
-      height: 300px;
+    .enter-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
     }
     
     /* Main Page Styles */
     .main-page {
       display: none;
-      font-family: Arial, sans-serif; 
-      background: #f7f9fc; 
-      margin: 0; 
-      transition: background-color 0.3s ease;
-      position: relative;
       min-height: 100vh;
+      background-color: #f5f7fa;
     }
     
-    header { 
-      background: #1f5fbf; 
-      color: white; 
-      text-align: center; 
-      padding: 20px; 
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    header {
+      background: linear-gradient(135deg, #1a73e8, #4285f4);
+      color: white;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       position: relative;
-      overflow: hidden;
     }
     
-    header::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 4px;
-      background: linear-gradient(90deg, #1f5fbf, #4a86e8, #1f5fbf);
-      animation: headerShine 3s infinite;
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .college-name {
+      font-size: 1.8rem;
+      font-weight: 600;
+    }
+    
+    .admin-btn {
+      background: #e53935;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 8px 16px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .admin-btn:hover {
+      background: #c62828;
+      transform: translateY(-2px);
     }
     
     /* Menu Bar Styles */
     .menu-bar {
-      background: #1f5fbf;
-      display: flex;
-      justify-content: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      background: #1a73e8;
+      padding: 0;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       position: sticky;
       top: 0;
       z-index: 100;
     }
     
+    .menu-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+    }
+    
     .menu-item {
-      padding: 15px 25px;
+      flex: 1;
+      text-align: center;
+      padding: 15px 20px;
       color: white;
       cursor: pointer;
       transition: all 0.3s ease;
-      position: relative;
       font-weight: 500;
-    }
-    
-    .menu-item::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 3px;
-      background: #4a86e8;
-      transition: width 0.3s ease;
-    }
-    
-    .menu-item:hover::after {
-      width: 100%;
+      position: relative;
     }
     
     .menu-item:hover {
       background: rgba(255, 255, 255, 0.1);
     }
     
-    .container { 
-      max-width: 1000px; 
-      margin: 20px auto; 
-      padding: 0 16px; 
-      animation: fadeIn 0.5s ease-out;
-      padding-bottom: 60px; /* Added space for footer */
+    .menu-item.active {
+      background: rgba(255, 255, 255, 0.2);
     }
     
-    .grid { 
-      display: grid; 
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
-      gap: 16px; 
-    }
-    
-    .card { 
-      background: white; 
-      border: 1px solid #ddd; 
-      border-radius: 8px; 
-      padding: 16px; 
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05); 
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .card::before {
+    .menu-item.active::after {
       content: '';
       position: absolute;
-      top: 0;
+      bottom: 0;
       left: 0;
       width: 100%;
       height: 3px;
-      background: #1f5fbf;
-      transform: scaleX(0);
-      transition: transform 0.3s ease;
-      transform-origin: left;
-    }
-    
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    }
-    
-    .card:hover::before {
-      transform: scaleX(1);
-    }
-    
-    .card h2 { 
-      margin-top: 0; 
-      font-size: 1.2rem; 
-      color: #1f5fbf; 
-      transition: color 0.3s ease;
-    }
-    
-    .card:hover h2 {
-      color: #4a86e8;
-    }
-    
-    .semesters { 
-      display: grid; 
-      grid-template-columns: repeat(4, 1fr); 
-      gap: 8px; 
-    }
-    
-    .semesters button, .sections button { 
-      padding: 10px; 
-      border: none; 
-      border-radius: 6px; 
-      background: #e6efff; 
-      color: #1f5fbf; 
-      font-weight: bold; 
-      cursor: pointer; 
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .semesters button::after, .sections button::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.5);
-      transform: translate(-50%, -50%);
-      transition: width 0.6s, height 0.6s;
-    }
-    
-    .semesters button:active::after, .sections button:active::after {
-      width: 300px;
-      height: 300px;
-    }
-    
-    .semesters button:hover, .sections button:hover { 
-      background: #d0e0ff; 
-      transform: scale(1.05);
-    }
-    
-    /* Modal */
-    #modal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      background: rgba(0,0,0,0);
-      z-index: 9999;
-      overflow: hidden;
-      transition: background 0.3s ease;
-    }
-    
-    #modal.active {
-      display: flex;
-      background: rgba(0,0,0,0.85);
-    }
-    
-    #modalContent {
       background: white;
-      width: 100%; height: 100%;
-      padding: 40px;
-      box-sizing: border-box;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      transform: scale(0.8);
-      opacity: 0;
-      transition: all 0.3s ease;
-      position: relative; /* Added this */
     }
     
-    #modal.active #modalContent {
-      transform: scale(1);
-      opacity: 1;
-    }
-    
-    #modalContent h3 {
-      font-size: 2rem;
-      margin-bottom: 20px;
-      color: #1f5fbf;
-      text-align: center;
-      position: relative;
-      display: inline-block;
-    }
-    
-    #modalContent h3::after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: #1f5fbf;
-      transition: width 0.5s ease;
-    }
-    
-    #modal.active #modalContent h3::after {
-      width: 100%;
-    }
-    
-    table {
-      width: 100%;
+    .container {
       max-width: 1200px;
-      font-size: 1rem;
-      border-collapse: collapse;
-      margin-top: 20px;
-      animation: slideIn 0.5s ease-out;
+      margin: 0 auto;
+      padding: 20px;
     }
     
-    @keyframes slideIn {
-      from { opacity: 0; transform: translateX(-20px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
-    
-    th, td {
-      border: 1px solid #ccc;
-      padding: 12px;
-      text-align: center;
-      transition: all 0.2s ease;
-    }
-    
-    tr {
-      transition: all 0.2s ease;
-    }
-    
-    tr:hover td {
-      background-color: #f5f9ff;
-    }
-    
-    th {
-      background: #e6efff;
-      font-weight: bold;
-      position: relative;
-    }
-    
-    th::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: #1f5fbf;
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.3s ease;
-    }
-    
-    table:hover th::after {
-      transform: scaleX(1);
-    }
-    
-    .closeBtn {
-      position: absolute;
-      top: 20px; right: 30px;
-      padding: 10px 16px;
-      font-size: 1rem;
-      background: #1f5fbf;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      overflow: hidden;
-      z-index: 10;
-    }
-    
-    .closeBtn:hover {
-      background: #4a86e8;
-      transform: rotate(90deg);
-    }
-    
-    .subject-cell {
-      position: relative;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-    
-    .subject-cell:hover {
-      transform: scale(1.05);
-      font-weight: bold;
-    }
-    
-    .subject-tooltip {
+    /* Content Sections */
+    .content-section {
       display: none;
-      position: absolute;
-      background-color: #f9f9f9;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      padding: 10px;
-      z-index: 1000;
-      width: 250px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      left: 50%;
-      transform: translateX(-50%) scale(0.8);
-      bottom: 100%;
-      margin-bottom: 10px;
-      opacity: 0;
-      transition: all 0.3s ease;
-    }
-    
-    .subject-cell:hover .subject-tooltip {
-      display: block;
-      opacity: 1;
-      transform: translateX(-50%) scale(1);
-    }
-    
-    .subject-name {
-      font-weight: bold;
-      color: #1f5fbf;
-    }
-    
-    .subject-code {
-      font-size: 0.9rem;
-      color: #666;
-    }
-    
-    .subject-faculty {
-      font-size: 0.9rem;
-      color: #333;
-      margin-top: 5px;
-    }
-    
-    .subject-details {
-      margin-top: 10px;
-      text-align: left;
-    }
-    
-    .legend {
-      margin-top: 20px;
-      background: white;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 16px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-      animation: slideUp 0.5s ease-out;
-    }
-    
-    @keyframes slideUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    
-    .legend h3 {
-      margin-top: 0;
-      font-size: 1.2rem;
-      color: #1f5fbf;
-      position: relative;
-      display: inline-block;
-    }
-    
-    .legend h3::after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: #1f5fbf;
-      transition: width 0.5s ease;
-    }
-    
-    .legend:hover h3::after {
-      width: 100%;
-    }
-    
-    .legend-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 16px;
-    }
-    
-    .legend-item {
-      border-bottom: 1px solid #eee;
-      padding-bottom: 8px;
-      margin-bottom: 8px;
-      transition: all 0.2s ease;
-    }
-    
-    .legend-item:hover {
-      background-color: #f5f9ff;
-      padding-left: 10px;
-      border-left: 3px solid #1f5fbf;
-    }
-    
-    .sections {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
       animation: fadeIn 0.5s ease-out;
     }
     
-    .loading {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      border: 3px solid rgba(0,0,0,0.1);
-      border-radius: 50%;
-      border-top-color: #1f5fbf;
-      animation: spin 1s ease-in-out infinite;
-      margin-left: 10px;
+    .content-section.active {
+      display: block;
     }
     
-    @keyframes spin {
-      to { transform: rotate(360deg); }
+    .section-header {
+      margin-bottom: 20px;
+      text-align: center;
     }
     
-    /* Syllabus and Papers Styles */
-    .branch-selector {
+    .section-title {
+      font-size: 1.8rem;
+      color: #1a73e8;
+      margin-bottom: 10px;
+    }
+    
+    .section-description {
+      color: #666;
+      font-size: 1rem;
+    }
+    
+    /* Branch and Semester Selection */
+    .selection-container {
       display: flex;
       justify-content: center;
-      gap: 15px;
-      margin-bottom: 20px;
+      gap: 20px;
+      margin-bottom: 30px;
       flex-wrap: wrap;
     }
     
-    .branch-btn {
-      padding: 10px 20px;
-      background: #e6efff;
-      color: #1f5fbf;
+    .selection-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .selection-label {
+      font-weight: 500;
+      color: #555;
+    }
+    
+    .selection-dropdown {
+      padding: 10px 15px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      background: white;
+      font-size: 1rem;
+      min-width: 150px;
+    }
+    
+    .view-btn {
+      background: #1a73e8;
+      color: white;
       border: none;
-      border-radius: 6px;
-      font-weight: bold;
+      border-radius: 4px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      font-weight: 500;
       cursor: pointer;
       transition: all 0.3s ease;
+      align-self: flex-end;
     }
     
-    .branch-btn:hover {
-      background: #d0e0ff;
-      transform: scale(1.05);
+    .view-btn:hover {
+      background: #0d47a1;
     }
     
-    .branch-btn.active {
-      background: #1f5fbf;
-      color: white;
+    /* Resources Display */
+    .resources-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
     }
     
-    .paper-list {
-      width: 100%;
-      max-width: 800px;
-    }
-    
-    .paper-item {
+    .resource-card {
       background: white;
-      border: 1px solid #ddd;
       border-radius: 8px;
-      padding: 15px;
-      margin-bottom: 15px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
       transition: all 0.3s ease;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
     }
     
-    .paper-item:hover {
+    .resource-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-      background-color: #f5f9ff;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     }
     
-    .paper-title {
-      font-weight: bold;
-      color: #1f5fbf;
+    .resource-title {
+      font-size: 1.2rem;
+      color: #1a73e8;
+      margin-bottom: 10px;
+      font-weight: 500;
     }
     
-    .paper-year {
+    .resource-meta {
       color: #666;
       font-size: 0.9rem;
+      margin-bottom: 15px;
+    }
+    
+    .resource-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: auto;
+    }
+    
+    .download-btn, .view-btn-small {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      flex: 1;
+      text-align: center;
     }
     
     .download-btn {
-      padding: 8px 15px;
-      background: #1f5fbf;
+      background: #34a853;
       color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: all 0.3s ease;
     }
     
     .download-btn:hover {
-      background: #4a86e8;
-      transform: scale(1.05);
+      background: #2e7d32;
     }
     
-    .syllabus-content {
-      width: 100%;
-      max-width: 800px;
-      background: white;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 20px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    .view-btn-small {
+      background: #fbbc04;
+      color: #333;
     }
     
-    .syllabus-section {
-      margin-bottom: 20px;
+    .view-btn-small:hover {
+      background: #f9ab00;
     }
     
-    .syllabus-section h4 {
-      color: #1f5fbf;
-      border-bottom: 2px solid #e6efff;
-      padding-bottom: 5px;
-      margin-top: 0;
-    }
-    
-    .syllabus-section ul {
-      padding-left: 20px;
-    }
-    
-    .syllabus-section li {
-      margin-bottom: 8px;
-    }
-    
-    /* Footer with name */
-    .footer {
-      position: fixed;
-      bottom: 0;
-      right: 0;
-      padding: 15px 20px;
-      background: linear-gradient(135deg, #1f5fbf, #4a86e8);
-      color: white;
-      font-size: 14px;
-      font-weight: bold;
-      border-top-left-radius: 8px;
-      box-shadow: -2px -2px 10px rgba(0,0,0,0.1);
-      z-index: 1000;
-      animation: slideInRight 0.5s ease-out;
-    }
-    
-    @keyframes slideInRight {
-      from { transform: translateX(100%); }
-      to { transform: translateX(0); }
-    }
-    
-    .footer:hover {
-      background: linear-gradient(135deg, #4a86e8, #1f5fbf);
-      transform: scale(1.05);
-    }
-    
-    /* Subject Details Toggle Button */
-    .toggle-details-btn {
-      margin: 15px 0;
-      padding: 10px 20px;
-      background: #1f5fbf;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    
-    .toggle-details-btn:hover {
-      background: #4a86e8;
-      transform: scale(1.05);
-    }
-    
-    .toggle-details-btn::after {
-      content: '▼';
-      transition: transform 0.3s ease;
-    }
-    
-    .toggle-details-btn.collapsed::after {
-      transform: rotate(-90deg);
-    }
-    
-    /* Subject Details Panel */
-    .subject-details-panel {
-      width: 100%;
-      max-width: 1200px;
-      margin-top: 20px;
-      background: white;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 20px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-      animation: slideDown 0.5s ease-out;
-    }
-    
-    @keyframes slideDown {
-      from { opacity: 0; max-height: 0; }
-      to { opacity: 1; max-height: 1000px; }
-    }
-    
-    .subject-details-panel h3 {
-      margin-top: 0;
-      font-size: 1.2rem;
-      color: #1f5fbf;
-      position: relative;
-      display: inline-block;
-    }
-    
-    .subject-details-panel h3::after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: #1f5fbf;
-    }
-    
-    .subject-details-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 16px;
-    }
-    
-    .subject-details-card {
-      background: #f7f9fc;
-      border: 1px solid #e6efff;
-      border-radius: 8px;
-      padding: 15px;
-      transition: all 0.3s ease;
-    }
-    
-    .subject-details-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      background: #e6efff;
-    }
-    
-    .subject-details-card h4 {
-      margin-top: 0;
-      color: #1f5fbf;
+    .no-resources {
+      text-align: center;
+      padding: 40px;
+      color: #666;
       font-size: 1.1rem;
     }
     
-    .subject-details-card .subject-code {
-      color: #4a86e8;
-      font-weight: bold;
+    /* Branches Container (for timetables) */
+    .branches-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
     }
     
-    .subject-details-card .subject-faculty {
+    .branch-card {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
+    
+    .branch-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .branch-title {
+      color: #1a73e8;
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e0e0e0;
+    }
+    
+    .semesters {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+    
+    .semester-btn {
+      background: #e8f0fe;
+      color: #1a73e8;
+      border: none;
+      border-radius: 4px;
+      padding: 10px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .semester-btn:hover {
+      background: #d2e3fc;
+    }
+    
+    .semester-btn.has-timetable {
+      background: #e6f4ea;
+      color: #34a853;
+    }
+    
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .modal-content {
+      background: white;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 500px;
+      max-height: 90vh;
+      overflow-y: auto;
+      animation: modalSlideIn 0.3s ease-out;
+    }
+    
+    @keyframes modalSlideIn {
+      from { transform: translateY(-50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    
+    .modal-header {
+      padding: 20px;
+      border-bottom: 1px solid #e0e0e0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .modal-title {
+      font-size: 1.5rem;
+      color: #1a73e8;
+    }
+    
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #757575;
+    }
+    
+    .modal-body {
+      padding: 20px;
+    }
+    
+    /* Auth Styles */
+    .auth-tabs {
+      display: flex;
+      margin-bottom: 20px;
+    }
+    
+    .auth-tab {
+      flex: 1;
+      padding: 10px;
+      background: #f5f5f5;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    
+    .auth-tab:first-child {
+      border-radius: 4px 0 0 4px;
+    }
+    
+    .auth-tab:last-child {
+      border-radius: 0 4px 4px 0;
+    }
+    
+    .auth-tab.active {
+      background: #1a73e8;
+      color: white;
+    }
+    
+    .form-group {
+      margin-bottom: 15px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
       color: #555;
-      margin-top: 5px;
     }
     
-    /* Responsive adjustments */
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 2rem;
-      }
-      
-      .subtitle {
-        font-size: 1rem;
-      }
-      
-      .welcome-container {
-        padding: 40px 20px;
-      }
-      
-      .college-icon {
-        width: 100px;
-        height: 100px;
-        font-size: 2rem;
-      }
-      
-      .menu-bar {
-        flex-wrap: wrap;
-      }
-      
-      .menu-item {
-        padding: 10px 15px;
-        font-size: 0.9rem;
-      }
-      
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+    
+    .form-group input:focus {
+      border-color: #1a73e8;
+      outline: none;
+    }
+    
+    .error-message {
+      color: #e53935;
+      font-size: 0.8rem;
+      margin-top: 5px;
+      display: none;
+    }
+    
+    .submit-btn {
+      background: #1a73e8;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+    
+    .submit-btn:hover {
+      background: #0d47a1;
+    }
+    
+    /* Admin Dashboard Styles */
+    .admin-dashboard {
+      display: none;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      margin-top: 20px;
+    }
+    
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    
+    .dashboard-title {
+      font-size: 1.5rem;
+      color: #1a73e8;
+    }
+    
+    .logout-btn {
+      background: #e53935;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 8px 16px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .logout-btn:hover {
+      background: #c62828;
+    }
+    
+    /* Admin Tabs */
+    .admin-tabs {
+      display: flex;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    
+    .admin-tab {
+      padding: 10px 20px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      color: #666;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    
+    .admin-tab.active {
+      color: #1a73e8;
+    }
+    
+    .admin-tab.active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: #1a73e8;
+    }
+    
+    .admin-tab-content {
+      display: none;
+    }
+    
+    .admin-tab-content.active {
+      display: block;
+    }
+    
+    /* Upload Section */
+    .upload-section {
+      margin-bottom: 30px;
+    }
+    
+    .upload-title {
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+      color: #333;
+    }
+    
+    .upload-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 15px;
+    }
+    
+    .upload-card {
+      background: #f5f5f5;
+      border-radius: 8px;
+      padding: 15px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    
+    .upload-card:hover {
+      background: #e8f0fe;
+    }
+    
+    .upload-card-title {
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+    
+    .upload-input {
+      display: none;
+    }
+    
+    .upload-btn {
+      background: #1a73e8;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 8px 16px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .upload-btn:hover {
+      background: #0d47a1;
+    }
+    
+    .upload-status {
+      font-size: 0.8rem;
+      margin-top: 5px;
+      color: #555;
+    }
+    
+    /* Gallery Section */
+    .gallery-section {
+      margin-top: 30px;
+    }
+    
+    .gallery-title {
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+      color: #333;
+    }
+    
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 15px;
+    }
+    
+    .gallery-item {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      background: white;
+    }
+    
+    .gallery-item img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      display: block;
+    }
+    
+    .gallery-item-title {
+      padding: 10px;
+      font-size: 0.9rem;
+      text-align: center;
+      border-top: 1px solid #e0e0e0;
+    }
+    
+    .delete-btn {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background: rgba(229, 57, 53, 0.8);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .delete-btn:hover {
+      background: rgba(198, 40, 40, 0.9);
+    }
+    
+    /* File Gallery */
+    .file-gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 15px;
+    }
+    
+    .file-gallery-item {
+      background: white;
+      border-radius: 8px;
+      padding: 15px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      position: relative;
+    }
+    
+    .file-icon {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    
+    .file-info {
+      margin-bottom: 10px;
+    }
+    
+    .file-name {
+      font-weight: 500;
+      margin-bottom: 5px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    
+    .file-meta {
+      font-size: 0.8rem;
+      color: #666;
+    }
+    
+    .file-actions {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .file-action-btn {
+      flex: 1;
+      padding: 6px 10px;
+      border: none;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+    
+    .view-file-btn {
+      background: #fbbc04;
+      color: #333;
+    }
+    
+    .view-file-btn:hover {
+      background: #f9ab00;
+    }
+    
+    .delete-file-btn {
+      background: #e53935;
+      color: white;
+    }
+    
+    .delete-file-btn:hover {
+      background: #c62828;
+    }
+    
+    /* Timetable Modal */
+    .timetable-modal-content {
+      background: white;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 800px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    
+    .timetable-image {
+      width: 100%;
+      display: block;
+    }
+    
+    .no-timetable {
+      text-align: center;
+      padding: 40px;
+      color: #757575;
+    }
+    
+    /* PDF Viewer Modal */
+    .pdf-viewer {
+      width: 100%;
+      height: 70vh;
+      border: none;
+    }
+    
+    /* Footer */
+    footer {
+      background: #333;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
       .semesters {
         grid-template-columns: repeat(2, 1fr);
       }
       
-      #modalContent {
-        padding: 20px;
+      .header-content {
+        flex-direction: column;
+        gap: 15px;
       }
       
-      .closeBtn {
-        top: 10px;
-        right: 10px;
+      .upload-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      }
+      
+      .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      }
+      
+      .selection-container {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .menu-container {
+        flex-direction: column;
       }
     }
   </style>
@@ -909,1337 +879,1583 @@
 <body>
   <!-- Welcome Page -->
   <div class="welcome-page" id="welcomePage">
-    <!-- Animated background -->
-    <div class="bg-animation" id="bgAnimation"></div>
-    
     <div class="welcome-container">
-      <div class="college-icon">SVCK</div>
-      <h1 class="welcome-title">Welcome to Sri venkateswara college of engineering Portal</h1>
-      <button class="next-btn" onclick="goToMainPage()">Next</button>
-      <p class="subtitle">Developed by C. Babu 23KH1A0519</p>
-    </div>
-    
-    <div class="footer">
-      BABU 23KH1A0519
+      <div class="college-logo">SVCK</div>
+      <h1 class="welcome-title">Sri Venkateswara College of Engineering</h1>
+      <p class="welcome-subtitle">Welcome to Student Portal</p>
+      <button class="enter-btn" onclick="enterPortal()">Enter Portal</button>
     </div>
   </div>
 
   <!-- Main Page -->
   <div class="main-page" id="mainPage">
     <header>
-      <h1>SV College of Engineering</h1>
-      <p>Branches: CSE, ECE, CSM</p>
+      <div class="header-content">
+        <h1 class="college-name">SV College of Engineering</h1>
+        <button class="admin-btn" onclick="showAdminAuth()">Admin</button>
+      </div>
     </header>
     
     <!-- Menu Bar -->
-    <div class="menu-bar">
-      <div class="menu-item" onclick="showTimetables()">Timetables</div>
-      <div class="menu-item" onclick="showPreviousYearPapers()">Previous Year Papers</div>
-      <div class="menu-item" onclick="showSyllabus()">Syllabus</div>
-    </div>
-
+    <nav class="menu-bar">
+      <div class="menu-container">
+        <div class="menu-item active" onclick="showSection('timetables')">Timetables</div>
+        <div class="menu-item" onclick="showSection('notes')">Notes (PDF)</div>
+        <div class="menu-item" onclick="showSection('syllabus')">Syllabus Paper</div>
+        <div class="menu-item" onclick="showSection('papers')">Previous Year Papers</div>
+      </div>
+    </nav>
+    
     <div class="container">
-      <div class="grid" id="timetableView">
-        <!-- CSE -->
-        <div class="card" data-branch="CSE">
-          <h2>Computer Science & Engineering (CSE)</h2>
-          <div class="semesters">
-            <button data-sem="1">Sem 1</button>
-            <button data-sem="2">Sem 2</button>
-            <button data-sem="3">Sem 3</button>
-            <button data-sem="4">Sem 4</button>
-            <button data-sem="5">Sem 5</button>
-            <button data-sem="6">Sem 6</button>
-            <button data-sem="7">Sem 7</button>
-            <button data-sem="8">Sem 8</button>
-          </div>
+      <!-- Timetables Section -->
+      <div class="content-section active" id="timetablesSection">
+        <div class="section-header">
+          <h2 class="section-title">Timetables</h2>
+          <p class="section-description">View timetables for different branches and semesters</p>
         </div>
-
-        <!-- ECE -->
-        <div class="card" data-branch="ECE">
-          <h2>Electronics & Communication Engineering (ECE)</h2>
-          <div class="semesters">
-            <button data-sem="1">Sem 1</button>
-            <button data-sem="2">Sem 2</button>
-            <button data-sem="3">Sem 3</button>
-            <button data-sem="4">Sem 4</button>
-            <button data-sem="5">Sem 5</button>
-            <button data-sem="6">Sem 6</button>
-            <button data-sem="7">Sem 7</button>
-            <button data-sem="8">Sem 8</button>
-          </div>
-        </div>
-
-        <!-- CSM -->
-        <div class="card" data-branch="CSM">
-          <h2>Computer Science & Engineering (CSM)</h2>
-          <div class="semesters">
-            <button data-sem="1">Sem 1</button>
-            <button data-sem="2">Sem 2</button>
-            <button data-sem="3">Sem 3</button>
-            <button data-sem="4">Sem 4</button>
-            <button data-sem="5">Sem 5</button>
-            <button data-sem="6">Sem 6</button>
-            <button data-sem="7">Sem 7</button>
-            <button data-sem="8">Sem 8</button>
-          </div>
+        
+        <div class="branches-container" id="branchesContainer">
+          <!-- Branch cards will be dynamically generated -->
         </div>
       </div>
       
-      <!-- Previous Year Papers View (Hidden by default) -->
-      <div id="papersView" style="display: none;">
-        <div class="branch-selector">
-          <button class="branch-btn active" data-branch="CSE">CSE</button>
-          <button class="branch-btn" data-branch="ECE">ECE</button>
-          <button class="branch-btn" data-branch="CSM">CSM</button>
+      <!-- Notes Section -->
+      <div class="content-section" id="notesSection">
+        <div class="section-header">
+          <h2 class="section-title">Notes (PDF)</h2>
+          <p class="section-description">Access study notes for different branches and semesters</p>
         </div>
         
-        <div class="paper-list" id="papersList">
-          <!-- Papers will be loaded here based on selected branch -->
+        <div class="selection-container">
+          <div class="selection-group">
+            <label class="selection-label">Branch:</label>
+            <select class="selection-dropdown" id="notesBranch">
+              <option value="">Select Branch</option>
+              <option value="CSE">Computer Science & Engineering</option>
+              <option value="ECE">Electronics & Communication Engineering</option>
+              <option value="CSM">Computer Science & Machine Learning</option>
+            </select>
+          </div>
+          
+          <div class="selection-group">
+            <label class="selection-label">Semester:</label>
+            <select class="selection-dropdown" id="notesSemester">
+              <option value="">Select Semester</option>
+              <option value="1">Semester 1</option>
+              <option value="2">Semester 2</option>
+              <option value="3">Semester 3</option>
+              <option value="4">Semester 4</option>
+              <option value="5">Semester 5</option>
+              <option value="6">Semester 6</option>
+              <option value="7">Semester 7</option>
+              <option value="8">Semester 8</option>
+            </select>
+          </div>
+          
+          <div class="selection-group">
+            <label class="selection-label">&nbsp;</label>
+            <button class="view-btn" onclick="loadNotes()">View Notes</button>
+          </div>
+        </div>
+        
+        <div class="resources-container" id="notesContainer">
+          <div class="no-resources">Please select branch and semester to view notes</div>
         </div>
       </div>
       
-      <!-- Syllabus View (Hidden by default) -->
-      <div id="syllabusView" style="display: none;">
-        <div class="branch-selector">
-          <button class="branch-btn active" data-branch="CSE">CSE</button>
-          <button class="branch-btn" data-branch="ECE">ECE</button>
-          <button class="branch-btn" data-branch="CSM">CSM</button>
+      <!-- Syllabus Section -->
+      <div class="content-section" id="syllabusSection">
+        <div class="section-header">
+          <h2 class="section-title">Syllabus Paper</h2>
+          <p class="section-description">Access syllabus papers for different branches and semesters</p>
         </div>
         
-        <div class="semesters" style="margin-bottom: 20px;">
-          <button data-sem="1">Sem 1</button>
-          <button data-sem="2">Sem 2</button>
-          <button data-sem="3">Sem 3</button>
-          <button data-sem="4">Sem 4</button>
-          <button data-sem="5">Sem 5</button>
-          <button data-sem="6">Sem 6</button>
-          <button data-sem="7">Sem 7</button>
-          <button data-sem="8">Sem 8</button>
+        <div class="selection-container">
+          <div class="selection-group">
+            <label class="selection-label">Branch:</label>
+            <select class="selection-dropdown" id="syllabusBranch">
+              <option value="">Select Branch</option>
+              <option value="CSE">Computer Science & Engineering</option>
+              <option value="ECE">Electronics & Communication Engineering</option>
+              <option value="CSM">Computer Science & Machine Learning</option>
+            </select>
+          </div>
+          
+          <div class="selection-group">
+            <label class="selection-label">Semester:</label>
+            <select class="selection-dropdown" id="syllabusSemester">
+              <option value="">Select Semester</option>
+              <option value="1">Semester 1</option>
+              <option value="2">Semester 2</option>
+              <option value="3">Semester 3</option>
+              <option value="4">Semester 4</option>
+              <option value="5">Semester 5</option>
+              <option value="6">Semester 6</option>
+              <option value="7">Semester 7</option>
+              <option value="8">Semester 8</option>
+            </select>
+          </div>
+          
+          <div class="selection-group">
+            <label class="selection-label">&nbsp;</label>
+            <button class="view-btn" onclick="loadSyllabus()">View Syllabus</button>
+          </div>
         </div>
         
-        <div class="syllabus-content" id="syllabusContent">
-          <!-- Syllabus will be loaded here based on selected branch and semester -->
+        <div class="resources-container" id="syllabusContainer">
+          <div class="no-resources">Please select branch and semester to view syllabus</div>
+        </div>
+      </div>
+      
+      <!-- Previous Year Papers Section -->
+      <div class="content-section" id="papersSection">
+        <div class="section-header">
+          <h2 class="section-title">Previous Year Papers</h2>
+          <p class="section-description">Access previous year question papers for different branches and semesters</p>
+        </div>
+        
+        <div class="selection-container">
+          <div class="selection-group">
+            <label class="selection-label">Branch:</label>
+            <select class="selection-dropdown" id="papersBranch">
+              <option value="">Select Branch</option>
+              <option value="CSE">Computer Science & Engineering</option>
+              <option value="ECE">Electronics & Communication Engineering</option>
+              <option value="CSM">Computer Science & Machine Learning</option>
+            </select>
+          </div>
+          
+          <div class="selection-group">
+            <label class="selection-label">Semester:</label>
+            <select class="selection-dropdown" id="papersSemester">
+              <option value="">Select Semester</option>
+              <option value="1">Semester 1</option>
+              <option value="2">Semester 2</option>
+              <option value="3">Semester 3</option>
+              <option value="4">Semester 4</option>
+              <option value="5">Semester 5</option>
+              <option value="6">Semester 6</option>
+              <option value="7">Semester 7</option>
+              <option value="8">Semester 8</option>
+            </select>
+          </div>
+          
+          <div class="selection-group">
+            <label class="selection-label">&nbsp;</label>
+            <button class="view-btn" onclick="loadPapers()">View Papers</button>
+          </div>
+        </div>
+        
+        <div class="resources-container" id="papersContainer">
+          <div class="no-resources">Please select branch and semester to view papers</div>
+        </div>
+      </div>
+      
+      <!-- Admin Dashboard (Hidden by default) -->
+      <div class="admin-dashboard" id="adminDashboard">
+        <div class="dashboard-header">
+          <h2 class="dashboard-title">Admin Dashboard</h2>
+          <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+        
+        <!-- Admin Tabs -->
+        <div class="admin-tabs">
+          <button class="admin-tab active" onclick="switchAdminTab('timetables')">Timetables</button>
+          <button class="admin-tab" onclick="switchAdminTab('notes')">Notes (PDF)</button>
+          <button class="admin-tab" onclick="switchAdminTab('syllabus')">Syllabus</button>
+          <button class="admin-tab" onclick="switchAdminTab('papers')">Previous Papers</button>
+        </div>
+        
+        <!-- Timetables Tab Content -->
+        <div class="admin-tab-content active" id="timetablesTabContent">
+          <div class="upload-section">
+            <h3 class="upload-title">Upload Timetables</h3>
+            <div class="upload-grid" id="timetableUploadGrid">
+              <!-- Upload cards will be dynamically generated -->
+            </div>
+          </div>
+          
+          <div class="gallery-section">
+            <h3 class="gallery-title">Uploaded Timetables</h3>
+            <div class="gallery-grid" id="timetableGallery">
+              <!-- Gallery items will be dynamically generated -->
+            </div>
+          </div>
+        </div>
+        
+        <!-- Notes Tab Content -->
+        <div class="admin-tab-content" id="notesTabContent">
+          <div class="upload-section">
+            <h3 class="upload-title">Upload Notes (PDF)</h3>
+            <div class="upload-grid" id="notesUploadGrid">
+              <!-- Upload cards will be dynamically generated -->
+            </div>
+          </div>
+          
+          <div class="gallery-section">
+            <h3 class="gallery-title">Uploaded Notes</h3>
+            <div class="file-gallery-grid" id="notesGallery">
+              <!-- File gallery items will be dynamically generated -->
+            </div>
+          </div>
+        </div>
+        
+        <!-- Syllabus Tab Content -->
+        <div class="admin-tab-content" id="syllabusTabContent">
+          <div class="upload-section">
+            <h3 class="upload-title">Upload Syllabus Papers</h3>
+            <div class="upload-grid" id="syllabusUploadGrid">
+              <!-- Upload cards will be dynamically generated -->
+            </div>
+          </div>
+          
+          <div class="gallery-section">
+            <h3 class="gallery-title">Uploaded Syllabus Papers</h3>
+            <div class="file-gallery-grid" id="syllabusGallery">
+              <!-- File gallery items will be dynamically generated -->
+            </div>
+          </div>
+        </div>
+        
+        <!-- Previous Papers Tab Content -->
+        <div class="admin-tab-content" id="papersTabContent">
+          <div class="upload-section">
+            <h3 class="upload-title">Upload Previous Year Papers</h3>
+            <div class="upload-grid" id="papersUploadGrid">
+              <!-- Upload cards will be dynamically generated -->
+            </div>
+          </div>
+          
+          <div class="gallery-section">
+            <h3 class="gallery-title">Uploaded Previous Year Papers</h3>
+            <div class="file-gallery-grid" id="papersGallery">
+              <!-- File gallery items will be dynamically generated -->
+            </div>
+          </div>
         </div>
       </div>
     </div>
+    
+    <footer>
+      <p>&copy; 2023 SV College of Engineering. Developed by C. Babu 23KH1A0519</p>
+    </footer>
+  </div>
 
-    <!-- Footer with name -->
-    <div class="footer">
-      BABU 23KH1A0519
+  <!-- Admin Authentication Modal -->
+  <div class="modal" id="authModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="authModalTitle">Admin Login</h2>
+        <button class="close-btn" onclick="closeAuthModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="auth-tabs">
+          <button class="auth-tab active" id="loginTab" onclick="switchAuthTab('login')">Login</button>
+          <button class="auth-tab" id="registerTab" onclick="switchAuthTab('register')">Register</button>
+        </div>
+        
+        <!-- Login Form -->
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="loginUsername">Username</label>
+            <input type="text" id="loginUsername" required>
+            <div class="error-message" id="loginUsernameError"></div>
+          </div>
+          <div class="form-group">
+            <label for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" required>
+            <div class="error-message" id="loginPasswordError"></div>
+          </div>
+          <button type="submit" class="submit-btn">Login</button>
+        </form>
+        
+        <!-- Register Form (Hidden by default) -->
+        <form id="registerForm" style="display: none;">
+          <div class="form-group">
+            <label for="registerUsername">Username</label>
+            <input type="text" id="registerUsername" required>
+            <div class="error-message" id="registerUsernameError"></div>
+          </div>
+          <div class="form-group">
+            <label for="registerEmail">Email</label>
+            <input type="email" id="registerEmail" required>
+            <div class="error-message" id="registerEmailError"></div>
+          </div>
+          <div class="form-group">
+            <label for="registerPassword">Password</label>
+            <input type="password" id="registerPassword" required>
+            <div class="error-message" id="registerPasswordError"></div>
+          </div>
+          <div class="form-group">
+            <label for="registerConfirmPassword">Confirm Password</label>
+            <input type="password" id="registerConfirmPassword" required>
+            <div class="error-message" id="registerConfirmPasswordError"></div>
+          </div>
+          <button type="submit" class="submit-btn">Register</button>
+        </form>
+      </div>
     </div>
+  </div>
 
-    <!-- Modal -->
-    <div id="modal">
-      <div id="modalContent">
-        <h3 id="modalTitle"></h3>
-        <div id="modalBody"></div>
-        <button class="closeBtn" onclick="closeModal()">Close</button>
+  <!-- Timetable Modal -->
+  <div class="modal" id="timetableModal">
+    <div class="timetable-modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="timetableModalTitle">Timetable</h2>
+        <button class="close-btn" onclick="closeTimetableModal()">&times;</button>
+      </div>
+      <div class="modal-body" id="timetableModalBody">
+        <!-- Timetable content will be dynamically generated -->
+      </div>
+    </div>
+  </div>
+
+  <!-- PDF Viewer Modal -->
+  <div class="modal" id="pdfModal">
+    <div class="timetable-modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="pdfModalTitle">PDF Viewer</h2>
+        <button class="close-btn" onclick="closePdfModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <iframe id="pdfViewer" class="pdf-viewer" src=""></iframe>
       </div>
     </div>
   </div>
 
   <script>
-    // Welcome Page Script
-    function createBackgroundElements() {
-      const bgContainer = document.getElementById('bgAnimation');
-      const circleCount = 15;
+    // Initialize data
+    const branches = ['CSE', 'ECE', 'CSM'];
+    const semesters = [1, 2, 3, 4, 5, 6, 7, 8];
+    
+    // Initialize local storage
+    function initializeStorage() {
+      if (!localStorage.getItem('adminUsers')) {
+        localStorage.setItem('adminUsers', JSON.stringify([{
+          username: 'admin',
+          email: 'admin@svcollege.edu',
+          password: 'admin123'
+        }]));
+      }
       
-      for (let i = 0; i < circleCount; i++) {
-        const circle = document.createElement('div');
-        circle.classList.add('bg-circle');
-        
-        // Random size between 20px and 100px
-        const size = Math.random() * 80 + 20;
-        circle.style.width = `${size}px`;
-        circle.style.height = `${size}px`;
-        
-        // Random position
-        circle.style.left = `${Math.random() * 100}%`;
-        circle.style.top = `${Math.random() * 100}%`;
-        
-        // Random animation delay and duration
-        const duration = Math.random() * 10 + 15;
-        const delay = Math.random() * 5;
-        circle.style.animationDuration = `${duration}s`;
-        circle.style.animationDelay = `${delay}s`;
-        
-        bgContainer.appendChild(circle);
+      if (!localStorage.getItem('timetables')) {
+        localStorage.setItem('timetables', JSON.stringify({}));
+      }
+      
+      if (!localStorage.getItem('notes')) {
+        localStorage.setItem('notes', JSON.stringify({}));
+      }
+      
+      if (!localStorage.getItem('syllabus')) {
+        localStorage.setItem('syllabus', JSON.stringify({}));
+      }
+      
+      if (!localStorage.getItem('papers')) {
+        localStorage.setItem('papers', JSON.stringify({}));
       }
     }
     
-    // Initialize background elements on page load
-    window.addEventListener('load', createBackgroundElements);
-    
-    // Navigate to main page
-    function goToMainPage() {
+    // Enter portal from welcome page
+    function enterPortal() {
       document.getElementById('welcomePage').style.display = 'none';
       document.getElementById('mainPage').style.display = 'block';
-      
-      // Initialize event listeners after DOM is ready
-      initializeEventListeners();
-    }
-
-    // Initialize all event listeners
-    function initializeEventListeners() {
-      // Event listeners for semester buttons in timetables
-      document.querySelectorAll('.semesters button').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          const sem = e.target.getAttribute('data-sem');
-          const branch = e.target.closest('.card').getAttribute('data-branch');
-          showSections(branch, sem);
-        });
-      });
-
-      // Event listeners for branch buttons in papers view
-      document.querySelectorAll('#papersView .branch-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          // Remove active class from all buttons
-          document.querySelectorAll('#papersView .branch-btn').forEach(b => {
-            b.classList.remove('active');
-          });
-          
-          // Add active class to clicked button
-          e.target.classList.add('active');
-          
-          // Load papers for selected branch
-          const branch = e.target.getAttribute('data-branch');
-          loadPapers(branch);
-        });
-      });
-
-      // Event listeners for branch buttons in syllabus view
-      document.querySelectorAll('#syllabusView .branch-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          // Remove active class from all buttons
-          document.querySelectorAll('#syllabusView .branch-btn').forEach(b => {
-            b.classList.remove('active');
-          });
-          
-          // Add active class to clicked button
-          e.target.classList.add('active');
-          
-          // Get current selected semester
-          const currentSemBtn = document.querySelector('#syllabusView .semesters button.active');
-          const sem = currentSemBtn ? currentSemBtn.getAttribute('data-sem') : 1;
-          
-          // Load syllabus for selected branch and semester
-          const branch = e.target.getAttribute('data-branch');
-          loadSyllabus(branch, sem);
-        });
-      });
-
-      // Event listeners for semester buttons in syllabus view
-      document.querySelectorAll('#syllabusView .semesters button').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          // Remove active class from all buttons
-          document.querySelectorAll('#syllabusView .semesters button').forEach(b => {
-            b.classList.remove('active');
-          });
-          
-          // Add active class to clicked button
-          e.target.classList.add('active');
-          
-          // Get current selected branch
-          const currentBranchBtn = document.querySelector('#syllabusView .branch-btn.active');
-          const branch = currentBranchBtn ? currentBranchBtn.getAttribute('data-branch') : 'CSE';
-          
-          // Load syllabus for selected branch and semester
-          const sem = e.target.getAttribute('data-sem');
-          loadSyllabus(branch, sem);
-        });
-      });
-    }
-
-    // Menu Bar Functions
-    function showTimetables() {
-      document.getElementById('timetableView').style.display = 'grid';
-      document.getElementById('papersView').style.display = 'none';
-      document.getElementById('syllabusView').style.display = 'none';
+      generateBranchCards();
     }
     
-    function showPreviousYearPapers() {
-      document.getElementById('timetableView').style.display = 'none';
-      document.getElementById('papersView').style.display = 'block';
-      document.getElementById('syllabusView').style.display = 'none';
+    // Show content section
+    function showSection(section) {
+      // Hide all sections
+      document.querySelectorAll('.content-section').forEach(el => {
+        el.classList.remove('active');
+      });
       
-      // Load default branch papers
-      loadPapers('CSE');
+      // Remove active class from all menu items
+      document.querySelectorAll('.menu-item').forEach(el => {
+        el.classList.remove('active');
+      });
+      
+      // Show selected section
+      document.getElementById(section + 'Section').classList.add('active');
+      
+      // Add active class to selected menu item
+      event.target.classList.add('active');
     }
     
-    function showSyllabus() {
-      document.getElementById('timetableView').style.display = 'none';
-      document.getElementById('papersView').style.display = 'none';
-      document.getElementById('syllabusView').style.display = 'block';
+    // Generate branch cards
+    function generateBranchCards() {
+      const container = document.getElementById('branchesContainer');
+      container.innerHTML = '';
       
-      // Set default semester to active if none is selected
-      if (!document.querySelector('#syllabusView .semesters button.active')) {
-        document.querySelector('#syllabusView .semesters button[data-sem="1"]').classList.add('active');
-      }
-      
-      // Load default branch and semester syllabus
-      loadSyllabus('CSE', 1);
-    }
-
-    // Main Page Script
-    // Different timing slots for different semesters
-    const timetableSlots = {
-      // Default timing for semesters 2-8
-      default: [
-        ["9:30-10:20 1", "9:30 am - 10:20 am"],
-        ["10:20-11:10 2", "10:20 am - 11:10 am"],
-        ["tea Break", "11:10 am - 11:30 am"],
-        ["11:30 am - 12:20  3", "11:30 am - 12:20 pm"],
-        ["12:20 pm - 1:10 pm 4", "12:20 pm - 1:10 pm"],
-        ["Lunch Break", "1:10 pm - 2:00 pm"],
-        ["2:00 pm - 2:50 pm 5", "2:00 pm - 2:50 pm"],
-        ["2:50 pm - 3:40 pm 6", "2:50 pm - 3:40 pm"],
-        ["3:40 pm - 4:30 pm 7", "3:40 pm - 4:30 pm"]
-      ],
-      // Custom timing for semester 1 (to be updated with your image timings)
-      sem1: [
-        ["P1  9:30am-10:20am ", " 9:30 am - 10:20 am"],
-        ["P2 10:20-11:10", "10:20 am - 11:10 am"],
-        ["P3 11:10am-12:00pm", "11:10 am - 12:00 pm"],
-        ["LUNCH BREAK ", "12:00 pm - 12:50 pm"],
-        ["P4 12:50pm-1:40pm ", " 12:50pm-1:40pm"],
-        ["P5 1:40 pm - 2:30 pm ", "1:40 pm - 2:30 pm"],
-        ["tea Break", "2:30pm-2:50pm"],
-        ["P6 2:50 pm - 3:40 pm ", "2:50 pm - 3:40 pm"],
-        ["P7 3:40 pm - 4:30 pm ", "3:40 pm - 4:30 pm"]
-      ]
-    };
-
-    const subjectDetails = {
-      // Existing subjects
-      "ML": { name: "Machine Learning", code: "23A31401T", faculty: "D. Masthan Pasha" },
-      "CC": { name: "Cloud Computing", code: "23A37501T", faculty: "K. Kishore Kumar" },
-      "CNS": { name: "Cryptography & Network Security", code: "23A50601T", faculty: "Dr. M. Jaya Bhaskar" },
-      "STM": { name: "Software Testing Methodologies", code: "23A50602A", faculty: "P. Ram Prasad" },
-      "SPM": { name: "Software Project Management", code: "23A50603A", faculty: "G. Parvathi" },
-      "CPA": { name: "Chemistry of Polymers and Applications", code: "23A31601", faculty: "Dr. Z. Raveendra Babu" },
-      "ML Lab": { name: "Machine Learning Lab", code: "23A31401P", faculty: "P. Ram Prasad" },
-      "CNS-LAB2": { name: "Cryptography & Network Security Lab", code: "23A50601P", faculty: "Dr. M. Jaya Bhaskar" },
-      "ML-LAB2": { name: "Machine Learning Lab", code: "23A31401P", faculty: "P. Ram Prasad" },
-      "CRT-SS": { name: "Soft Skills", code: "23A52501", faculty: "T. Sanjeeva Prasad" },
-      "SOFT-SKILLS LAB": { name: "Soft Skills Lab", code: "23A52501P", faculty: "T. Sanjeeva Prasad" },
-      "TPW": { name: "Technical Paper Writing & IPR", code: "23A52601", faculty: "B. Soma Sekhara Reddy" },
-      "CRT-APT": { name: "CRT - Aptitude", code: "CRT001", faculty: "CRT Faculty" },
-      
-      // New Semester 1 subjects
-      "EP/EW LAB": { name: "Engineering Physics/Engineering Workshop Lab", code: "23A11101P", faculty: "DR.P.Sreenivasula Reddy" },
-      "IP": { name: "Programming in C", code: "23A11103T", faculty: "Mr.G.Sreenivasulu" },
-      "BC": { name: "Basic Chemistry", code: "23A11102T", faculty: "dr.z.Ravindra Babu" },
-      "EGP": { name: "Engineering Graphics Practice", code: "23A11104P", faculty: "Mr.B.Saroj kumar" },
-      "ITW": { name: "Introduction to Web Technologies", code: "23A11105T", faculty: "Computer Science Faculty" },
-      "APT": { name: "Aptitude Skills", code: "23A11106T", faculty: "Training Faculty" },
-      "ME": { name: "Mathematics for Engineers", code: "23A11107T", faculty: " " },
-      "EG": { name: "Engineering Graphics", code: "23A11108T", faculty: "Mr.B.saroj kumar" },
-      "LAC": { name: "Linear algebra & calculus", code: "23A11109T", faculty: "Mr.M.firoj ali baig" },
-      "HW": { name: "Health and Wellness", code: "23A11110T", faculty: "Mrs.T.silpa" },
-      "EP": { name: "Engineering Physics", code: "23A11111T", faculty: "Dr.P.sreenivasulu" },
-      "YS": { name: "Yoga and Sports", code: "23A11112T", faculty: "Mr.M.ravi kumar" },
-      "LIB": { name: "Library Hour", code: "LIB001", faculty: "Library Staff" },
-      "CP LAB": { name: "C Programming Lab", code: "23A11113P", faculty: "Computer Science Faculty" },
-      "SS": { name: "Soft Skills", code: "23A11114T", faculty: "English Faculty" },
-      "SPORTS": { name: "Sports Activities", code: "SPORTS001", faculty: "Physical Education Faculty" },
-      "EEEW": { name: "Electrical and Electronics Engineering Workshop", code: "23A11115P", faculty: "EEE Faculty" },
-      "BEEE (ECE)": { name: "Basic Electrical and Electronics Engineering (ECE)", code: "23A11116T", faculty: "ECE Faculty" },
-      "IT/CHE LAB": { name: "Information Technology/Chemistry Lab", code: "23A11117P", faculty: "IT/Chemistry Faculty" },
-      "CHE": { name: "Chemistry", code: "23A11118T", faculty: "Chemistry Faculty" },
-      "BEEE (EEE)": { name: "Basic Electrical and Electronics Engineering (EEE)", code: "23A11119T", faculty: "EEE Faculty" },
-      "NSS": { name: "National Service Scheme", code: "NSS001", faculty: "NSS Coordinator" }
-    };
-
-    const timetableData = {
-      // Semester 6 timetables (existing)
-      "CSE-6-A": {
-        Monday: ["ML", "STM", "Break", "CPA", "CNS", "Lunch", "CC", "ML Lab", "ML Lab"],
-        Tuesday: ["CPA", "CNS", "Break", "ML", "STM", "Lunch", "CC", "CRT-SS", "CC"],
-        Wednesday: ["CRT-APT", "TPW", "Break", "CPA", "SPM", "Lunch", "STM", "SOFT-SKILLS LAB", "SOFT-SKILLS LAB"],
-        Thursday: ["STM", "SPM", "Break", "CNS-LAB2", "CNS-LAB2", "Lunch", "SPM", "CRT-APT", "CC"],
-        Friday: ["ML", "STM", "Break", "SPM", "CNS", "Lunch", "SPM", "CNS", "SPORTS"],
-        Saturday: ["CNS", "CC", "Break", "ML", "CPA", "Lunch", "ML", "CPA", "LIB"]
-      },
-      "CSE-6-B": {
-        Monday: ["CPA", "CC", "Break", "CRT-APT", "STM", "Lunch", "CNS", "ML", "CC"],
-        Tuesday: ["SPM", "STM", "Break", "CPA", "LIB", "Lunch", "ML", "CNS-LAB2", "CNS-LAB2"],
-        Wednesday: ["ML", "CNS", "Break", "STM", "CNS", "Lunch", "SPM", "CPA", "SPORTS"],
-        Thursday: ["CC", "ML", "Break", "CPA", "SPM", "Lunch", "STM", "ML-LAB2", "ML-LAB2"],
-        Friday: ["CC", "CNS", "Break", "CRT-APT", "CC", "Lunch", "STM", "SOFT-SKILLS LAB", "SOFT-SKILLS LAB"],
-        Saturday: ["SPM", "ML", "Break", "CNS", "TPW", "Lunch", "CPA", "CRT-SS", "SPM"]
-      },
-      "CSE-6-C": {
-        Monday: ["STM", "CC", "Break", "CNS", "CPA", "Lunch", "ML", "SOFT-SKILLS LAB", "SOFT-SKILLS LAB"],
-        Tuesday: ["CNS", "ML", "Break", "STM", "CC", "Lunch", "ML", "CRT-SS", "ML"],
-        Wednesday: ["CRT-APT", "TPW", "Break", "CNS", "SPM", "Lunch", "CC", "ML Lab", "ML Lab"],
-        Thursday: ["CC", "SPM", "Break", "CNS-LAB2", "CNS-LAB2", "Lunch", "SPM", "CRT-APT", "STM"],
-        Friday: ["STM", "CC", "Break", "SPM", "ML", "Lunch", "SPM", "CNS", "SPORTS"],
-        Saturday: ["CPA", "ML", "Break", "STM", "CNS", "Lunch", "STM", "CNS", "LIB"]
-      },
-      
-      // Semester 1 timetables (new)
-      "CSE-1-A": {
-        "Monday":    ["EP/EW LAB", "EP/EW LAB", "IP", "LUNCH", "BC", "EGP", "TEA-BREAK", "EGP", "EGP"],
-        "Tuesday":   ["ITW", "ITW", "APT", "LUNCH", "ME", "EG", "TEA-BREAK", "LAC", "IP"],
-        "Wednesday": ["ME", "LAC", "IP", "LUNCH", "EP/EW LAB", "EP/EW LAB", "TEA-BREAK", "EG", "EP"],
-        "Thursday":  ["LAC", "EG", "BC", "LUNCH", "ME", "HW", "TEA-BREAK", "EP", "IP"],
-        "Friday":    ["LAC", "IP", "EP", "LUNCH", "EG", "EP", "TEA-BREAK", "YS", "LIB"],
-        "Saturday":  ["CP LAB", "CP LAB", "EP", "LUNCH", "BC", "LAC", "TEA-BREAK", "SPORTS", "SS"]
-      },
-      "CSE-1-B": {
-        "Monday":   ["IP", "LAC", "EG", "LUNCH", "EP", "LIB", "TEA-BREAK", "SPORTS", "BC"],
-        "Tuesday":  ["EP/EW LAB", "EP/EW LAB", "EP/EW LAB", "LUNCH", "IP", "BC", "TEA-BREAK", "IP", "LAC"],
-        "Wednesday":["CP LAB", "CP LAB", "CP LAB", "LUNCH", "LAC", "EG", "TEA-BREAK", "EP", "ME"],
-        "Thursday": ["ITW", "ITW", "EG", "LUNCH", "IP", "EP", "TEA-BREAK", "YS", "EG"],
-        "Friday":   ["EGP", "EGP", "EGP", "LUNCH", "BC", "SS", "TEA-BREAK", "ME", "HW"],
-        "Saturday": ["EP", "APT", "IP", "LUNCH", "EP/EW LAB", "EP/EW LAB", "TEA-BREAK", "LAC", "ME"]
-      },
-      "CSM-1-A": {
-        "Monday":   ["EEEW", "EEEW", "LAC", "LUNCH", "IP", "BEEE (ECE)", "TEA-BREAK", "NSS", "LAC"],
-        "Tuesday":  ["IP", "SS", "EG", "LUNCH", "IT/CHE LAB", "IT/CHE LAB", "TEA-BREAK", "SPORTS", "CHE"],
-        "Wednesday":["EG", "CHE", "BEEE (EEE)", "LUNCH", "APT", "IP", "TEA-BREAK", "BEEE (ECE)", "LAC"],
-        "Thursday": ["IP", "CHE", "EG", "LUNCH", "BEEE (EEE)", "EGP", "TEA-BREAK", "BEEE (ECE)", "LIB"],
-        "Friday":   ["IT/CHE LAB", "IT/CHE LAB", "CHE", "LUNCH", "EGP", "IP", "TEA-BREAK", "CHE", "CP LAB"],
-        "Saturday": ["BEEE (EEE)", "LAC", "EG", "LUNCH", "EEEW", "EEEW", "TEA-BREAK", "CP LAB", "CP LAB"]
-      }
-    };
-    
-    // Sample data for previous year papers
-    const previousYearPapers = {
-      "CSE": [
-        { title: "Data Structures", year: "2022", semester: "3" },
-        { title: "Algorithms", year: "2022", semester: "3" },
-        { title: "Database Management Systems", year: "2022", semester: "4" },
-        { title: "Operating Systems", year: "2022", semester: "4" },
-        { title: "Computer Networks", year: "2021", semester: "5" },
-        { title: "Theory of Computation", year: "2021", semester: "5" },
-        { title: "Machine Learning", year: "2021", semester: "6" },
-        { title: "Cloud Computing", year: "2021", semester: "6" },
-        { title: "Software Engineering", year: "2020", semester: "7" },
-        { title: "Web Technologies", year: "2020", semester: "7" }
-      ],
-      "ECE": [
-        { title: "Electronic Devices", year: "2022", semester: "3" },
-        { title: "Digital Electronics", year: "2022", semester: "3" },
-        { title: "Signals and Systems", year: "2022", semester: "4" },
-        { title: "Microprocessors", year: "2022", semester: "4" },
-        { title: "Analog Communications", year: "2021", semester: "5" },
-        { title: "Digital Signal Processing", year: "2021", semester: "5" },
-        { title: "VLSI Design", year: "2021", semester: "6" },
-        { title: "Microwave Engineering", year: "2021", semester: "6" },
-        { title: "Embedded Systems", year: "2020", semester: "7" },
-        { title: "Wireless Communications", year: "2020", semester: "7" }
-      ],
-      "CSM": [
-        { title: "Programming in C", year: "2022", semester: "3" },
-        { title: "Data Structures", year: "2022", semester: "3" },
-        { title: "Object Oriented Programming", year: "2022", semester: "4" },
-        { title: "Database Systems", year: "2022", semester: "4" },
-        { title: "Web Development", year: "2021", semester: "5" },
-        { title: "Software Engineering", year: "2021", semester: "5" },
-        { title: "Machine Learning", year: "2021", semester: "6" },
-        { title: "Big Data Analytics", year: "2021", semester: "6" },
-        { title: "Cloud Computing", year: "2020", semester: "7" },
-        { title: "Internet of Things", year: "2020", semester: "7" }
-      ]
-    };
-    
-    // Sample data for syllabus
-    const syllabusData = {
-      "CSE": {
-        1: {
-          title: "CSE - Semester 1 Syllabus",
-          sections: [
-            {
-              title: "Mathematics I",
-              topics: [
-                "Calculus and Linear Algebra",
-                "Differential Equations",
-                "Vector Calculus"
-              ]
-            },
-            {
-              title: "Engineering Physics",
-              topics: [
-                "Mechanics",
-                "Optics",
-                "Thermodynamics"
-              ]
-            },
-            {
-              title: "Basic Electrical Engineering",
-              topics: [
-                "DC Circuits",
-                "AC Circuits",
-                "Electrical Machines"
-              ]
-            }
-          ]
-        },
-        2: {
-          title: "CSE - Semester 2 Syllabus",
-          sections: [
-            {
-              title: "Mathematics II",
-              topics: [
-                "Complex Analysis",
-                "Probability and Statistics",
-                "Numerical Methods"
-              ]
-            },
-            {
-              title: "Engineering Chemistry",
-              topics: [
-                "Chemical Thermodynamics",
-                "Electrochemistry",
-                "Environmental Chemistry"
-              ]
-            },
-            {
-              title: "Programming in C",
-              topics: [
-                "Introduction to C Programming",
-                "Control Structures",
-                "Arrays and Functions"
-              ]
-            }
-          ]
-        },
-        3: {
-          title: "CSE - Semester 3 Syllabus",
-          sections: [
-            {
-              title: "Data Structures",
-              topics: [
-                "Arrays, Stacks and Queues",
-                "Linked Lists",
-                "Trees and Graphs"
-              ]
-            },
-            {
-              title: "Digital Logic Design",
-              topics: [
-                "Boolean Algebra",
-                "Combinational Circuits",
-                "Sequential Circuits"
-              ]
-            },
-            {
-              title: "Computer Organization",
-              topics: [
-                "Basic Computer Organization",
-                "Instruction Set Architecture",
-                "CPU Organization"
-              ]
-            }
-          ]
-        },
-        4: {
-          title: "CSE - Semester 4 Syllabus",
-          sections: [
-            {
-              title: "Algorithms",
-              topics: [
-                "Algorithm Analysis",
-                "Sorting and Searching",
-                "Graph Algorithms"
-              ]
-            },
-            {
-              title: "Operating Systems",
-              topics: [
-                "Process Management",
-                "Memory Management",
-                "File Systems"
-              ]
-            },
-            {
-              title: "Database Management Systems",
-              topics: [
-                "Relational Model",
-                "SQL",
-                "Database Design"
-              ]
-            }
-          ]
-        },
-        5: {
-          title: "CSE - Semester 5 Syllabus",
-          sections: [
-            {
-              title: "Theory of Computation",
-              topics: [
-                "Finite Automata",
-                "Context-Free Grammars",
-                "Turing Machines"
-              ]
-            },
-            {
-              title: "Computer Networks",
-              topics: [
-                "Network Models",
-                "Data Link Layer",
-                "Network Layer"
-              ]
-            },
-            {
-              title: "Software Engineering",
-              topics: [
-                "Software Process Models",
-                "Requirements Engineering",
-                "Software Design"
-              ]
-            }
-          ]
-        },
-        6: {
-          title: "CSE - Semester 6 Syllabus",
-          sections: [
-            {
-              title: "Machine Learning",
-              topics: [
-                "Introduction to Machine Learning",
-                "Supervised Learning",
-                "Unsupervised Learning"
-              ]
-            },
-            {
-              title: "Cloud Computing",
-              topics: [
-                "Cloud Architecture",
-                "Virtualization",
-                "Cloud Services"
-              ]
-            },
-            {
-              title: "Cryptography and Network Security",
-              topics: [
-                "Symmetric Encryption",
-                "Asymmetric Encryption",
-                "Network Security"
-              ]
-            }
-          ]
-        },
-        7: {
-          title: "CSE - Semester 7 Syllabus",
-          sections: [
-            {
-              title: "Distributed Systems",
-              topics: [
-                "Distributed System Architecture",
-                "Distributed Algorithms",
-                "Consistency and Replication"
-              ]
-            },
-            {
-              title: "Compiler Design",
-              topics: [
-                "Lexical Analysis",
-                "Syntax Analysis",
-                "Code Generation"
-              ]
-            },
-            {
-              title: "Web Technologies",
-              topics: [
-                "HTML, CSS and JavaScript",
-                "Server-side Programming",
-                "Web Services"
-              ]
-            }
-          ]
-        },
-        8: {
-          title: "CSE - Semester 8 Syllabus",
-          sections: [
-            {
-              title: "Artificial Intelligence",
-              topics: [
-                "Problem Solving",
-                "Knowledge Representation",
-                "Machine Learning Applications"
-              ]
-            },
-            {
-              title: "Big Data Analytics",
-              topics: [
-                "Big Data Fundamentals",
-                "Data Mining",
-                "Data Visualization"
-              ]
-            },
-            {
-              title: "Project Work",
-              topics: [
-                "Project Planning",
-                "Implementation",
-                "Documentation and Presentation"
-              ]
-            }
-          ]
-        }
-      },
-      "ECE": {
-        1: {
-          title: "ECE - Semester 1 Syllabus",
-          sections: [
-            {
-              title: "Mathematics I",
-              topics: [
-                "Calculus and Linear Algebra",
-                "Differential Equations",
-                "Vector Calculus"
-              ]
-            },
-            {
-              title: "Engineering Physics",
-              topics: [
-                "Mechanics",
-                "Optics",
-                "Thermodynamics"
-              ]
-            },
-            {
-              title: "Basic Electrical Engineering",
-              topics: [
-                "DC Circuits",
-                "AC Circuits",
-                "Electrical Machines"
-              ]
-            }
-          ]
-        },
-        2: {
-          title: "ECE - Semester 2 Syllabus",
-          sections: [
-            {
-              title: "Mathematics II",
-              topics: [
-                "Complex Analysis",
-                "Probability and Statistics",
-                "Numerical Methods"
-              ]
-            },
-            {
-              title: "Engineering Chemistry",
-              topics: [
-                "Chemical Thermodynamics",
-                "Electrochemistry",
-                "Environmental Chemistry"
-              ]
-            },
-            {
-              title: "Electronic Devices",
-              topics: [
-                "Semiconductor Physics",
-                "Diodes and Applications",
-                "Transistors"
-              ]
-            }
-          ]
-        },
-        3: {
-          title: "ECE - Semester 3 Syllabus",
-          sections: [
-            {
-              title: "Digital Electronics",
-              topics: [
-                "Number Systems and Codes",
-                "Combinational Logic",
-                "Sequential Logic"
-              ]
-            },
-            {
-              title: "Network Analysis",
-              topics: [
-                "Network Theorems",
-                "Transient Analysis",
-                "AC Circuits"
-              ]
-            },
-            {
-              title: "Signals and Systems",
-              topics: [
-                "Signal Representation",
-                "LTI Systems",
-                "Fourier Analysis"
-              ]
-            }
-          ]
-        },
-        4: {
-          title: "ECE - Semester 4 Syllabus",
-          sections: [
-            {
-              title: "Analog Circuits",
-              topics: [
-                "Amplifiers",
-                "Oscillators",
-                "Filters"
-              ]
-            },
-            {
-              title: "Microprocessors",
-              topics: [
-                "8085 Architecture",
-                "Instruction Set",
-                "Programming"
-              ]
-            },
-            {
-              title: "Electromagnetic Theory",
-              topics: [
-                "Electrostatics",
-                "Magnetostatics",
-                "Maxwell's Equations"
-              ]
-            }
-          ]
-        },
-        5: {
-          title: "ECE - Semester 5 Syllabus",
-          sections: [
-            {
-              title: "Analog Communications",
-              topics: [
-                "Modulation Techniques",
-                "AM and FM",
-                "Noise in Communication Systems"
-              ]
-            },
-            {
-              title: "Digital Signal Processing",
-              topics: [
-                "Discrete-Time Signals",
-                "Z-Transform",
-                "DFT and FFT"
-              ]
-            },
-            {
-              title: "Control Systems",
-              topics: [
-                "System Modeling",
-                "Time Response Analysis",
-                "Stability Analysis"
-              ]
-            }
-          ]
-        },
-        6: {
-          title: "ECE - Semester 6 Syllabus",
-          sections: [
-            {
-              title: "Digital Communications",
-              topics: [
-                "Pulse Modulation",
-                "Digital Modulation",
-                "Error Control Coding"
-              ]
-            },
-            {
-              title: "VLSI Design",
-              topics: [
-                "MOSFET Operation",
-                "CMOS Logic Design",
-                "VLSI Design Methodology"
-              ]
-            },
-            {
-              title: "Microwave Engineering",
-              topics: [
-                "Waveguides",
-                "Microwave Components",
-                "Antennas"
-              ]
-            }
-          ]
-        },
-        7: {
-          title: "ECE - Semester 7 Syllabus",
-          sections: [
-            {
-              title: "Embedded Systems",
-              topics: [
-                "Microcontrollers",
-                "Embedded Programming",
-                "Real-Time Operating Systems"
-              ]
-            },
-            {
-              title: "Wireless Communications",
-              topics: [
-                "Cellular Systems",
-                "Wireless LANs",
-                "Mobile Ad Hoc Networks"
-              ]
-            },
-            {
-              title: "Digital Image Processing",
-              topics: [
-                "Image Enhancement",
-                "Image Filtering",
-                "Image Segmentation"
-              ]
-            }
-          ]
-        },
-        8: {
-          title: "ECE - Semester 8 Syllabus",
-          sections: [
-            {
-              title: "Advanced Communication Systems",
-              topics: [
-                "Optical Communication",
-                "Satellite Communication",
-                "Radar Systems"
-              ]
-            },
-            {
-              title: "Biomedical Instrumentation",
-              topics: [
-                "Biomedical Sensors",
-                "Diagnostic Equipment",
-                "Therapeutic Equipment"
-              ]
-            },
-            {
-              title: "Project Work",
-              topics: [
-                "Project Planning",
-                "Implementation",
-                "Documentation and Presentation"
-              ]
-            }
-          ]
-        }
-      },
-      "CSM": {
-        1: {
-          title: "CSM - Semester 1 Syllabus",
-          sections: [
-            {
-              title: "Mathematics I",
-              topics: [
-                "Calculus and Linear Algebra",
-                "Differential Equations",
-                "Vector Calculus"
-              ]
-            },
-            {
-              title: "Engineering Physics",
-              topics: [
-                "Mechanics",
-                "Optics",
-                "Thermodynamics"
-              ]
-            },
-            {
-              title: "Basic Electrical Engineering",
-              topics: [
-                "DC Circuits",
-                "AC Circuits",
-                "Electrical Machines"
-              ]
-            }
-          ]
-        },
-        2: {
-          title: "CSM - Semester 2 Syllabus",
-          sections: [
-            {
-              title: "Mathematics II",
-              topics: [
-                "Complex Analysis",
-                "Probability and Statistics",
-                "Numerical Methods"
-              ]
-            },
-            {
-              title: "Engineering Chemistry",
-              topics: [
-                "Chemical Thermodynamics",
-                "Electrochemistry",
-                "Environmental Chemistry"
-              ]
-            },
-            {
-              title: "Programming in C",
-              topics: [
-                "Introduction to C Programming",
-                "Control Structures",
-                "Arrays and Functions"
-              ]
-            }
-          ]
-        },
-        3: {
-          title: "CSM - Semester 3 Syllabus",
-          sections: [
-            {
-              title: "Data Structures",
-              topics: [
-                "Arrays, Stacks and Queues",
-                "Linked Lists",
-                "Trees and Graphs"
-              ]
-            },
-            {
-              title: "Digital Logic Design",
-              topics: [
-                "Boolean Algebra",
-                "Combinational Circuits",
-                "Sequential Circuits"
-              ]
-            },
-            {
-              title: "Computer Organization",
-              topics: [
-                "Basic Computer Organization",
-                "Instruction Set Architecture",
-                "CPU Organization"
-              ]
-            }
-          ]
-        },
-        4: {
-          title: "CSM - Semester 4 Syllabus",
-          sections: [
-            {
-              title: "Algorithms",
-              topics: [
-                "Algorithm Analysis",
-                "Sorting and Searching",
-                "Graph Algorithms"
-              ]
-            },
-            {
-              title: "Operating Systems",
-              topics: [
-                "Process Management",
-                "Memory Management",
-                "File Systems"
-              ]
-            },
-            {
-              title: "Database Management Systems",
-              topics: [
-                "Relational Model",
-                "SQL",
-                "Database Design"
-              ]
-            }
-          ]
-        },
-        5: {
-          title: "CSM - Semester 5 Syllabus",
-          sections: [
-            {
-              title: "Web Development",
-              topics: [
-                "HTML, CSS and JavaScript",
-                "Server-side Programming",
-                "Web Frameworks"
-              ]
-            },
-            {
-              title: "Software Engineering",
-              topics: [
-                "Software Process Models",
-                "Requirements Engineering",
-                "Software Design"
-              ]
-            },
-            {
-              title: "Computer Networks",
-              topics: [
-                "Network Models",
-                "Data Link Layer",
-                "Network Layer"
-              ]
-            }
-          ]
-        },
-        6: {
-          title: "CSM - Semester 6 Syllabus",
-          sections: [
-            {
-              title: "Machine Learning",
-              topics: [
-                "Introduction to Machine Learning",
-                "Supervised Learning",
-                "Unsupervised Learning"
-              ]
-            },
-            {
-              title: "Big Data Analytics",
-              topics: [
-                "Big Data Fundamentals",
-                "Hadoop and Spark",
-                "Data Mining"
-              ]
-            },
-            {
-              title: "Cloud Computing",
-              topics: [
-                "Cloud Architecture",
-                "Virtualization",
-                "Cloud Services"
-              ]
-            }
-          ]
-        },
-        7: {
-          title: "CSM - Semester 7 Syllabus",
-          sections: [
-            {
-              title: "Internet of Things",
-              topics: [
-                "IoT Architecture",
-                "Sensors and Actuators",
-                "IoT Protocols"
-              ]
-            },
-            {
-              title: "Blockchain Technology",
-              topics: [
-                "Blockchain Fundamentals",
-                "Cryptocurrency",
-                "Smart Contracts"
-              ]
-            },
-            {
-              title: "Cyber Security",
-              topics: [
-                "Security Fundamentals",
-                "Network Security",
-                "Application Security"
-              ]
-            }
-          ]
-        },
-        8: {
-          title: "CSM - Semester 8 Syllabus",
-          sections: [
-            {
-              title: "Artificial Intelligence",
-              topics: [
-                "Problem Solving",
-                "Knowledge Representation",
-                "Machine Learning Applications"
-              ]
-            },
-            {
-              title: "DevOps",
-              topics: [
-                "Continuous Integration",
-                "Continuous Deployment",
-                "Containerization"
-              ]
-            },
-            {
-              title: "Project Work",
-              topics: [
-                "Project Planning",
-                "Implementation",
-                "Documentation and Presentation"
-              ]
-            }
-          ]
-        }
-      }
-    };
-
-    // Function to load papers for a branch
-    function loadPapers(branch) {
-      const papersList = document.getElementById('papersList');
-      papersList.innerHTML = '<div class="loading"></div>';
-      
-      // Simulate loading delay
-      setTimeout(() => {
-        const papers = previousYearPapers[branch] || [];
+      branches.forEach(branch => {
+        const card = document.createElement('div');
+        card.className = 'branch-card';
         
-        let html = '';
-        papers.forEach(paper => {
-          html += `
-            <div class="paper-item">
-              <div>
-                <div class="paper-title">${paper.title}</div>
-                <div class="paper-year">Semester ${paper.semester} - ${paper.year}</div>
-              </div>
-              <button class="download-btn">Download</button>
-            </div>
-          `;
-        });
+        const title = document.createElement('h2');
+        title.className = 'branch-title';
+        title.textContent = branch === 'CSE' ? 'Computer Science & Engineering' :
+                         branch === 'ECE' ? 'Electronics & Communication Engineering' :
+                         'Computer Science & Machine Learning';
         
-        papersList.innerHTML = html || '<p>No papers available for this branch.</p>';
-      }, 300);
-    }
-
-    // Function to load syllabus for a branch and semester
-    function loadSyllabus(branch, semester) {
-      const syllabusContent = document.getElementById('syllabusContent');
-      syllabusContent.innerHTML = '<div class="loading"></div>';
-      
-      // Simulate loading delay
-      setTimeout(() => {
-        const syllabus = syllabusData[branch] ? syllabusData[branch][semester] : null;
+        const semestersContainer = document.createElement('div');
+        semestersContainer.className = 'semesters';
         
-        if (syllabus) {
-          let html = `<h3>${syllabus.title}</h3>`;
+        semesters.forEach(semester => {
+          const btn = document.createElement('button');
+          btn.className = 'semester-btn';
+          btn.textContent = `Sem ${semester}`;
           
-          syllabus.sections.forEach(section => {
-            html += `
-              <div class="syllabus-section">
-                <h4>${section.title}</h4>
-                <ul>
-            `;
-            
-            section.topics.forEach(topic => {
-              html += `<li>${topic}</li>`;
-            });
-            
-            html += `
-                </ul>
-              </div>
-            `;
-          });
-          
-          syllabusContent.innerHTML = html;
-        } else {
-          syllabusContent.innerHTML = '<p>No syllabus available for this branch and semester.</p>';
-        }
-      }, 300);
-    }
-
-    function showSections(branch, sem) {
-      const modal = document.getElementById('modal');
-      document.getElementById('modalTitle').innerText = `${branch} - Semester ${sem} Sections`;
-      const body = document.getElementById('modalBody');
-      body.innerHTML = `
-        <div class="sections">
-          <button onclick="showTimetable('${branch}', '${sem}', 'A')">Section A</button>
-          <button onclick="showTimetable('${branch}', '${sem}', 'B')">Section B</button>
-          <button onclick="showTimetable('${branch}', '${sem}', 'C')">Section C</button>
-        </div>
-      `;
-      
-      // Show modal with animation
-      modal.style.display = "flex";
-      setTimeout(() => {
-        modal.classList.add('active');
-      }, 10);
-    }
-
-    function showTimetable(branch, sem, section) {
-      const key = `${branch}-${sem}-${section}`;
-      document.getElementById('modalTitle').innerText = `${branch} - Semester ${sem} - Section ${section} Timetable`;
-      const body = document.getElementById('modalBody');
-
-      // Show loading indicator
-      body.innerHTML = `<div class="loading"></div>`;
-
-      // Simulate loading delay for better UX
-      setTimeout(() => {
-        if (timetableData[key]) {
-          // Determine which timing slots to use based on semester
-          const slots = sem === '1' ? timetableSlots.sem1 : timetableSlots.default;
-          
-          let table = "<table><thead><tr><th>Day</th>";
-          slots.forEach(slot => {
-            table += `<th>${slot[0]}</th>`;
-          });
-          table += "</tr></thead><tbody>";
-          for (const [day, subjects] of Object.entries(timetableData[key])) {
-            table += `<tr><td>${day}</td>`;
-            subjects.forEach(sub => {
-              if (subjectDetails[sub]) {
-                table += `<td class="subject-cell">
-                  ${sub}
-                  <div class="subject-tooltip">
-                    <div class="subject-name">${subjectDetails[sub].name}</div>
-                    <div class="subject-code">Code: ${subjectDetails[sub].code}</div>
-                    <div class="subject-faculty">Faculty: ${subjectDetails[sub].faculty}</div>
-                  </div>
-                </td>`;
-              } else {
-                table += `<td>${sub}</td>`;
-              }
-            });
-            table += "</tr>";
-          }
-          table += "</tbody></table>";
-          
-          // Add toggle button for subject details
-          table += `
-            <button class="toggle-details-btn" onclick="toggleSubjectDetails()">
-              Show Subject Details
-            </button>
-            <div class="subject-details-panel" id="subjectDetailsPanel">
-              <h3>Subject Details</h3>
-              <div class="subject-details-grid">
-          `;
-          
-          // Collect unique subjects from this timetable
-          const uniqueSubjects = new Set();
-          for (const [day, subjects] of Object.entries(timetableData[key])) {
-            subjects.forEach(sub => {
-              if (subjectDetails[sub]) {
-                uniqueSubjects.add(sub);
-              }
-            });
+          // Check if timetable exists
+          const timetableKey = `${branch}-${semester}`;
+          const timetables = JSON.parse(localStorage.getItem('timetables')) || {};
+          if (timetables[timetableKey]) {
+            btn.classList.add('has-timetable');
           }
           
-          // Create subject cards for each unique subject
-          for (const subject of uniqueSubjects) {
-            const details = subjectDetails[subject];
-            table += `
-              <div class="subject-details-card">
-                <h4>${subject}</h4>
-                <div class="subject-code">${details.code}</div>
-                <div class="subject-name">${details.name}</div>
-                <div class="subject-faculty">Faculty: ${details.faculty}</div>
-              </div>
-            `;
-          }
-          
-          table += `
-              </div>
-            </div>
-          `;
-          
-          body.innerHTML = table;
-        } else {
-          body.innerHTML = "<p>No timetable available for this section yet.</p>";
-        }
-      }, 300);
+          btn.onclick = () => viewTimetable(branch, semester);
+          semestersContainer.appendChild(btn);
+        });
+        
+        card.appendChild(title);
+        card.appendChild(semestersContainer);
+        container.appendChild(card);
+      });
     }
-
-    function toggleSubjectDetails() {
-      const panel = document.getElementById('subjectDetailsPanel');
-      const button = document.querySelector('.toggle-details-btn');
+    
+    // Load notes
+    function loadNotes() {
+      const branch = document.getElementById('notesBranch').value;
+      const semester = document.getElementById('notesSemester').value;
+      const container = document.getElementById('notesContainer');
       
-      if (panel.style.display === 'none') {
-        panel.style.display = 'block';
-        button.innerText = 'Hide Subject Details';
-        button.classList.remove('collapsed');
+      if (!branch || !semester) {
+        container.innerHTML = '<div class="no-resources">Please select both branch and semester</div>';
+        return;
+      }
+      
+      const notes = JSON.parse(localStorage.getItem('notes')) || {};
+      const key = `${branch}-${semester}`;
+      const notesData = notes[key] || [];
+      
+      console.log('Loading notes for:', key, 'Data:', notesData);
+      
+      if (notesData.length === 0) {
+        container.innerHTML = '<div class="no-resources">No notes available for this selection</div>';
+        return;
+      }
+      
+      container.innerHTML = '';
+      
+      notesData.forEach((note, index) => {
+        const card = document.createElement('div');
+        card.className = 'resource-card';
+        
+        const title = document.createElement('h3');
+        title.className = 'resource-title';
+        title.textContent = note.name || `Note ${index + 1}`;
+        
+        const meta = document.createElement('div');
+        meta.className = 'resource-meta';
+        meta.textContent = `${branch} - Semester ${semester}`;
+        
+        const actions = document.createElement('div');
+        actions.className = 'resource-actions';
+        
+        const viewBtn = document.createElement('button');
+        viewBtn.className = 'view-btn-small';
+        viewBtn.textContent = 'View';
+        viewBtn.onclick = () => viewPDF(note.data, note.name || `Note ${index + 1}`);
+        
+        const downloadBtn = document.createElement('button');
+        downloadBtn.className = 'download-btn';
+        downloadBtn.textContent = 'Download';
+        downloadBtn.onclick = () => downloadFile(note.data, note.name || `Note ${index + 1}`);
+        
+        actions.appendChild(viewBtn);
+        actions.appendChild(downloadBtn);
+        
+        card.appendChild(title);
+        card.appendChild(meta);
+        card.appendChild(actions);
+        
+        container.appendChild(card);
+      });
+    }
+    
+    // Load syllabus
+    function loadSyllabus() {
+      const branch = document.getElementById('syllabusBranch').value;
+      const semester = document.getElementById('syllabusSemester').value;
+      const container = document.getElementById('syllabusContainer');
+      
+      if (!branch || !semester) {
+        container.innerHTML = '<div class="no-resources">Please select both branch and semester</div>';
+        return;
+      }
+      
+      const syllabus = JSON.parse(localStorage.getItem('syllabus')) || {};
+      const key = `${branch}-${semester}`;
+      const syllabusData = syllabus[key] || [];
+      
+      if (syllabusData.length === 0) {
+        container.innerHTML = '<div class="no-resources">No syllabus papers available for this selection</div>';
+        return;
+      }
+      
+      container.innerHTML = '';
+      
+      syllabusData.forEach((paper, index) => {
+        const card = document.createElement('div');
+        card.className = 'resource-card';
+        
+        const title = document.createElement('h3');
+        title.className = 'resource-title';
+        title.textContent = paper.name || `Syllabus Paper ${index + 1}`;
+        
+        const meta = document.createElement('div');
+        meta.className = 'resource-meta';
+        meta.textContent = `${branch} - Semester ${semester}`;
+        
+        const actions = document.createElement('div');
+        actions.className = 'resource-actions';
+        
+        const viewBtn = document.createElement('button');
+        viewBtn.className = 'view-btn-small';
+        viewBtn.textContent = 'View';
+        viewBtn.onclick = () => viewPDF(paper.data, paper.name || `Syllabus Paper ${index + 1}`);
+        
+        const downloadBtn = document.createElement('button');
+        downloadBtn.className = 'download-btn';
+        downloadBtn.textContent = 'Download';
+        downloadBtn.onclick = () => downloadFile(paper.data, paper.name || `Syllabus Paper ${index + 1}`);
+        
+        actions.appendChild(viewBtn);
+        actions.appendChild(downloadBtn);
+        
+        card.appendChild(title);
+        card.appendChild(meta);
+        card.appendChild(actions);
+        
+        container.appendChild(card);
+      });
+    }
+    
+    // Load previous year papers
+    function loadPapers() {
+      const branch = document.getElementById('papersBranch').value;
+      const semester = document.getElementById('papersSemester').value;
+      const container = document.getElementById('papersContainer');
+      
+      if (!branch || !semester) {
+        container.innerHTML = '<div class="no-resources">Please select both branch and semester</div>';
+        return;
+      }
+      
+      const papers = JSON.parse(localStorage.getItem('papers')) || {};
+      const key = `${branch}-${semester}`;
+      const papersData = papers[key] || [];
+      
+      if (papersData.length === 0) {
+        container.innerHTML = '<div class="no-resources">No previous year papers available for this selection</div>';
+        return;
+      }
+      
+      container.innerHTML = '';
+      
+      papersData.forEach((paper, index) => {
+        const card = document.createElement('div');
+        card.className = 'resource-card';
+        
+        const title = document.createElement('h3');
+        title.className = 'resource-title';
+        title.textContent = paper.name || `Previous Year Paper ${index + 1}`;
+        
+        const meta = document.createElement('div');
+        meta.className = 'resource-meta';
+        meta.textContent = `${branch} - Semester ${semester}`;
+        
+        const actions = document.createElement('div');
+        actions.className = 'resource-actions';
+        
+        const viewBtn = document.createElement('button');
+        viewBtn.className = 'view-btn-small';
+        viewBtn.textContent = 'View';
+        viewBtn.onclick = () => viewPDF(paper.data, paper.name || `Previous Year Paper ${index + 1}`);
+        
+        const downloadBtn = document.createElement('button');
+        downloadBtn.className = 'download-btn';
+        downloadBtn.textContent = 'Download';
+        downloadBtn.onclick = () => downloadFile(paper.data, paper.name || `Previous Year Paper ${index + 1}`);
+        
+        actions.appendChild(viewBtn);
+        actions.appendChild(downloadBtn);
+        
+        card.appendChild(title);
+        card.appendChild(meta);
+        card.appendChild(actions);
+        
+        container.appendChild(card);
+      });
+    }
+    
+    // View PDF
+    function viewPDF(data, name) {
+      const modal = document.getElementById('pdfModal');
+      const title = document.getElementById('pdfModalTitle');
+      const viewer = document.getElementById('pdfViewer');
+      
+      title.textContent = name;
+      viewer.src = data;
+      
+      modal.style.display = 'flex';
+    }
+    
+    // Close PDF modal
+    function closePdfModal() {
+      document.getElementById('pdfModal').style.display = 'none';
+      document.getElementById('pdfViewer').src = '';
+    }
+    
+    // Download file
+    function downloadFile(data, name) {
+      const link = document.createElement('a');
+      link.href = data;
+      link.download = name;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+    
+    // Show admin authentication modal
+    function showAdminAuth() {
+      document.getElementById('authModal').style.display = 'flex';
+      switchAuthTab('login');
+    }
+    
+    // Close admin authentication modal
+    function closeAuthModal() {
+      document.getElementById('authModal').style.display = 'none';
+      resetAuthForms();
+    }
+    
+    // Switch between login and register tabs
+    function switchAuthTab(tab) {
+      const loginTab = document.getElementById('loginTab');
+      const registerTab = document.getElementById('registerTab');
+      const loginForm = document.getElementById('loginForm');
+      const registerForm = document.getElementById('registerForm');
+      const authModalTitle = document.getElementById('authModalTitle');
+      
+      if (tab === 'login') {
+        loginTab.classList.add('active');
+        registerTab.classList.remove('active');
+        loginForm.style.display = 'block';
+        registerForm.style.display = 'none';
+        authModalTitle.textContent = 'Admin Login';
       } else {
-        panel.style.display = 'none';
-        button.innerText = 'Show Subject Details';
-        button.classList.add('collapsed');
+        loginTab.classList.remove('active');
+        registerTab.classList.add('active');
+        loginForm.style.display = 'none';
+        registerForm.style.display = 'block';
+        authModalTitle.textContent = 'Admin Registration';
       }
     }
-
-    function closeModal() {
-      const modal = document.getElementById('modal');
-      modal.classList.remove('active');
+    
+    // Reset auth forms
+    function resetAuthForms() {
+      document.getElementById('loginForm').reset();
+      document.getElementById('registerForm').reset();
       
-      // Wait for transition to complete before hiding
-      setTimeout(() => {
-        modal.style.display = "none";
-      }, 300);
+      // Hide error messages
+      document.querySelectorAll('.error-message').forEach(el => {
+        el.style.display = 'none';
+      });
     }
+    
+    // Handle login form submission
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const username = document.getElementById('loginUsername').value;
+      const password = document.getElementById('loginPassword').value;
+      
+      // Reset error messages
+      document.getElementById('loginUsernameError').style.display = 'none';
+      document.getElementById('loginPasswordError').style.display = 'none';
+      
+      // Validate inputs
+      if (!username) {
+        document.getElementById('loginUsernameError').textContent = 'Username is required';
+        document.getElementById('loginUsernameError').style.display = 'block';
+        return;
+      }
+      
+      if (!password) {
+        document.getElementById('loginPasswordError').textContent = 'Password is required';
+        document.getElementById('loginPasswordError').style.display = 'block';
+        return;
+      }
+      
+      // Check against database
+      const users = JSON.parse(localStorage.getItem('adminUsers')) || [];
+      const authenticatedUser = users.find(user => user.username === username && user.password === password);
+      
+      if (authenticatedUser) {
+        // Store admin session
+        sessionStorage.setItem('adminLoggedIn', 'true');
+        sessionStorage.setItem('adminUsername', username);
+        
+        // Show admin dashboard
+        document.getElementById('adminDashboard').style.display = 'block';
+        closeAuthModal();
+        generateUploadCards();
+        loadGalleries();
+        
+        // Scroll to admin dashboard
+        document.getElementById('adminDashboard').scrollIntoView({ behavior: 'smooth' });
+      } else {
+        document.getElementById('loginPasswordError').textContent = 'Invalid username or password';
+        document.getElementById('loginPasswordError').style.display = 'block';
+      }
+    });
+    
+    // Handle register form submission
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const username = document.getElementById('registerUsername').value;
+      const email = document.getElementById('registerEmail').value;
+      const password = document.getElementById('registerPassword').value;
+      const confirmPassword = document.getElementById('registerConfirmPassword').value;
+      
+      // Reset error messages
+      document.querySelectorAll('#registerForm .error-message').forEach(el => {
+        el.style.display = 'none';
+      });
+      
+      // Validate inputs
+      let hasError = false;
+      
+      if (!username) {
+        document.getElementById('registerUsernameError').textContent = 'Username is required';
+        document.getElementById('registerUsernameError').style.display = 'block';
+        hasError = true;
+      }
+      
+      if (!email) {
+        document.getElementById('registerEmailError').textContent = 'Email is required';
+        document.getElementById('registerEmailError').style.display = 'block';
+        hasError = true;
+      } else if (!isValidEmail(email)) {
+        document.getElementById('registerEmailError').textContent = 'Please enter a valid email';
+        document.getElementById('registerEmailError').style.display = 'block';
+        hasError = true;
+      }
+      
+      if (!password) {
+        document.getElementById('registerPasswordError').textContent = 'Password is required';
+        document.getElementById('registerPasswordError').style.display = 'block';
+        hasError = true;
+      } else if (password.length < 6) {
+        document.getElementById('registerPasswordError').textContent = 'Password must be at least 6 characters';
+        document.getElementById('registerPasswordError').style.display = 'block';
+        hasError = true;
+      }
+      
+      if (!confirmPassword) {
+        document.getElementById('registerConfirmPasswordError').textContent = 'Please confirm your password';
+        document.getElementById('registerConfirmPasswordError').style.display = 'block';
+        hasError = true;
+      } else if (password !== confirmPassword) {
+        document.getElementById('registerConfirmPasswordError').textContent = 'Passwords do not match';
+        document.getElementById('registerConfirmPasswordError').style.display = 'block';
+        hasError = true;
+      }
+      
+      if (hasError) return;
+      
+      // Check if username already exists
+      const users = JSON.parse(localStorage.getItem('adminUsers')) || [];
+      const existingUser = users.find(user => user.username === username);
+      
+      if (existingUser) {
+        document.getElementById('registerUsernameError').textContent = 'Username already exists';
+        document.getElementById('registerUsernameError').style.display = 'block';
+        return;
+      }
+      
+      // Add new user
+      const newUser = {
+        username,
+        email,
+        password
+      };
+      
+      users.push(newUser);
+      localStorage.setItem('adminUsers', JSON.stringify(users));
+      
+      // Show success message and switch to login
+      alert('Registration successful! Please login.');
+      switchAuthTab('login');
+    });
+    
+    // Validate email
+    function isValidEmail(email) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    }
+    
+    // Switch admin tab
+    function switchAdminTab(tab) {
+      // Hide all tab contents
+      document.querySelectorAll('.admin-tab-content').forEach(el => {
+        el.classList.remove('active');
+      });
+      
+      // Remove active class from all tabs
+      document.querySelectorAll('.admin-tab').forEach(el => {
+        el.classList.remove('active');
+      });
+      
+      // Show selected tab content
+      document.getElementById(tab + 'TabContent').classList.add('active');
+      
+      // Add active class to selected tab
+      event.target.classList.add('active');
+    }
+    
+    // Generate upload cards
+    function generateUploadCards() {
+      // Generate timetable upload cards
+      const timetableUploadGrid = document.getElementById('timetableUploadGrid');
+      timetableUploadGrid.innerHTML = '';
+      
+      branches.forEach(branch => {
+        semesters.forEach(semester => {
+          const card = document.createElement('div');
+          card.className = 'upload-card';
+          
+          const title = document.createElement('div');
+          title.className = 'upload-card-title';
+          title.textContent = `${branch} - Sem ${semester}`;
+          
+          const input = document.createElement('input');
+          input.type = 'file';
+          input.className = 'upload-input';
+          input.id = `timetable-upload-${branch}-${semester}`;
+          input.accept = 'image/*';
+          input.onchange = (e) => handleTimetableUpload(e, branch, semester);
+          
+          const btn = document.createElement('button');
+          btn.className = 'upload-btn';
+          btn.textContent = 'Upload';
+          btn.onclick = () => input.click();
+          
+          const status = document.createElement('div');
+          status.className = 'upload-status';
+          status.id = `timetable-status-${branch}-${semester}`;
+          
+          // Check if timetable exists
+          const timetableKey = `${branch}-${semester}`;
+          const timetables = JSON.parse(localStorage.getItem('timetables')) || {};
+          if (timetables[timetableKey]) {
+            status.textContent = 'Timetable uploaded';
+          } else {
+            status.textContent = 'No timetable uploaded';
+          }
+          
+          card.appendChild(title);
+          card.appendChild(input);
+          card.appendChild(btn);
+          card.appendChild(status);
+          
+          timetableUploadGrid.appendChild(card);
+        });
+      });
+      
+      // Generate notes upload cards
+      const notesUploadGrid = document.getElementById('notesUploadGrid');
+      notesUploadGrid.innerHTML = '';
+      
+      branches.forEach(branch => {
+        semesters.forEach(semester => {
+          const card = document.createElement('div');
+          card.className = 'upload-card';
+          
+          const title = document.createElement('div');
+          title.className = 'upload-card-title';
+          title.textContent = `${branch} - Sem ${semester}`;
+          
+          const input = document.createElement('input');
+          input.type = 'file';
+          input.className = 'upload-input';
+          input.id = `notes-upload-${branch}-${semester}`;
+          input.accept = '.pdf';
+          input.onchange = (e) => handleNotesUpload(e, branch, semester);
+          
+          const btn = document.createElement('button');
+          btn.className = 'upload-btn';
+          btn.textContent = 'Upload';
+          btn.onclick = () => input.click();
+          
+          const status = document.createElement('div');
+          status.className = 'upload-status';
+          status.id = `notes-status-${branch}-${semester}`;
+          
+          // Check if notes exist
+          const notesKey = `${branch}-${semester}`;
+          const notes = JSON.parse(localStorage.getItem('notes')) || {};
+          if (notes[notesKey] && notes[notesKey].length > 0) {
+            status.textContent = `${notes[notesKey].length} note(s) uploaded`;
+          } else {
+            status.textContent = 'No notes uploaded';
+          }
+          
+          card.appendChild(title);
+          card.appendChild(input);
+          card.appendChild(btn);
+          card.appendChild(status);
+          
+          notesUploadGrid.appendChild(card);
+        });
+      });
+      
+      // Generate syllabus upload cards
+      const syllabusUploadGrid = document.getElementById('syllabusUploadGrid');
+      syllabusUploadGrid.innerHTML = '';
+      
+      branches.forEach(branch => {
+        semesters.forEach(semester => {
+          const card = document.createElement('div');
+          card.className = 'upload-card';
+          
+          const title = document.createElement('div');
+          title.className = 'upload-card-title';
+          title.textContent = `${branch} - Sem ${semester}`;
+          
+          const input = document.createElement('input');
+          input.type = 'file';
+          input.className = 'upload-input';
+          input.id = `syllabus-upload-${branch}-${semester}`;
+          input.accept = '.pdf';
+          input.onchange = (e) => handleSyllabusUpload(e, branch, semester);
+          
+          const btn = document.createElement('button');
+          btn.className = 'upload-btn';
+          btn.textContent = 'Upload';
+          btn.onclick = () => input.click();
+          
+          const status = document.createElement('div');
+          status.className = 'upload-status';
+          status.id = `syllabus-status-${branch}-${semester}`;
+          
+          // Check if syllabus papers exist
+          const syllabusKey = `${branch}-${semester}`;
+          const syllabus = JSON.parse(localStorage.getItem('syllabus')) || {};
+          if (syllabus[syllabusKey] && syllabus[syllabusKey].length > 0) {
+            status.textContent = `${syllabus[syllabusKey].length} paper(s) uploaded`;
+          } else {
+            status.textContent = 'No syllabus papers uploaded';
+          }
+          
+          card.appendChild(title);
+          card.appendChild(input);
+          card.appendChild(btn);
+          card.appendChild(status);
+          
+          syllabusUploadGrid.appendChild(card);
+        });
+      });
+      
+      // Generate papers upload cards
+      const papersUploadGrid = document.getElementById('papersUploadGrid');
+      papersUploadGrid.innerHTML = '';
+      
+      branches.forEach(branch => {
+        semesters.forEach(semester => {
+          const card = document.createElement('div');
+          card.className = 'upload-card';
+          
+          const title = document.createElement('div');
+          title.className = 'upload-card-title';
+          title.textContent = `${branch} - Sem ${semester}`;
+          
+          const input = document.createElement('input');
+          input.type = 'file';
+          input.className = 'upload-input';
+          input.id = `papers-upload-${branch}-${semester}`;
+          input.accept = '.pdf';
+          input.onchange = (e) => handlePapersUpload(e, branch, semester);
+          
+          const btn = document.createElement('button');
+          btn.className = 'upload-btn';
+          btn.textContent = 'Upload';
+          btn.onclick = () => input.click();
+          
+          const status = document.createElement('div');
+          status.className = 'upload-status';
+          status.id = `papers-status-${branch}-${semester}`;
+          
+          // Check if previous year papers exist
+          const papersKey = `${branch}-${semester}`;
+          const papers = JSON.parse(localStorage.getItem('papers')) || {};
+          if (papers[papersKey] && papers[papersKey].length > 0) {
+            status.textContent = `${papers[papersKey].length} paper(s) uploaded`;
+          } else {
+            status.textContent = 'No previous year papers uploaded';
+          }
+          
+          card.appendChild(title);
+          card.appendChild(input);
+          card.appendChild(btn);
+          card.appendChild(status);
+          
+          papersUploadGrid.appendChild(card);
+        });
+      });
+    }
+    
+    // Handle timetable upload
+    function handleTimetableUpload(event, branch, semester) {
+      const file = event.target.files[0];
+      if (!file) return;
+      
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        // Store image in localStorage
+        const timetables = JSON.parse(localStorage.getItem('timetables')) || {};
+        const key = `${branch}-${semester}`;
+        timetables[key] = e.target.result;
+        localStorage.setItem('timetables', JSON.stringify(timetables));
+        
+        // Update status
+        document.getElementById(`timetable-status-${branch}-${semester}`).textContent = 'Timetable uploaded';
+        
+        // Update gallery
+        loadTimetableGallery();
+        
+        // Update branch cards
+        generateBranchCards();
+        
+        // Show success message
+        alert(`Timetable for ${branch} Semester ${semester} uploaded successfully!`);
+        
+        // Reset file input
+        event.target.value = '';
+      };
+      reader.readAsDataURL(file);
+    }
+    
+    // Handle notes upload - SIMPLIFIED AND WORKING VERSION
+    function handleNotesUpload(event, branch, semester) {
+      const file = event.target.files[0];
+      if (!file) return;
+      
+      // Check if file is PDF
+      if (!file.type.includes('pdf') && !file.name.toLowerCase().endsWith('.pdf')) {
+        alert('Please upload PDF files only.');
+        return;
+      }
+      
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        // Store PDF in localStorage
+        const notes = JSON.parse(localStorage.getItem('notes')) || {};
+        const key = `${branch}-${semester}`;
+        
+        if (!notes[key]) {
+          notes[key] = [];
+        }
+        
+        // Add new file
+        notes[key].push({
+          name: file.name,
+          data: e.target.result,
+          uploaded: new Date().toLocaleDateString()
+        });
+        
+        localStorage.setItem('notes', JSON.stringify(notes));
+        
+        // Update status
+        document.getElementById(`notes-status-${branch}-${semester}`).textContent = `${notes[key].length} note(s) uploaded`;
+        
+        // Update gallery
+        loadNotesGallery();
+        
+        // Refresh student view if currently viewing notes
+        refreshStudentView('notes', branch, semester);
+        
+        // Show success message
+        alert(`Note "${file.name}" uploaded successfully for ${branch} Semester ${semester}!`);
+        
+        // Reset file input
+        event.target.value = '';
+      };
+      reader.readAsDataURL(file);
+    }
+    
+    // Handle syllabus upload
+    function handleSyllabusUpload(event, branch, semester) {
+      const file = event.target.files[0];
+      if (!file) return;
+      
+      // Check if file is PDF
+      if (!file.type.includes('pdf') && !file.name.toLowerCase().endsWith('.pdf')) {
+        alert('Please upload PDF files only.');
+        return;
+      }
+      
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        // Store PDF in localStorage
+        const syllabus = JSON.parse(localStorage.getItem('syllabus')) || {};
+        const key = `${branch}-${semester}`;
+        
+        if (!syllabus[key]) {
+          syllabus[key] = [];
+        }
+        
+        // Add new file
+        syllabus[key].push({
+          name: file.name,
+          data: e.target.result,
+          uploaded: new Date().toLocaleDateString()
+        });
+        
+        localStorage.setItem('syllabus', JSON.stringify(syllabus));
+        
+        // Update status
+        document.getElementById(`syllabus-status-${branch}-${semester}`).textContent = `${syllabus[key].length} paper(s) uploaded`;
+        
+        // Update gallery
+        loadSyllabusGallery();
+        
+        // Refresh student view if currently viewing syllabus
+        refreshStudentView('syllabus', branch, semester);
+        
+        // Show success message
+        alert(`Syllabus paper "${file.name}" uploaded successfully for ${branch} Semester ${semester}!`);
+        
+        // Reset file input
+        event.target.value = '';
+      };
+      reader.readAsDataURL(file);
+    }
+    
+    // Handle papers upload
+    function handlePapersUpload(event, branch, semester) {
+      const file = event.target.files[0];
+      if (!file) return;
+      
+      // Check if file is PDF
+      if (!file.type.includes('pdf') && !file.name.toLowerCase().endsWith('.pdf')) {
+        alert('Please upload PDF files only.');
+        return;
+      }
+      
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        // Store PDF in localStorage
+        const papers = JSON.parse(localStorage.getItem('papers')) || {};
+        const key = `${branch}-${semester}`;
+        
+        if (!papers[key]) {
+          papers[key] = [];
+        }
+        
+        // Add new file
+        papers[key].push({
+          name: file.name,
+          data: e.target.result,
+          uploaded: new Date().toLocaleDateString()
+        });
+        
+        localStorage.setItem('papers', JSON.stringify(papers));
+        
+        // Update status
+        document.getElementById(`papers-status-${branch}-${semester}`).textContent = `${papers[key].length} paper(s) uploaded`;
+        
+        // Update gallery
+        loadPapersGallery();
+        
+        // Refresh student view if currently viewing papers
+        refreshStudentView('papers', branch, semester);
+        
+        // Show success message
+        alert(`Previous year paper "${file.name}" uploaded successfully for ${branch} Semester ${semester}!`);
+        
+        // Reset file input
+        event.target.value = '';
+      };
+      reader.readAsDataURL(file);
+    }
+    
+    // Refresh student view
+    function refreshStudentView(section, branch, semester) {
+      console.log('Refreshing student view for:', section, branch, semester);
+      
+      // Get current active section
+      const activeSection = document.querySelector('.content-section.active');
+      const activeSectionId = activeSection ? activeSection.id : '';
+      
+      // Check if student is viewing the same section and branch/semester
+      if (section === 'notes' && activeSectionId === 'notesSection') {
+        const currentBranch = document.getElementById('notesBranch').value;
+        const currentSemester = document.getElementById('notesSemester').value;
+        
+        if (currentBranch === branch && currentSemester == semester) {
+          loadNotes();
+        }
+      } else if (section === 'syllabus' && activeSectionId === 'syllabusSection') {
+        const currentBranch = document.getElementById('syllabusBranch').value;
+        const currentSemester = document.getElementById('syllabusSemester').value;
+        
+        if (currentBranch === branch && currentSemester == semester) {
+          loadSyllabus();
+        }
+      } else if (section === 'papers' && activeSectionId === 'papersSection') {
+        const currentBranch = document.getElementById('papersBranch').value;
+        const currentSemester = document.getElementById('papersSemester').value;
+        
+        if (currentBranch === branch && currentSemester == semester) {
+          loadPapers();
+        }
+      }
+    }
+    
+    // Load galleries
+    function loadGalleries() {
+      loadTimetableGallery();
+      loadNotesGallery();
+      loadSyllabusGallery();
+      loadPapersGallery();
+    }
+    
+    // Load timetable gallery
+    function loadTimetableGallery() {
+      const gallery = document.getElementById('timetableGallery');
+      gallery.innerHTML = '';
+      
+      const timetables = JSON.parse(localStorage.getItem('timetables')) || {};
+      
+      Object.keys(timetables).forEach(key => {
+        const [branch, semester] = key.split('-');
+        
+        const item = document.createElement('div');
+        item.className = 'gallery-item';
+        
+        const img = document.createElement('img');
+        img.src = timetables[key];
+        img.alt = `${branch} Semester ${semester} Timetable`;
+        
+        const title = document.createElement('div');
+        title.className = 'gallery-item-title';
+        title.textContent = `${branch} - Sem ${semester}`;
+        
+        const deleteBtn = document.createElement('button');
+        deleteBtn.className = 'delete-btn';
+        deleteBtn.innerHTML = '&times;';
+        deleteBtn.onclick = () => deleteTimetable(key);
+        
+        item.appendChild(img);
+        item.appendChild(title);
+        item.appendChild(deleteBtn);
+        
+        gallery.appendChild(item);
+      });
+      
+      if (Object.keys(timetables).length === 0) {
+        gallery.innerHTML = '<p>No timetables uploaded yet.</p>';
+      }
+    }
+    
+    // Load notes gallery
+    function loadNotesGallery() {
+      const gallery = document.getElementById('notesGallery');
+      gallery.innerHTML = '';
+      
+      const notes = JSON.parse(localStorage.getItem('notes')) || {};
+      
+      Object.keys(notes).forEach(key => {
+        const [branch, semester] = key.split('-');
+        
+        notes[key].forEach((note, index) => {
+          const item = document.createElement('div');
+          item.className = 'file-gallery-item';
+          
+          const icon = document.createElement('div');
+          icon.className = 'file-icon';
+          icon.innerHTML = '📄';
+          
+          const info = document.createElement('div');
+          info.className = 'file-info';
+          
+          const name = document.createElement('div');
+          name.className = 'file-name';
+          name.textContent = note.name || `Note ${index + 1}`;
+          
+          const meta = document.createElement('div');
+          meta.className = 'file-meta';
+          meta.textContent = `${branch} - Semester ${semester}`;
+          
+          info.appendChild(name);
+          info.appendChild(meta);
+          
+          const actions = document.createElement('div');
+          actions.className = 'file-actions';
+          
+          const viewBtn = document.createElement('button');
+          viewBtn.className = 'file-action-btn view-file-btn';
+          viewBtn.textContent = 'View';
+          viewBtn.onclick = () => viewPDF(note.data, note.name || `Note ${index + 1}`);
+          
+          const deleteBtn = document.createElement('button');
+          deleteBtn.className = 'file-action-btn delete-file-btn';
+          deleteBtn.textContent = 'Delete';
+          deleteBtn.onclick = () => deleteFile('notes', key, index);
+          
+          actions.appendChild(viewBtn);
+          actions.appendChild(deleteBtn);
+          
+          item.appendChild(icon);
+          item.appendChild(info);
+          item.appendChild(actions);
+          
+          gallery.appendChild(item);
+        });
+      });
+      
+      if (Object.keys(notes).length === 0) {
+        gallery.innerHTML = '<p>No notes uploaded yet.</p>';
+      }
+    }
+    
+    // Load syllabus gallery
+    function loadSyllabusGallery() {
+      const gallery = document.getElementById('syllabusGallery');
+      gallery.innerHTML = '';
+      
+      const syllabus = JSON.parse(localStorage.getItem('syllabus')) || {};
+      
+      Object.keys(syllabus).forEach(key => {
+        const [branch, semester] = key.split('-');
+        
+        syllabus[key].forEach((paper, index) => {
+          const item = document.createElement('div');
+          item.className = 'file-gallery-item';
+          
+          const icon = document.createElement('div');
+          icon.className = 'file-icon';
+          icon.innerHTML = '📄';
+          
+          const info = document.createElement('div');
+          info.className = 'file-info';
+          
+          const name = document.createElement('div');
+          name.className = 'file-name';
+          name.textContent = paper.name || `Syllabus Paper ${index + 1}`;
+          
+          const meta = document.createElement('div');
+          meta.className = 'file-meta';
+          meta.textContent = `${branch} - Semester ${semester}`;
+          
+          info.appendChild(name);
+          info.appendChild(meta);
+          
+          const actions = document.createElement('div');
+          actions.className = 'file-actions';
+          
+          const viewBtn = document.createElement('button');
+          viewBtn.className = 'file-action-btn view-file-btn';
+          viewBtn.textContent = 'View';
+          viewBtn.onclick = () => viewPDF(paper.data, paper.name || `Syllabus Paper ${index + 1}`);
+          
+          const deleteBtn = document.createElement('button');
+          deleteBtn.className = 'file-action-btn delete-file-btn';
+          deleteBtn.textContent = 'Delete';
+          deleteBtn.onclick = () => deleteFile('syllabus', key, index);
+          
+          actions.appendChild(viewBtn);
+          actions.appendChild(deleteBtn);
+          
+          item.appendChild(icon);
+          item.appendChild(info);
+          item.appendChild(actions);
+          
+          gallery.appendChild(item);
+        });
+      });
+      
+      if (Object.keys(syllabus).length === 0) {
+        gallery.innerHTML = '<p>No syllabus papers uploaded yet.</p>';
+      }
+    }
+    
+    // Load papers gallery
+    function loadPapersGallery() {
+      const gallery = document.getElementById('papersGallery');
+      gallery.innerHTML = '';
+      
+      const papers = JSON.parse(localStorage.getItem('papers')) || {};
+      
+      Object.keys(papers).forEach(key => {
+        const [branch, semester] = key.split('-');
+        
+        papers[key].forEach((paper, index) => {
+          const item = document.createElement('div');
+          item.className = 'file-gallery-item';
+          
+          const icon = document.createElement('div');
+          icon.className = 'file-icon';
+          icon.innerHTML = '📄';
+          
+          const info = document.createElement('div');
+          info.className = 'file-info';
+          
+          const name = document.createElement('div');
+          name.className = 'file-name';
+          name.textContent = paper.name || `Previous Year Paper ${index + 1}`;
+          
+          const meta = document.createElement('div');
+          meta.className = 'file-meta';
+          meta.textContent = `${branch} - Semester ${semester}`;
+          
+          info.appendChild(name);
+          info.appendChild(meta);
+          
+          const actions = document.createElement('div');
+          actions.className = 'file-actions';
+          
+          const viewBtn = document.createElement('button');
+          viewBtn.className = 'file-action-btn view-file-btn';
+          viewBtn.textContent = 'View';
+          viewBtn.onclick = () => viewPDF(paper.data, paper.name || `Previous Year Paper ${index + 1}`);
+          
+          const deleteBtn = document.createElement('button');
+          deleteBtn.className = 'file-action-btn delete-file-btn';
+          deleteBtn.textContent = 'Delete';
+          deleteBtn.onclick = () => deleteFile('papers', key, index);
+          
+          actions.appendChild(viewBtn);
+          actions.appendChild(deleteBtn);
+          
+          item.appendChild(icon);
+          item.appendChild(info);
+          item.appendChild(actions);
+          
+          gallery.appendChild(item);
+        });
+      });
+      
+      if (Object.keys(papers).length === 0) {
+        gallery.innerHTML = '<p>No previous year papers uploaded yet.</p>';
+      }
+    }
+    
+    // Delete timetable
+    function deleteTimetable(key) {
+      if (confirm('Are you sure you want to delete this timetable?')) {
+        const timetables = JSON.parse(localStorage.getItem('timetables')) || {};
+        delete timetables[key];
+        localStorage.setItem('timetables', JSON.stringify(timetables));
+        
+        // Update gallery
+        loadTimetableGallery();
+        
+        // Update upload cards
+        generateUploadCards();
+        
+        // Update branch cards
+        generateBranchCards();
+      }
+    }
+    
+    // Delete file
+    function deleteFile(type, key, index) {
+      if (confirm('Are you sure you want to delete this file?')) {
+        const files = JSON.parse(localStorage.getItem(type)) || {};
+        
+        if (files[key] && files[key].length > index) {
+          const [branch, semester] = key.split('-');
+          
+          files[key].splice(index, 1);
+          
+          if (files[key].length === 0) {
+            delete files[key];
+          }
+          
+          localStorage.setItem(type, JSON.stringify(files));
+          
+          // Update gallery
+          if (type === 'notes') {
+            loadNotesGallery();
+            refreshStudentView('notes', branch, semester);
+          } else if (type === 'syllabus') {
+            loadSyllabusGallery();
+            refreshStudentView('syllabus', branch, semester);
+          } else if (type === 'papers') {
+            loadPapersGallery();
+            refreshStudentView('papers', branch, semester);
+          }
+          
+          // Update upload cards
+          generateUploadCards();
+        }
+      }
+    }
+    
+    // View timetable
+    function viewTimetable(branch, semester) {
+      const timetables = JSON.parse(localStorage.getItem('timetables')) || {};
+      const key = `${branch}-${semester}`;
+      
+      const modal = document.getElementById('timetableModal');
+      const title = document.getElementById('timetableModalTitle');
+      const body = document.getElementById('timetableModalBody');
+      
+      title.textContent = `${branch} - Semester ${semester} Timetable`;
+      
+      if (timetables[key]) {
+        body.innerHTML = `<img src="${timetables[key]}" alt="${branch} Semester ${semester} Timetable" class="timetable-image">`;
+      } else {
+        body.innerHTML = '<div class="no-timetable">No timetable available for this semester.</div>';
+      }
+      
+      modal.style.display = 'flex';
+    }
+    
+    // Close timetable modal
+    function closeTimetableModal() {
+      document.getElementById('timetableModal').style.display = 'none';
+    }
+    
+    // Logout
+    function logout() {
+      sessionStorage.removeItem('adminLoggedIn');
+      sessionStorage.removeItem('adminUsername');
+      document.getElementById('adminDashboard').style.display = 'none';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    // Check if admin is logged in
+    function checkAdminStatus() {
+      const isLoggedIn = sessionStorage.getItem('adminLoggedIn') === 'true';
+      if (isLoggedIn) {
+        document.getElementById('adminDashboard').style.display = 'block';
+        generateUploadCards();
+        loadGalleries();
+      }
+    }
+    
+    // Initialize on page load
+    window.onload = function() {
+      initializeStorage();
+      checkAdminStatus();
+      
+      // Add default admin credentials
+      console.log('Default admin credentials:');
+      console.log('Username: admin');
+      console.log('Password: admin123');
+    };
   </script>
 </body>
 </html>
