@@ -911,11 +911,50 @@
       <div class="content-section active" id="timetablesSection">
         <div class="section-header">
           <h2 class="section-title">Timetables</h2>
-          <p class="section-description">View timetables for different branches and semesters</p>
+          <p class="section-description">View timetables for different branches, semesters, and sections</p>
         </div>
         
-        <div class="branches-container" id="branchesContainer">
-          <!-- Branch cards will be dynamically generated -->
+        <div class="selection-container">
+          <div class="selection-group">
+            <label class="selection-label">Branch:</label>
+            <select class="selection-dropdown" id="timetableBranch" onchange="updateTimetableSections()">
+              <option value="">Select Branch</option>
+              <option value="CSE">Computer Science & Engineering</option>
+              <option value="ECE">Electronics & Communication Engineering</option>
+              <option value="CSM">Computer Science & Machine Learning</option>
+            </select>
+          </div>
+          
+          <div class="selection-group">
+            <label class="selection-label">Semester:</label>
+            <select class="selection-dropdown" id="timetableSemester" onchange="updateTimetableSections()">
+              <option value="">Select Semester</option>
+              <option value="1">Semester 1</option>
+              <option value="2">Semester 2</option>
+              <option value="3">Semester 3</option>
+              <option value="4">Semester 4</option>
+              <option value="5">Semester 5</option>
+              <option value="6">Semester 6</option>
+              <option value="7">Semester 7</option>
+              <option value="8">Semester 8</option>
+            </select>
+          </div>
+          
+          <div class="selection-group">
+            <label class="selection-label">Section:</label>
+            <select class="selection-dropdown" id="timetableSection">
+              <option value="">Select Section</option>
+            </select>
+          </div>
+          
+          <div class="selection-group">
+            <label class="selection-label">&nbsp;</label>
+            <button class="view-btn" onclick="viewTimetable()">View Timetable</button>
+          </div>
+        </div>
+        
+        <div class="timetable-container" id="timetableContainer">
+          <!-- Timetable will be displayed here -->
         </div>
       </div>
       
@@ -923,13 +962,13 @@
       <div class="content-section" id="notesSection">
         <div class="section-header">
           <h2 class="section-title">Notes (PDF)</h2>
-          <p class="section-description">Access study notes for different branches and semesters</p>
+          <p class="section-description">Access study notes for different branches, semesters, and sections</p>
         </div>
         
         <div class="selection-container">
           <div class="selection-group">
             <label class="selection-label">Branch:</label>
-            <select class="selection-dropdown" id="notesBranch">
+            <select class="selection-dropdown" id="notesBranch" onchange="updateSections('notes')">
               <option value="">Select Branch</option>
               <option value="CSE">Computer Science & Engineering</option>
               <option value="ECE">Electronics & Communication Engineering</option>
@@ -953,13 +992,20 @@
           </div>
           
           <div class="selection-group">
+            <label class="selection-label">Section:</label>
+            <select class="selection-dropdown" id="notesSection">
+              <option value="">Select Section</option>
+            </select>
+          </div>
+          
+          <div class="selection-group">
             <label class="selection-label">&nbsp;</label>
             <button class="view-btn" onclick="loadNotes()">View Notes</button>
           </div>
         </div>
         
         <div class="resources-container" id="notesContainer">
-          <div class="no-resources">Please select branch and semester to view notes</div>
+          <div class="no-resources">Please select branch, semester, and section to view notes</div>
         </div>
       </div>
       
@@ -967,13 +1013,13 @@
       <div class="content-section" id="syllabusSection">
         <div class="section-header">
           <h2 class="section-title">Syllabus Paper</h2>
-          <p class="section-description">Access syllabus papers for different branches and semesters</p>
+          <p class="section-description">Access syllabus papers for different branches, semesters, and sections</p>
         </div>
         
         <div class="selection-container">
           <div class="selection-group">
             <label class="selection-label">Branch:</label>
-            <select class="selection-dropdown" id="syllabusBranch">
+            <select class="selection-dropdown" id="syllabusBranch" onchange="updateSections('syllabus')">
               <option value="">Select Branch</option>
               <option value="CSE">Computer Science & Engineering</option>
               <option value="ECE">Electronics & Communication Engineering</option>
@@ -997,13 +1043,20 @@
           </div>
           
           <div class="selection-group">
+            <label class="selection-label">Section:</label>
+            <select class="selection-dropdown" id="syllabusSection">
+              <option value="">Select Section</option>
+            </select>
+          </div>
+          
+          <div class="selection-group">
             <label class="selection-label">&nbsp;</label>
             <button class="view-btn" onclick="loadSyllabus()">View Syllabus</button>
           </div>
         </div>
         
         <div class="resources-container" id="syllabusContainer">
-          <div class="no-resources">Please select branch and semester to view syllabus</div>
+          <div class="no-resources">Please select branch, semester, and section to view syllabus</div>
         </div>
       </div>
       
@@ -1011,13 +1064,13 @@
       <div class="content-section" id="papersSection">
         <div class="section-header">
           <h2 class="section-title">Previous Year Papers</h2>
-          <p class="section-description">Access previous year question papers for different branches and semesters</p>
+          <p class="section-description">Access previous year question papers for different branches, semesters, and sections</p>
         </div>
         
         <div class="selection-container">
           <div class="selection-group">
             <label class="selection-label">Branch:</label>
-            <select class="selection-dropdown" id="papersBranch">
+            <select class="selection-dropdown" id="papersBranch" onchange="updateSections('papers')">
               <option value="">Select Branch</option>
               <option value="CSE">Computer Science & Engineering</option>
               <option value="ECE">Electronics & Communication Engineering</option>
@@ -1041,13 +1094,20 @@
           </div>
           
           <div class="selection-group">
+            <label class="selection-label">Section:</label>
+            <select class="selection-dropdown" id="papersSection">
+              <option value="">Select Section</option>
+            </select>
+          </div>
+          
+          <div class="selection-group">
             <label class="selection-label">&nbsp;</label>
             <button class="view-btn" onclick="loadPapers()">View Papers</button>
           </div>
         </div>
         
         <div class="resources-container" id="papersContainer">
-          <div class="no-resources">Please select branch and semester to view papers</div>
+          <div class="no-resources">Please select branch, semester, and section to view papers</div>
         </div>
       </div>
       
@@ -1227,6 +1287,11 @@
     // Initialize data
     const branches = ['CSE', 'ECE', 'CSM'];
     const semesters = [1, 2, 3, 4, 5, 6, 7, 8];
+    const sections = {
+      'CSE': ['A', 'B', 'C'],
+      'ECE': ['A', 'B'],
+      'CSM': ['A']
+    };
     
     // Initialize local storage
     function initializeStorage() {
@@ -1259,7 +1324,45 @@
     function enterPortal() {
       document.getElementById('welcomePage').style.display = 'none';
       document.getElementById('mainPage').style.display = 'block';
-      generateBranchCards();
+    }
+    
+    // Update sections based on selected branch
+    function updateSections(type) {
+      const branchId = type + 'Branch';
+      const sectionId = type + 'Section';
+      const branch = document.getElementById(branchId).value;
+      const sectionSelect = document.getElementById(sectionId);
+      
+      // Clear current sections
+      sectionSelect.innerHTML = '<option value="">Select Section</option>';
+      
+      if (branch && sections[branch]) {
+        sections[branch].forEach(section => {
+          const option = document.createElement('option');
+          option.value = section;
+          option.textContent = 'Section ' + section;
+          sectionSelect.appendChild(option);
+        });
+      }
+    }
+    
+    // Update timetable sections
+    function updateTimetableSections() {
+      const branch = document.getElementById('timetableBranch').value;
+      const semester = document.getElementById('timetableSemester').value;
+      const sectionSelect = document.getElementById('timetableSection');
+      
+      // Clear current sections
+      sectionSelect.innerHTML = '<option value="">Select Section</option>';
+      
+      if (branch && semester && sections[branch]) {
+        sections[branch].forEach(section => {
+          const option = document.createElement('option');
+          option.value = section;
+          option.textContent = 'Section ' + section;
+          sectionSelect.appendChild(option);
+        });
+      }
     }
     
     // Show content section
@@ -1281,62 +1384,43 @@
       event.target.classList.add('active');
     }
     
-    // Generate branch cards
-    function generateBranchCards() {
-      const container = document.getElementById('branchesContainer');
-      container.innerHTML = '';
+    // View timetable
+    function viewTimetable() {
+      const branch = document.getElementById('timetableBranch').value;
+      const semester = document.getElementById('timetableSemester').value;
+      const sectionName = document.getElementById('timetableSection').value;
+      const container = document.getElementById('timetableContainer');
       
-      branches.forEach(branch => {
-        const card = document.createElement('div');
-        card.className = 'branch-card';
-        
-        const title = document.createElement('h2');
-        title.className = 'branch-title';
-        title.textContent = branch === 'CSE' ? 'Computer Science & Engineering' :
-                         branch === 'ECE' ? 'Electronics & Communication Engineering' :
-                         'Computer Science & Machine Learning';
-        
-        const semestersContainer = document.createElement('div');
-        semestersContainer.className = 'semesters';
-        
-        semesters.forEach(semester => {
-          const btn = document.createElement('button');
-          btn.className = 'semester-btn';
-          btn.textContent = `Sem ${semester}`;
-          
-          // Check if timetable exists
-          const timetableKey = `${branch}-${semester}`;
-          const timetables = JSON.parse(localStorage.getItem('timetables')) || {};
-          if (timetables[timetableKey]) {
-            btn.classList.add('has-timetable');
-          }
-          
-          btn.onclick = () => viewTimetable(branch, semester);
-          semestersContainer.appendChild(btn);
-        });
-        
-        card.appendChild(title);
-        card.appendChild(semestersContainer);
-        container.appendChild(card);
-      });
+      if (!branch || !semester || !sectionName) {
+        container.innerHTML = '<div class="no-timetable">Please select branch, semester, and section</div>';
+        return;
+      }
+      
+      const timetables = JSON.parse(localStorage.getItem('timetables')) || {};
+      const key = `${branch}-${semester}-${sectionName}`;
+      
+      if (timetables[key]) {
+        container.innerHTML = `<img src="${timetables[key]}" alt="${branch} Semester ${semester} Section ${sectionName} Timetable" class="timetable-image">`;
+      } else {
+        container.innerHTML = '<div class="no-timetable">No timetable available for this selection</div>';
+      }
     }
     
     // Load notes
     function loadNotes() {
       const branch = document.getElementById('notesBranch').value;
       const semester = document.getElementById('notesSemester').value;
+      const sectionName = document.getElementById('notesSection').value;
       const container = document.getElementById('notesContainer');
       
-      if (!branch || !semester) {
-        container.innerHTML = '<div class="no-resources">Please select both branch and semester</div>';
+      if (!branch || !semester || !sectionName) {
+        container.innerHTML = '<div class="no-resources">Please select branch, semester, and section</div>';
         return;
       }
       
       const notes = JSON.parse(localStorage.getItem('notes')) || {};
-      const key = `${branch}-${semester}`;
+      const key = `${branch}-${semester}-${sectionName}`;
       const notesData = notes[key] || [];
-      
-      console.log('Loading notes for:', key, 'Data:', notesData);
       
       if (notesData.length === 0) {
         container.innerHTML = '<div class="no-resources">No notes available for this selection</div>';
@@ -1355,7 +1439,7 @@
         
         const meta = document.createElement('div');
         meta.className = 'resource-meta';
-        meta.textContent = `${branch} - Semester ${semester}`;
+        meta.textContent = `${branch} - Semester ${semester} - Section ${sectionName}`;
         
         const actions = document.createElement('div');
         actions.className = 'resource-actions';
@@ -1385,15 +1469,16 @@
     function loadSyllabus() {
       const branch = document.getElementById('syllabusBranch').value;
       const semester = document.getElementById('syllabusSemester').value;
+      const sectionName = document.getElementById('syllabusSection').value;
       const container = document.getElementById('syllabusContainer');
       
-      if (!branch || !semester) {
-        container.innerHTML = '<div class="no-resources">Please select both branch and semester</div>';
+      if (!branch || !semester || !sectionName) {
+        container.innerHTML = '<div class="no-resources">Please select branch, semester, and section</div>';
         return;
       }
       
       const syllabus = JSON.parse(localStorage.getItem('syllabus')) || {};
-      const key = `${branch}-${semester}`;
+      const key = `${branch}-${semester}-${sectionName}`;
       const syllabusData = syllabus[key] || [];
       
       if (syllabusData.length === 0) {
@@ -1413,7 +1498,7 @@
         
         const meta = document.createElement('div');
         meta.className = 'resource-meta';
-        meta.textContent = `${branch} - Semester ${semester}`;
+        meta.textContent = `${branch} - Semester ${semester} - Section ${sectionName}`;
         
         const actions = document.createElement('div');
         actions.className = 'resource-actions';
@@ -1443,15 +1528,16 @@
     function loadPapers() {
       const branch = document.getElementById('papersBranch').value;
       const semester = document.getElementById('papersSemester').value;
+      const sectionName = document.getElementById('papersSection').value;
       const container = document.getElementById('papersContainer');
       
-      if (!branch || !semester) {
-        container.innerHTML = '<div class="no-resources">Please select both branch and semester</div>';
+      if (!branch || !semester || !sectionName) {
+        container.innerHTML = '<div class="no-resources">Please select branch, semester, and section</div>';
         return;
       }
       
       const papers = JSON.parse(localStorage.getItem('papers')) || {};
-      const key = `${branch}-${semester}`;
+      const key = `${branch}-${semester}-${sectionName}`;
       const papersData = papers[key] || [];
       
       if (papersData.length === 0) {
@@ -1471,7 +1557,7 @@
         
         const meta = document.createElement('div');
         meta.className = 'resource-meta';
-        meta.textContent = `${branch} - Semester ${semester}`;
+        meta.textContent = `${branch} - Semester ${semester} - Section ${sectionName}`;
         
         const actions = document.createElement('div');
         actions.className = 'resource-actions';
@@ -1731,44 +1817,46 @@
       
       branches.forEach(branch => {
         semesters.forEach(semester => {
-          const card = document.createElement('div');
-          card.className = 'upload-card';
-          
-          const title = document.createElement('div');
-          title.className = 'upload-card-title';
-          title.textContent = `${branch} - Sem ${semester}`;
-          
-          const input = document.createElement('input');
-          input.type = 'file';
-          input.className = 'upload-input';
-          input.id = `timetable-upload-${branch}-${semester}`;
-          input.accept = 'image/*';
-          input.onchange = (e) => handleTimetableUpload(e, branch, semester);
-          
-          const btn = document.createElement('button');
-          btn.className = 'upload-btn';
-          btn.textContent = 'Upload';
-          btn.onclick = () => input.click();
-          
-          const status = document.createElement('div');
-          status.className = 'upload-status';
-          status.id = `timetable-status-${branch}-${semester}`;
-          
-          // Check if timetable exists
-          const timetableKey = `${branch}-${semester}`;
-          const timetables = JSON.parse(localStorage.getItem('timetables')) || {};
-          if (timetables[timetableKey]) {
-            status.textContent = 'Timetable uploaded';
-          } else {
-            status.textContent = 'No timetable uploaded';
-          }
-          
-          card.appendChild(title);
-          card.appendChild(input);
-          card.appendChild(btn);
-          card.appendChild(status);
-          
-          timetableUploadGrid.appendChild(card);
+          sections[branch].forEach(sectionName => {
+            const card = document.createElement('div');
+            card.className = 'upload-card';
+            
+            const title = document.createElement('div');
+            title.className = 'upload-card-title';
+            title.textContent = `${branch} - Sem ${semester} - Sec ${sectionName}`;
+            
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.className = 'upload-input';
+            input.id = `timetable-upload-${branch}-${semester}-${sectionName}`;
+            input.accept = 'image/*';
+            input.onchange = (e) => handleTimetableUpload(e, branch, semester, sectionName);
+            
+            const btn = document.createElement('button');
+            btn.className = 'upload-btn';
+            btn.textContent = 'Upload';
+            btn.onclick = () => input.click();
+            
+            const status = document.createElement('div');
+            status.className = 'upload-status';
+            status.id = `timetable-status-${branch}-${semester}-${sectionName}`;
+            
+            // Check if timetable exists
+            const timetableKey = `${branch}-${semester}-${sectionName}`;
+            const timetables = JSON.parse(localStorage.getItem('timetables')) || {};
+            if (timetables[timetableKey]) {
+              status.textContent = 'Timetable uploaded';
+            } else {
+              status.textContent = 'No timetable uploaded';
+            }
+            
+            card.appendChild(title);
+            card.appendChild(input);
+            card.appendChild(btn);
+            card.appendChild(status);
+            
+            timetableUploadGrid.appendChild(card);
+          });
         });
       });
       
@@ -1778,44 +1866,46 @@
       
       branches.forEach(branch => {
         semesters.forEach(semester => {
-          const card = document.createElement('div');
-          card.className = 'upload-card';
-          
-          const title = document.createElement('div');
-          title.className = 'upload-card-title';
-          title.textContent = `${branch} - Sem ${semester}`;
-          
-          const input = document.createElement('input');
-          input.type = 'file';
-          input.className = 'upload-input';
-          input.id = `notes-upload-${branch}-${semester}`;
-          input.accept = '.pdf';
-          input.onchange = (e) => handleNotesUpload(e, branch, semester);
-          
-          const btn = document.createElement('button');
-          btn.className = 'upload-btn';
-          btn.textContent = 'Upload';
-          btn.onclick = () => input.click();
-          
-          const status = document.createElement('div');
-          status.className = 'upload-status';
-          status.id = `notes-status-${branch}-${semester}`;
-          
-          // Check if notes exist
-          const notesKey = `${branch}-${semester}`;
-          const notes = JSON.parse(localStorage.getItem('notes')) || {};
-          if (notes[notesKey] && notes[notesKey].length > 0) {
-            status.textContent = `${notes[notesKey].length} note(s) uploaded`;
-          } else {
-            status.textContent = 'No notes uploaded';
-          }
-          
-          card.appendChild(title);
-          card.appendChild(input);
-          card.appendChild(btn);
-          card.appendChild(status);
-          
-          notesUploadGrid.appendChild(card);
+          sections[branch].forEach(sectionName => {
+            const card = document.createElement('div');
+            card.className = 'upload-card';
+            
+            const title = document.createElement('div');
+            title.className = 'upload-card-title';
+            title.textContent = `${branch} - Sem ${semester} - Sec ${sectionName}`;
+            
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.className = 'upload-input';
+            input.id = `notes-upload-${branch}-${semester}-${sectionName}`;
+            input.accept = '.pdf';
+            input.onchange = (e) => handleNotesUpload(e, branch, semester, sectionName);
+            
+            const btn = document.createElement('button');
+            btn.className = 'upload-btn';
+            btn.textContent = 'Upload';
+            btn.onclick = () => input.click();
+            
+            const status = document.createElement('div');
+            status.className = 'upload-status';
+            status.id = `notes-status-${branch}-${semester}-${sectionName}`;
+            
+            // Check if notes exist
+            const notesKey = `${branch}-${semester}-${sectionName}`;
+            const notes = JSON.parse(localStorage.getItem('notes')) || {};
+            if (notes[notesKey] && notes[notesKey].length > 0) {
+              status.textContent = `${notes[notesKey].length} note(s) uploaded`;
+            } else {
+              status.textContent = 'No notes uploaded';
+            }
+            
+            card.appendChild(title);
+            card.appendChild(input);
+            card.appendChild(btn);
+            card.appendChild(status);
+            
+            notesUploadGrid.appendChild(card);
+          });
         });
       });
       
@@ -1825,44 +1915,46 @@
       
       branches.forEach(branch => {
         semesters.forEach(semester => {
-          const card = document.createElement('div');
-          card.className = 'upload-card';
-          
-          const title = document.createElement('div');
-          title.className = 'upload-card-title';
-          title.textContent = `${branch} - Sem ${semester}`;
-          
-          const input = document.createElement('input');
-          input.type = 'file';
-          input.className = 'upload-input';
-          input.id = `syllabus-upload-${branch}-${semester}`;
-          input.accept = '.pdf';
-          input.onchange = (e) => handleSyllabusUpload(e, branch, semester);
-          
-          const btn = document.createElement('button');
-          btn.className = 'upload-btn';
-          btn.textContent = 'Upload';
-          btn.onclick = () => input.click();
-          
-          const status = document.createElement('div');
-          status.className = 'upload-status';
-          status.id = `syllabus-status-${branch}-${semester}`;
-          
-          // Check if syllabus papers exist
-          const syllabusKey = `${branch}-${semester}`;
-          const syllabus = JSON.parse(localStorage.getItem('syllabus')) || {};
-          if (syllabus[syllabusKey] && syllabus[syllabusKey].length > 0) {
-            status.textContent = `${syllabus[syllabusKey].length} paper(s) uploaded`;
-          } else {
-            status.textContent = 'No syllabus papers uploaded';
-          }
-          
-          card.appendChild(title);
-          card.appendChild(input);
-          card.appendChild(btn);
-          card.appendChild(status);
-          
-          syllabusUploadGrid.appendChild(card);
+          sections[branch].forEach(sectionName => {
+            const card = document.createElement('div');
+            card.className = 'upload-card';
+            
+            const title = document.createElement('div');
+            title.className = 'upload-card-title';
+            title.textContent = `${branch} - Sem ${semester} - Sec ${sectionName}`;
+            
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.className = 'upload-input';
+            input.id = `syllabus-upload-${branch}-${semester}-${sectionName}`;
+            input.accept = '.pdf';
+            input.onchange = (e) => handleSyllabusUpload(e, branch, semester, sectionName);
+            
+            const btn = document.createElement('button');
+            btn.className = 'upload-btn';
+            btn.textContent = 'Upload';
+            btn.onclick = () => input.click();
+            
+            const status = document.createElement('div');
+            status.className = 'upload-status';
+            status.id = `syllabus-status-${branch}-${semester}-${sectionName}`;
+            
+            // Check if syllabus papers exist
+            const syllabusKey = `${branch}-${semester}-${sectionName}`;
+            const syllabus = JSON.parse(localStorage.getItem('syllabus')) || {};
+            if (syllabus[syllabusKey] && syllabus[syllabusKey].length > 0) {
+              status.textContent = `${syllabus[syllabusKey].length} paper(s) uploaded`;
+            } else {
+              status.textContent = 'No syllabus papers uploaded';
+            }
+            
+            card.appendChild(title);
+            card.appendChild(input);
+            card.appendChild(btn);
+            card.appendChild(status);
+            
+            syllabusUploadGrid.appendChild(card);
+          });
         });
       });
       
@@ -1872,50 +1964,52 @@
       
       branches.forEach(branch => {
         semesters.forEach(semester => {
-          const card = document.createElement('div');
-          card.className = 'upload-card';
-          
-          const title = document.createElement('div');
-          title.className = 'upload-card-title';
-          title.textContent = `${branch} - Sem ${semester}`;
-          
-          const input = document.createElement('input');
-          input.type = 'file';
-          input.className = 'upload-input';
-          input.id = `papers-upload-${branch}-${semester}`;
-          input.accept = '.pdf';
-          input.onchange = (e) => handlePapersUpload(e, branch, semester);
-          
-          const btn = document.createElement('button');
-          btn.className = 'upload-btn';
-          btn.textContent = 'Upload';
-          btn.onclick = () => input.click();
-          
-          const status = document.createElement('div');
-          status.className = 'upload-status';
-          status.id = `papers-status-${branch}-${semester}`;
-          
-          // Check if previous year papers exist
-          const papersKey = `${branch}-${semester}`;
-          const papers = JSON.parse(localStorage.getItem('papers')) || {};
-          if (papers[papersKey] && papers[papersKey].length > 0) {
-            status.textContent = `${papers[papersKey].length} paper(s) uploaded`;
-          } else {
-            status.textContent = 'No previous year papers uploaded';
-          }
-          
-          card.appendChild(title);
-          card.appendChild(input);
-          card.appendChild(btn);
-          card.appendChild(status);
-          
-          papersUploadGrid.appendChild(card);
+          sections[branch].forEach(sectionName => {
+            const card = document.createElement('div');
+            card.className = 'upload-card';
+            
+            const title = document.createElement('div');
+            title.className = 'upload-card-title';
+            title.textContent = `${branch} - Sem ${semester} - Sec ${sectionName}`;
+            
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.className = 'upload-input';
+            input.id = `papers-upload-${branch}-${semester}-${sectionName}`;
+            input.accept = '.pdf';
+            input.onchange = (e) => handlePapersUpload(e, branch, semester, sectionName);
+            
+            const btn = document.createElement('button');
+            btn.className = 'upload-btn';
+            btn.textContent = 'Upload';
+            btn.onclick = () => input.click();
+            
+            const status = document.createElement('div');
+            status.className = 'upload-status';
+            status.id = `papers-status-${branch}-${semester}-${sectionName}`;
+            
+            // Check if previous year papers exist
+            const papersKey = `${branch}-${semester}-${sectionName}`;
+            const papers = JSON.parse(localStorage.getItem('papers')) || {};
+            if (papers[papersKey] && papers[papersKey].length > 0) {
+              status.textContent = `${papers[papersKey].length} paper(s) uploaded`;
+            } else {
+              status.textContent = 'No previous year papers uploaded';
+            }
+            
+            card.appendChild(title);
+            card.appendChild(input);
+            card.appendChild(btn);
+            card.appendChild(status);
+            
+            papersUploadGrid.appendChild(card);
+          });
         });
       });
     }
     
     // Handle timetable upload
-    function handleTimetableUpload(event, branch, semester) {
+    function handleTimetableUpload(event, branch, semester, sectionName) {
       const file = event.target.files[0];
       if (!file) return;
       
@@ -1923,21 +2017,21 @@
       reader.onload = function(e) {
         // Store image in localStorage
         const timetables = JSON.parse(localStorage.getItem('timetables')) || {};
-        const key = `${branch}-${semester}`;
+        const key = `${branch}-${semester}-${sectionName}`;
         timetables[key] = e.target.result;
         localStorage.setItem('timetables', JSON.stringify(timetables));
         
         // Update status
-        document.getElementById(`timetable-status-${branch}-${semester}`).textContent = 'Timetable uploaded';
+        document.getElementById(`timetable-status-${branch}-${semester}-${sectionName}`).textContent = 'Timetable uploaded';
         
         // Update gallery
         loadTimetableGallery();
         
-        // Update branch cards
-        generateBranchCards();
+        // Refresh student view if currently viewing timetables
+        refreshTimetableView(branch, semester, sectionName);
         
         // Show success message
-        alert(`Timetable for ${branch} Semester ${semester} uploaded successfully!`);
+        alert(`Timetable for ${branch} Semester ${semester} Section ${sectionName} uploaded successfully!`);
         
         // Reset file input
         event.target.value = '';
@@ -1945,8 +2039,8 @@
       reader.readAsDataURL(file);
     }
     
-    // Handle notes upload - SIMPLIFIED AND WORKING VERSION
-    function handleNotesUpload(event, branch, semester) {
+    // Handle notes upload
+    function handleNotesUpload(event, branch, semester, sectionName) {
       const file = event.target.files[0];
       if (!file) return;
       
@@ -1960,7 +2054,7 @@
       reader.onload = function(e) {
         // Store PDF in localStorage
         const notes = JSON.parse(localStorage.getItem('notes')) || {};
-        const key = `${branch}-${semester}`;
+        const key = `${branch}-${semester}-${sectionName}`;
         
         if (!notes[key]) {
           notes[key] = [];
@@ -1976,16 +2070,16 @@
         localStorage.setItem('notes', JSON.stringify(notes));
         
         // Update status
-        document.getElementById(`notes-status-${branch}-${semester}`).textContent = `${notes[key].length} note(s) uploaded`;
+        document.getElementById(`notes-status-${branch}-${semester}-${sectionName}`).textContent = `${notes[key].length} note(s) uploaded`;
         
         // Update gallery
         loadNotesGallery();
         
         // Refresh student view if currently viewing notes
-        refreshStudentView('notes', branch, semester);
+        refreshStudentView('notes', branch, semester, sectionName);
         
         // Show success message
-        alert(`Note "${file.name}" uploaded successfully for ${branch} Semester ${semester}!`);
+        alert(`Note "${file.name}" uploaded successfully for ${branch} Semester ${semester} Section ${sectionName}!`);
         
         // Reset file input
         event.target.value = '';
@@ -1994,7 +2088,7 @@
     }
     
     // Handle syllabus upload
-    function handleSyllabusUpload(event, branch, semester) {
+    function handleSyllabusUpload(event, branch, semester, sectionName) {
       const file = event.target.files[0];
       if (!file) return;
       
@@ -2008,7 +2102,7 @@
       reader.onload = function(e) {
         // Store PDF in localStorage
         const syllabus = JSON.parse(localStorage.getItem('syllabus')) || {};
-        const key = `${branch}-${semester}`;
+        const key = `${branch}-${semester}-${sectionName}`;
         
         if (!syllabus[key]) {
           syllabus[key] = [];
@@ -2024,16 +2118,16 @@
         localStorage.setItem('syllabus', JSON.stringify(syllabus));
         
         // Update status
-        document.getElementById(`syllabus-status-${branch}-${semester}`).textContent = `${syllabus[key].length} paper(s) uploaded`;
+        document.getElementById(`syllabus-status-${branch}-${semester}-${sectionName}`).textContent = `${syllabus[key].length} paper(s) uploaded`;
         
         // Update gallery
         loadSyllabusGallery();
         
         // Refresh student view if currently viewing syllabus
-        refreshStudentView('syllabus', branch, semester);
+        refreshStudentView('syllabus', branch, semester, sectionName);
         
         // Show success message
-        alert(`Syllabus paper "${file.name}" uploaded successfully for ${branch} Semester ${semester}!`);
+        alert(`Syllabus paper "${file.name}" uploaded successfully for ${branch} Semester ${semester} Section ${sectionName}!`);
         
         // Reset file input
         event.target.value = '';
@@ -2042,7 +2136,7 @@
     }
     
     // Handle papers upload
-    function handlePapersUpload(event, branch, semester) {
+    function handlePapersUpload(event, branch, semester, sectionName) {
       const file = event.target.files[0];
       if (!file) return;
       
@@ -2056,7 +2150,7 @@
       reader.onload = function(e) {
         // Store PDF in localStorage
         const papers = JSON.parse(localStorage.getItem('papers')) || {};
-        const key = `${branch}-${semester}`;
+        const key = `${branch}-${semester}-${sectionName}`;
         
         if (!papers[key]) {
           papers[key] = [];
@@ -2072,16 +2166,16 @@
         localStorage.setItem('papers', JSON.stringify(papers));
         
         // Update status
-        document.getElementById(`papers-status-${branch}-${semester}`).textContent = `${papers[key].length} paper(s) uploaded`;
+        document.getElementById(`papers-status-${branch}-${semester}-${sectionName}`).textContent = `${papers[key].length} paper(s) uploaded`;
         
         // Update gallery
         loadPapersGallery();
         
         // Refresh student view if currently viewing papers
-        refreshStudentView('papers', branch, semester);
+        refreshStudentView('papers', branch, semester, sectionName);
         
         // Show success message
-        alert(`Previous year paper "${file.name}" uploaded successfully for ${branch} Semester ${semester}!`);
+        alert(`Previous year paper "${file.name}" uploaded successfully for ${branch} Semester ${semester} Section ${sectionName}!`);
         
         // Reset file input
         event.target.value = '';
@@ -2089,35 +2183,58 @@
       reader.readAsDataURL(file);
     }
     
+    // Refresh timetable view
+    function refreshTimetableView(branch, semester, sectionName) {
+      // Check if timetables section is currently active
+      const timetablesSection = document.getElementById('timetablesSection');
+      if (timetablesSection && timetablesSection.classList.contains('active')) {
+        const currentBranch = document.getElementById('timetableBranch').value;
+        const currentSemester = document.getElementById('timetableSemester').value;
+        const currentSection = document.getElementById('timetableSection').value;
+        
+        // Always reload timetables if we're in timetables section, regardless of selection
+        if (currentBranch && currentSemester && currentSection) {
+          viewTimetable();
+        }
+      }
+    }
+    
     // Refresh student view
-    function refreshStudentView(section, branch, semester) {
-      console.log('Refreshing student view for:', section, branch, semester);
-      
-      // Get current active section
-      const activeSection = document.querySelector('.content-section.active');
-      const activeSectionId = activeSection ? activeSection.id : '';
-      
-      // Check if student is viewing the same section and branch/semester
-      if (section === 'notes' && activeSectionId === 'notesSection') {
-        const currentBranch = document.getElementById('notesBranch').value;
-        const currentSemester = document.getElementById('notesSemester').value;
-        
-        if (currentBranch === branch && currentSemester == semester) {
-          loadNotes();
+    function refreshStudentView(section, branch, semester, sectionName) {
+      // Check if notes section is currently active
+      if (section === 'notes') {
+        const notesSection = document.getElementById('notesSection');
+        if (notesSection && notesSection.classList.contains('active')) {
+          const currentBranch = document.getElementById('notesBranch').value;
+          const currentSemester = document.getElementById('notesSemester').value;
+          const currentSection = document.getElementById('notesSection').value;
+          
+          // Always reload notes if we're in notes section, regardless of selection
+          if (currentBranch && currentSemester && currentSection) {
+            loadNotes();
+          }
         }
-      } else if (section === 'syllabus' && activeSectionId === 'syllabusSection') {
-        const currentBranch = document.getElementById('syllabusBranch').value;
-        const currentSemester = document.getElementById('syllabusSemester').value;
-        
-        if (currentBranch === branch && currentSemester == semester) {
-          loadSyllabus();
+      } else if (section === 'syllabus') {
+        const syllabusSection = document.getElementById('syllabusSection');
+        if (syllabusSection && syllabusSection.classList.contains('active')) {
+          const currentBranch = document.getElementById('syllabusBranch').value;
+          const currentSemester = document.getElementById('syllabusSemester').value;
+          const currentSection = document.getElementById('syllabusSection').value;
+          
+          if (currentBranch && currentSemester && currentSection) {
+            loadSyllabus();
+          }
         }
-      } else if (section === 'papers' && activeSectionId === 'papersSection') {
-        const currentBranch = document.getElementById('papersBranch').value;
-        const currentSemester = document.getElementById('papersSemester').value;
-        
-        if (currentBranch === branch && currentSemester == semester) {
-          loadPapers();
+      } else if (section === 'papers') {
+        const papersSection = document.getElementById('papersSection');
+        if (papersSection && papersSection.classList.contains('active')) {
+          const currentBranch = document.getElementById('papersBranch').value;
+          const currentSemester = document.getElementById('papersSemester').value;
+          const currentSection = document.getElementById('papersSection').value;
+          
+          if (currentBranch && currentSemester && currentSection) {
+            loadPapers();
+          }
         }
       }
     }
@@ -2138,18 +2255,18 @@
       const timetables = JSON.parse(localStorage.getItem('timetables')) || {};
       
       Object.keys(timetables).forEach(key => {
-        const [branch, semester] = key.split('-');
+        const [branch, semester, sectionName] = key.split('-');
         
         const item = document.createElement('div');
         item.className = 'gallery-item';
         
         const img = document.createElement('img');
         img.src = timetables[key];
-        img.alt = `${branch} Semester ${semester} Timetable`;
+        img.alt = `${branch} Semester ${semester} Section ${sectionName} Timetable`;
         
         const title = document.createElement('div');
         title.className = 'gallery-item-title';
-        title.textContent = `${branch} - Sem ${semester}`;
+        title.textContent = `${branch} - Sem ${semester} - Sec ${sectionName}`;
         
         const deleteBtn = document.createElement('button');
         deleteBtn.className = 'delete-btn';
@@ -2176,7 +2293,7 @@
       const notes = JSON.parse(localStorage.getItem('notes')) || {};
       
       Object.keys(notes).forEach(key => {
-        const [branch, semester] = key.split('-');
+        const [branch, semester, sectionName] = key.split('-');
         
         notes[key].forEach((note, index) => {
           const item = document.createElement('div');
@@ -2195,7 +2312,7 @@
           
           const meta = document.createElement('div');
           meta.className = 'file-meta';
-          meta.textContent = `${branch} - Semester ${semester}`;
+          meta.textContent = `${branch} - Semester ${semester} - Section ${sectionName}`;
           
           info.appendChild(name);
           info.appendChild(meta);
@@ -2237,7 +2354,7 @@
       const syllabus = JSON.parse(localStorage.getItem('syllabus')) || {};
       
       Object.keys(syllabus).forEach(key => {
-        const [branch, semester] = key.split('-');
+        const [branch, semester, sectionName] = key.split('-');
         
         syllabus[key].forEach((paper, index) => {
           const item = document.createElement('div');
@@ -2256,7 +2373,7 @@
           
           const meta = document.createElement('div');
           meta.className = 'file-meta';
-          meta.textContent = `${branch} - Semester ${semester}`;
+          meta.textContent = `${branch} - Semester ${semester} - Section ${sectionName}`;
           
           info.appendChild(name);
           info.appendChild(meta);
@@ -2298,7 +2415,7 @@
       const papers = JSON.parse(localStorage.getItem('papers')) || {};
       
       Object.keys(papers).forEach(key => {
-        const [branch, semester] = key.split('-');
+        const [branch, semester, sectionName] = key.split('-');
         
         papers[key].forEach((paper, index) => {
           const item = document.createElement('div');
@@ -2317,7 +2434,7 @@
           
           const meta = document.createElement('div');
           meta.className = 'file-meta';
-          meta.textContent = `${branch} - Semester ${semester}`;
+          meta.textContent = `${branch} - Semester ${semester} - Section ${sectionName}`;
           
           info.appendChild(name);
           info.appendChild(meta);
@@ -2363,9 +2480,6 @@
         
         // Update upload cards
         generateUploadCards();
-        
-        // Update branch cards
-        generateBranchCards();
       }
     }
     
@@ -2375,7 +2489,7 @@
         const files = JSON.parse(localStorage.getItem(type)) || {};
         
         if (files[key] && files[key].length > index) {
-          const [branch, semester] = key.split('-');
+          const [branch, semester, sectionName] = key.split('-');
           
           files[key].splice(index, 1);
           
@@ -2388,39 +2502,19 @@
           // Update gallery
           if (type === 'notes') {
             loadNotesGallery();
-            refreshStudentView('notes', branch, semester);
+            refreshStudentView('notes', branch, semester, sectionName);
           } else if (type === 'syllabus') {
             loadSyllabusGallery();
-            refreshStudentView('syllabus', branch, semester);
+            refreshStudentView('syllabus', branch, semester, sectionName);
           } else if (type === 'papers') {
             loadPapersGallery();
-            refreshStudentView('papers', branch, semester);
+            refreshStudentView('papers', branch, semester, sectionName);
           }
           
           // Update upload cards
           generateUploadCards();
         }
       }
-    }
-    
-    // View timetable
-    function viewTimetable(branch, semester) {
-      const timetables = JSON.parse(localStorage.getItem('timetables')) || {};
-      const key = `${branch}-${semester}`;
-      
-      const modal = document.getElementById('timetableModal');
-      const title = document.getElementById('timetableModalTitle');
-      const body = document.getElementById('timetableModalBody');
-      
-      title.textContent = `${branch} - Semester ${semester} Timetable`;
-      
-      if (timetables[key]) {
-        body.innerHTML = `<img src="${timetables[key]}" alt="${branch} Semester ${semester} Timetable" class="timetable-image">`;
-      } else {
-        body.innerHTML = '<div class="no-timetable">No timetable available for this semester.</div>';
-      }
-      
-      modal.style.display = 'flex';
     }
     
     // Close timetable modal
